@@ -1,0 +1,91 @@
+@import '@/styles/mixins';
+
+.root {
+  @include flex(column, 12px);
+
+  .error {
+    color: var(--color-danger-300);
+  }
+
+  .item {
+    @include flex(row, 0, 12px, center);
+
+    cursor: pointer;
+
+    &.disabled {
+      cursor: auto;
+      color: var(--color-light-900);
+    }
+
+    .indicator {
+      width: 8px;
+      height: 8px;
+      background-color: var(--color-accent-500);
+      border-radius: 50%;
+    }
+
+    .radio {
+      all: unset;
+
+      position: relative;
+
+      display: grid;
+      place-items: center;
+
+      box-sizing: border-box;
+      width: 16px;
+      height: 16px;
+
+      border: 2px solid var(--color-accent-500);
+      border-radius: 50%;
+
+      &::before,
+      &::after {
+        @include animation-circle-control(0);
+
+        content: '';
+
+        position: absolute;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+
+        display: block;
+
+        width: 36px;
+        height: 36px;
+
+        border-radius: 50%;
+
+        transition: 0.3s;
+      }
+
+      &:focus-visible::before {
+        @include animation-circle-control(1, --color-dark-500);
+      }
+
+      &:hover::before {
+        @include animation-circle-control(1, --color-dark-500);
+      }
+
+      &:active::after {
+        @include animation-circle-control(1, --color-accent-900);
+
+        transition: 0s;
+      }
+
+      &:disabled {
+        border-color: var(--color-accent-900);
+
+        &::before,
+        &::after {
+          @include animation-circle-control(0);
+        }
+
+        .indicator {
+          background-color: var(--color-accent-900);
+        }
+      }
+    }
+  }
+}
