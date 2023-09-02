@@ -1,0 +1,131 @@
+.root {
+  display: block;
+
+  .label {
+    color: var(--color-dark-100);
+
+    &.disabled {
+      color: var(--color-dark-300);
+    }
+  }
+
+  .container {
+    position: relative;
+
+    .searchIcon {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+
+      fill: var(--color-dark-100);
+
+      &.disabledIcon {
+        fill: var(--color-dark-300);
+      }
+
+      &.filledIcon {
+        fill: var(--color-light-100);
+      }
+    }
+
+    .input {
+      all: unset;
+
+      box-sizing: border-box;
+      width: 100%;
+      padding: 5px 12px;
+
+      line-height: var(--line-height-m);
+      color: var(--color-light-100);
+
+      border: 1px solid var(--color-dark-100);
+      border-radius: 2px;
+
+      &::placeholder {
+        color: var(--color-dark-100);
+      }
+
+      &.filled {
+        border-color: var(--color-light-100);
+      }
+
+      &:disabled {
+        border-color: var(--color-dark-300);
+
+        &::placeholder {
+          color: var(--color-dark-300);
+        }
+      }
+
+      &:focus {
+        border-color: var(--color-info-500);
+      }
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+
+        -webkit-text-fill-color: var(--color-light-100);
+      }
+
+      &:hover:enabled {
+        cursor: text;
+        background-color: var(--color-dark-700);
+      }
+
+      &.search {
+        padding-left: 40px;
+
+        &:not(:focus) ~ button {
+          cursor: text;
+          opacity: 0;
+        }
+      }
+
+      &.error {
+        color: var(--color-danger-300);
+        border-color: var(--color-danger-300);
+
+        &::placeholder {
+          color: var(--color-danger-300);
+        }
+      }
+    }
+
+    .button {
+      all: unset;
+
+      cursor: pointer;
+
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+
+      display: flex;
+      align-items: center;
+
+      color: var(--color-light-100);
+
+      > svg {
+        fill: var(--color-light-100);
+      }
+
+      &:disabled {
+        cursor: auto;
+
+        > svg {
+          fill: var(--color-dark-300);
+        }
+      }
+    }
+  }
+
+  .errorMessage {
+    line-height: var(--line-height-m);
+    color: var(--color-danger-300);
+  }
+}
