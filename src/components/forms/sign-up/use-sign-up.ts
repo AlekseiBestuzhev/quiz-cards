@@ -2,21 +2,21 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-const loginSchema = z.object({
+const registrationSchema = z.object({
   email: z.string().email(),
   password: z.string().min(3),
-  rememberMe: z.boolean().default(false),
+  confirmPassword: z.string().min(3),
 })
 
-export type SignInFormProps = z.infer<typeof loginSchema>
+export type SignUpFormProps = z.infer<typeof registrationSchema>
 
-export const useSignIn = () => {
+export const useSignUp = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInFormProps>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<SignUpFormProps>({
+    resolver: zodResolver(registrationSchema),
   })
 
   return { control, handleSubmit, errors }
