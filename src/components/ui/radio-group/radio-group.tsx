@@ -12,8 +12,9 @@ export type Option = {
   value: string
 }
 
-type RadioGroupProps = {
+export type RadioGroupProps = {
   options: Option[]
+  name?: string
   value?: string
   onValueChange?: (value: string) => void
   errorMessage?: string
