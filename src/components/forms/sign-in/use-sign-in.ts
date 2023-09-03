@@ -11,13 +11,9 @@ const loginSchema = z.object({
 export type SignInFormProps = z.infer<typeof loginSchema>
 
 export const useSignIn = () => {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SignInFormProps>({
+  const { control, handleSubmit } = useForm<SignInFormProps>({
     resolver: zodResolver(loginSchema),
   })
 
-  return { control, handleSubmit, errors }
+  return { control, handleSubmit }
 }

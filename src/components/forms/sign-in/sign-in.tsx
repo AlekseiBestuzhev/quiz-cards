@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react'
 
+import { DevTool } from '@hookform/devtools'
 import { clsx } from 'clsx'
 
 import s from './sign-in.module.scss'
@@ -17,24 +18,18 @@ type Props = {
 export const SignInForm = ({ onSubmit, className, children }: Props) => {
   const classes = clsx(s.form, className)
 
-  const { control, handleSubmit, errors } = useSignIn()
+  const { control, handleSubmit } = useSignIn()
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
-      <ControlledTextField
-        control={control}
-        name={'email'}
-        label={'Email'}
-        className={s.email}
-        errorMessage={errors?.email?.message}
-      />
+      <DevTool control={control} />
+      <ControlledTextField control={control} name={'email'} label={'Email'} className={s.email} />
       <ControlledTextField
         control={control}
         name={'password'}
         label={'Password'}
         type="password"
         className={s.password}
-        errorMessage={errors?.password?.message}
       />
       <ControlledCheckbox
         name={'rememberMe'}
