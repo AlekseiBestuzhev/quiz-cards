@@ -17,3 +17,40 @@
   transform: translate(-50%, -50%) scale($scale);
   background-color: var($color);
 }
+
+@mixin interactive-circle($active-color) {
+  &::before,
+  &::after {
+    @include animation-circle-control(0);
+
+    content: '';
+
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    transition: 0.3s;
+  }
+
+  &:focus-visible::before {
+    @include animation-circle-control(1, --color-dark-500);
+  }
+
+  &:hover::before {
+    @include animation-circle-control(1, --color-dark-500);
+  }
+
+  &:active::after {
+    @include animation-circle-control(1, $active-color);
+
+    transition: 0s;
+  }
+}

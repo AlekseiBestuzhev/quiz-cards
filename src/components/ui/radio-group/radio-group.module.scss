@@ -25,6 +25,9 @@
     }
 
     .radio {
+
+      @include interactive-circle(--color-accent-900);
+
       all: unset;
 
       position: relative;
@@ -38,41 +41,6 @@
 
       border: 2px solid var(--color-accent-500);
       border-radius: 50%;
-
-      &::before,
-      &::after {
-        @include animation-circle-control(0);
-
-        content: '';
-
-        position: absolute;
-        z-index: -1;
-        top: 50%;
-        left: 50%;
-
-        display: block;
-
-        width: 36px;
-        height: 36px;
-
-        border-radius: 50%;
-
-        transition: 0.3s;
-      }
-
-      &:focus-visible::before {
-        @include animation-circle-control(1, --color-dark-500);
-      }
-
-      &:hover::before {
-        @include animation-circle-control(1, --color-dark-500);
-      }
-
-      &:active::after {
-        @include animation-circle-control(1, --color-accent-900);
-
-        transition: 0s;
-      }
 
       &:disabled {
         border-color: var(--color-accent-900);
