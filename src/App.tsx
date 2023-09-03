@@ -1,11 +1,11 @@
 import { BrowserRouter } from 'react-router-dom'
 
-import { SignUp } from '@/pages'
+import { Layout } from '@/components/layout'
 
 export const App = () => {
   return (
     <BrowserRouter>
-      <SignUp />
+      <Layout />
     </BrowserRouter>
   )
 }
