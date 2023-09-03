@@ -54,3 +54,18 @@
     transition: 0s;
   }
 }
+
+@mixin link-hover {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@mixin container($width, $padding-inline: 12px) {
+  box-sizing: content-box;
+  max-width: $width;
+  margin: 0 auto;
+  padding-inline: $padding-inline;
+}

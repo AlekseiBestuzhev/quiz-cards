@@ -1,0 +1,33 @@
+@import '@/styles/mixins';
+
+.root {
+  @include container(420px);
+
+  .content {
+    @include flex(column, 20px, 0, center);
+
+    .form {
+      align-self: stretch;
+
+      .linkContainer {
+        text-align: right;
+
+        a {
+          @include link-hover;
+
+          &:active {
+            color: var(--color-light-700);
+          }
+        }
+      }
+    }
+
+    .register {
+      @include flex(column, 7px, 0, center);
+
+      .signUp {
+        @include link-hover;
+      }
+    }
+  }
+}
