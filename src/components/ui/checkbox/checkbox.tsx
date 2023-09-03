@@ -8,19 +8,20 @@ import s from './checkbox.module.scss'
 import { Icon } from '@/components/ui/icon/icon.tsx'
 import { Typography } from '@/components/ui/typography'
 
-type CheckboxProps = {
+export type CheckboxProps = {
   checked: boolean
   onChange: (checked: boolean) => void
   id?: string
   label?: string
   disabled?: boolean
+  className?: string
 }
 
 export const Checkbox: FC<CheckboxProps> = props => {
-  const { checked, label, disabled, id, onChange } = props
+  const { checked, label, disabled, id, onChange, className } = props
 
   const classes = {
-    root: clsx(s.label, disabled && s.disabled),
+    root: clsx(s.label, disabled && s.disabled, className),
     checkbox: s.checkbox,
   }
 
