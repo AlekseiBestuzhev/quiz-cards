@@ -15,5 +15,9 @@
     @include container(1010px);
 
     height: 100%;
+
+    .logo {
+      cursor: pointer;
+    }
   }
 }

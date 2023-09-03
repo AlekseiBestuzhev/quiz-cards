@@ -1,11 +1,5 @@
-import { BrowserRouter } from 'react-router-dom'
-
-import { Layout } from '@/components/layout'
+import { Router } from '@/router.tsx'
 
 export const App = () => {
-  return (
-    <BrowserRouter>
-      <Layout />
-    </BrowserRouter>
-  )
+  return <Router />
 }
