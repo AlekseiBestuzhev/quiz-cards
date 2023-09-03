@@ -1,11 +1,11 @@
 import { BrowserRouter } from 'react-router-dom'
 
-import { SignIn } from '@/pages/sign-in/sign-in.tsx'
+import { SignUp } from '@/pages'
 
 export const App = () => {
   return (
     <BrowserRouter>
-      <SignIn />
+      <SignUp />
     </BrowserRouter>
   )
 }

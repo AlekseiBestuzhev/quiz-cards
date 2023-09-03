@@ -1,0 +1,21 @@
+@import '@/styles/mixins';
+
+.root {
+  @include container(420px);
+
+  .content {
+    @include flex(column, 20px, 0, center);
+
+    .form {
+      align-self: stretch;
+    }
+
+    .login {
+      @include flex(column, 7px, 0, center);
+
+      .signIn {
+        @include link-hover;
+      }
+    }
+  }
+}

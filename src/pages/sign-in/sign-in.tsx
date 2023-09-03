@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom'
 
 import s from './sign-in.module.scss'
 
-import { SignInForm } from '@/components/forms/sign-in'
+import { SignInForm, SignInFormProps } from '@/components/forms'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 
 export const SignIn = () => {
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: SignInFormProps) => {
     alert(JSON.stringify(data))
   }
 
@@ -27,9 +27,7 @@ export const SignIn = () => {
             </div>
           </SignInForm>
           <div className={s.register}>
-            <Typography variant="body2" className={s.caption}>
-              Don&apos;t have an account?
-            </Typography>
+            <Typography variant="body2">Don&apos;t have an account?</Typography>
             <Button as={Link} to="/sign-up" variant="link" className={s.signUp}>
               Sign Up
             </Button>
