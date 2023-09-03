@@ -1,0 +1,51 @@
+import { PropsWithChildren } from 'react'
+
+import { clsx } from 'clsx'
+
+import s from './sign-in.module.scss'
+
+import { SignInFormProps, useSignIn } from './'
+
+import { ControlledCheckbox, ControlledTextField } from '@/components/controlled'
+import { Button } from '@/components/ui/button'
+
+type Props = {
+  onSubmit: (data: SignInFormProps) => void
+  className?: string
+} & PropsWithChildren
+
+export const SignInForm = ({ onSubmit, className, children }: Props) => {
+  const classes = clsx(s.form, className)
+
+  const { control, handleSubmit, errors } = useSignIn()
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className={classes}>
+      <ControlledTextField
+        control={control}
+        name={'email'}
+        label={'Email'}
+        className={s.email}
+        errorMessage={errors?.email?.message}
+      />
+      <ControlledTextField
+        control={control}
+        name={'password'}
+        label={'Password'}
+        type="password"
+        className={s.password}
+        errorMessage={errors?.password?.message}
+      />
+      <ControlledCheckbox
+        name={'rememberMe'}
+        control={control}
+        label={'Remember Me'}
+        className={s.checkbox}
+      />
+      {children}
+      <Button fullWidth className={s.button}>
+        Sign In
+      </Button>
+    </form>
+  )
+}

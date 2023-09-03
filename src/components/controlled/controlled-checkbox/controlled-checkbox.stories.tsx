@@ -4,7 +4,8 @@ import { DevTool } from '@hookform/devtools'
 import type { Meta } from '@storybook/react'
 import { useForm } from 'react-hook-form'
 
-import { ControlledCheckbox } from '@/components/controlled/controlled-checkbox'
+import { ControlledCheckbox } from './'
+
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 
