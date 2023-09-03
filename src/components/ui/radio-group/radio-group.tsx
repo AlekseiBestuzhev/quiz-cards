@@ -29,6 +29,7 @@ export const RadioGroup: FC<RadioGroupProps> = ({ options, errorMessage, ...rest
       {options.map(el => (
         <Typography as={'label'} variant={'body2'} key={el.value} className={labelClasses}>
           <RadioGr.Item value={el.value} className={s.radio}>
+            <div className={s.frame}></div>
             <RadioGr.Indicator className={s.indicator} />
           </RadioGr.Item>
           {el.label}

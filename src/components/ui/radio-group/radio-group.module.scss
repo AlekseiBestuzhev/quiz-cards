@@ -18,14 +18,17 @@
     }
 
     .indicator {
+      position: relative;
+      z-index: 10;
+
       width: 8px;
       height: 8px;
+
       background-color: var(--color-accent-500);
       border-radius: 50%;
     }
 
     .radio {
-
       @include interactive-circle(--color-accent-900);
 
       all: unset;
@@ -39,8 +42,16 @@
       width: 16px;
       height: 16px;
 
-      border: 2px solid var(--color-accent-500);
-      border-radius: 50%;
+      .frame {
+        position: absolute;
+        z-index: 5;
+        inset: 0;
+
+        box-sizing: border-box;
+
+        border: 2px solid var(--color-accent-500);
+        border-radius: 50%;
+      }
 
       &:disabled {
         border-color: var(--color-accent-900);

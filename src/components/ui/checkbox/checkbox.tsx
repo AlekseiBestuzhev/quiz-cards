@@ -34,6 +34,7 @@ export const Checkbox: FC<CheckboxProps> = props => {
         onCheckedChange={onChange}
         disabled={disabled}
       >
+        <div className={s.frame}></div>
         {checked && (
           <RadixCheckbox.Indicator className={s.indicator} forceMount>
             <Icon name={'checked'} />

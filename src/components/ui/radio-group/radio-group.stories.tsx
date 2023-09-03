@@ -8,12 +8,6 @@ const meta = {
   title: 'Components/Radio Group',
   component: RadioGroup,
   tags: ['autodocs'],
-  argTypes: {
-    // variant: {
-    //   options: ['primary', 'secondary', 'tertiary', 'link'],
-    //   control: { type: 'radio' },
-    // },
-  },
 } satisfies Meta<typeof RadioGroup>
 
 const baseData: Option[] = [

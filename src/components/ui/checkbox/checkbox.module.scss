@@ -20,17 +20,26 @@
 
     position: relative;
 
-    box-sizing: border-box;
     width: 18px;
     height: 18px;
 
-    border: 2px solid var(--color-light-900);
-    border-radius: 2px;
+    .frame {
+      position: absolute;
+      z-index: 5;
+      inset: 0;
+
+      box-sizing: border-box;
+
+      border: 2px solid var(--color-light-900);
+      border-radius: 2px;
+    }
 
     .indicator {
       position: absolute;
-      top: -2px;
-      left: -2px;
+      z-index: 10;
+      top: 0;
+      left: 0;
+
       fill: var(--color-light-100);
     }
 
