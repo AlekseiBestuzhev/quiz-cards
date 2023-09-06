@@ -22,6 +22,8 @@
   border: none;
   border-radius: 0.25rem;
 
+  transition: 0.2s;
+
   &:disabled {
     cursor: initial;
   }
