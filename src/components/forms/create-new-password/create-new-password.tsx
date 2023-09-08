@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
 import { DevTool } from '@hookform/devtools'
+import { clsx } from 'clsx'
 
 import s from './create-new-password.module.scss'
 
@@ -14,13 +15,16 @@ import { Typography } from '@/components/ui/typography'
 
 type PropsType = {
   onSubmit: (data: CreateNewPasswordFormType) => void
+  className?: string
 }
 
-export const CreateNewPasswordForm: FC<PropsType> = ({ onSubmit }) => {
+export const CreateNewPasswordForm: FC<PropsType> = ({ onSubmit, className }) => {
+  const classes = clsx(s.form, className)
+
   const { control, handleSubmit } = useCreateNewPassword()
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+    <form onSubmit={handleSubmit(onSubmit)} className={classes}>
       <DevTool control={control} />
       <ControlledTextField control={control} name="password" label="Password" type="password" />
       <Typography variant="body2" className={s.information}>
