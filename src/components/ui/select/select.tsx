@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
 
-import * as Select from '@radix-ui/react-select'
+import * as SelectRadix from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
 import s from './select.module.scss'
@@ -21,7 +21,7 @@ export type SelectPropsType = {
   className?: string
 }
 
-export const SelectDemo: FC<SelectPropsType> = ({
+export const Select: FC<SelectPropsType> = ({
   label,
   placeholder,
   value,
@@ -41,31 +41,31 @@ export const SelectDemo: FC<SelectPropsType> = ({
   return (
     <Typography variant={'body2'} as={'label'} className={classes.label}>
       {label}
-      <Select.Root
+      <SelectRadix.Root
         defaultValue={defaultValue}
         value={value}
         onValueChange={onValueChange}
         disabled={disabled}
         required={required}
       >
-        <Select.Trigger className={classes.trigger} asChild aria-label={'select'} tabIndex={1}>
+        <SelectRadix.Trigger className={classes.trigger} asChild aria-label={'select'} tabIndex={1}>
           <div>
-            <Select.Value placeholder={placeholder} />
+            <SelectRadix.Value placeholder={placeholder} />
             <Icon name={'arrowDown'} className={classes.icon} />
           </div>
-        </Select.Trigger>
-        <Select.Portal>
-          <Select.Content position={'popper'} className={s.content}>
-            <Select.Viewport>
+        </SelectRadix.Trigger>
+        <SelectRadix.Portal>
+          <SelectRadix.Content position={'popper'} className={s.content}>
+            <SelectRadix.Viewport>
               {options.map(el => (
-                <Select.Item key={el.value} value={el.value} className={s.item}>
-                  <Select.ItemText>{el.label}</Select.ItemText>
-                </Select.Item>
+                <SelectRadix.Item key={el.value} value={el.value} className={s.item}>
+                  <SelectRadix.ItemText>{el.label}</SelectRadix.ItemText>
+                </SelectRadix.Item>
               ))}
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Portal>
-      </Select.Root>
+            </SelectRadix.Viewport>
+          </SelectRadix.Content>
+        </SelectRadix.Portal>
+      </SelectRadix.Root>
     </Typography>
   )
 }
