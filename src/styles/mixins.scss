@@ -18,7 +18,7 @@
   background-color: var($color);
 }
 
-@mixin interactive-circle($active-color) {
+@mixin interactive-circle-element {
   &::before,
   &::after {
     @include animation-circle-control(0);
@@ -39,6 +39,10 @@
 
     transition: 0.3s;
   }
+}
+
+@mixin interactive-circle($active-color) {
+  @include interactive-circle-element;
 
   &:focus-visible::before {
     @include animation-circle-control(1, --color-dark-500);

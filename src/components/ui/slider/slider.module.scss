@@ -1,0 +1,93 @@
+@import '@/styles/mixins';
+
+.label {
+  @include flex(column, 7px);
+
+  .body {
+    @include flex(row, 0, 0, center, space-between);
+
+    width: 251px;
+    height: 36px;
+
+    .value {
+      display: grid;
+      place-items: center;
+
+      width: 36px;
+      height: 36px;
+
+      color: var(--color-light-100);
+
+      border: 1px solid var(--color-dark-300);
+      border-radius: 2px;
+    }
+
+    .line {
+      @include flex(row, 0, 0, center);
+
+      touch-action: none;
+      user-select: none;
+
+      position: relative;
+
+      width: 155px;
+      height: 16px;
+
+      .track {
+        position: relative;
+
+        flex-grow: 1;
+
+        height: 4px;
+
+        background-color: var(--color-accent-900);
+        border-radius: 9999px;
+
+        .range {
+          position: absolute;
+          height: 100%;
+          background-color: var(--color-accent-500);
+          border-radius: 9999px;
+        }
+      }
+
+      .thumb {
+        @include interactive-circle-element;
+
+        cursor: pointer;
+
+        position: relative;
+
+        display: grid;
+        place-items: center;
+
+        width: 16px;
+        height: 16px;
+
+        background-color: var(--color-accent-500);
+        border-radius: 10px;
+
+        &:hover::after {
+          @include animation-circle-control(1, --color-accent-500);
+
+          opacity: 0.4;
+        }
+
+        .dot {
+          position: relative;
+          z-index: 2;
+
+          width: 8px;
+          height: 8px;
+
+          background-color: var(--color-light-100);
+          border-radius: 50%;
+        }
+
+        &:focus-visible {
+          outline: none;
+        }
+      }
+    }
+  }
+}
