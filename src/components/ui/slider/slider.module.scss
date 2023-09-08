@@ -70,7 +70,11 @@
         &:hover::after {
           @include animation-circle-control(1, --color-accent-500);
 
-          opacity: 0.4;
+          opacity: 0.3;
+        }
+
+        &:active::after {
+          opacity: 0.5;
         }
 
         .dot {

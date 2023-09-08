@@ -12,11 +12,24 @@ import { useCreateDeckMutation, useGetDecksQuery } from '@/services/decks/decks.
 
 export const Packs = () => {
   const [sliderValue, setSliderValue] = useState<number[]>([0, 10])
-  const packs = useGetDecksQuery({ itemsPerPage: 15 })
+  const [nameSearch, setNameSearch] = useState('')
+
+  const packs = useGetDecksQuery({
+    name: nameSearch,
+    itemsPerPage: 10,
+    minCardsCount: sliderValue[0],
+    maxCardsCount: sliderValue[1],
+  })
+
   const [createDeck] = useCreateDeckMutation()
 
   const createDeckHandler = () => {
     createDeck({ name: 'Created Deck' })
+  }
+
+  const clearFilterHandler = () => {
+    setSliderValue([0, 10])
+    setNameSearch('')
   }
 
   return (
@@ -29,7 +42,12 @@ export const Packs = () => {
           <Button onClick={createDeckHandler}>Add New Pack</Button>
         </div>
         <div className={s.filter}>
-          <TextField type="search" className={s.textField} />
+          <TextField
+            type="search"
+            className={s.textField}
+            value={nameSearch}
+            onChange={e => setNameSearch(e.currentTarget.value)}
+          />
           <Slider
             value={sliderValue}
             onChange={setSliderValue}
@@ -37,9 +55,9 @@ export const Packs = () => {
             min={0}
             max={10}
           />
-          <Button variant="secondary">
+          <Button variant="secondary" onClick={clearFilterHandler}>
             <Icon name={'trash-bin'} className={s.icon} />
-            Filter
+            Clear Filter
           </Button>
         </div>
       </div>

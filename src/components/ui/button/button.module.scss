@@ -63,6 +63,7 @@
 .secondary {
   @include button;
 
+  padding-inline: 24px;
   color: var(--color-light-100);
   background: var(--color-dark-300);
   box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
