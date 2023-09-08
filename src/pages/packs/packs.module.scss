@@ -1,0 +1,27 @@
+@import '@/styles/mixins';
+
+.root {
+  .header {
+    margin-bottom: 36px;
+
+    .top {
+      @include flex(row, 0, 0, center, space-between);
+
+      margin-bottom: 36px;
+    }
+
+    .filter {
+      @include flex(row, 0, 0, flex-end, space-between);
+
+      .textField {
+        flex: 0 1 300px;
+      }
+
+      .icon {
+        width: 16px;
+        height: 16px;
+        fill: var(--color-light-100);
+      }
+    }
+  }
+}

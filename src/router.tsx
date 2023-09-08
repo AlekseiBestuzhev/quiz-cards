@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { Layout } from '@/components/layout'
-import { CreateNewPassword, ForgotPassword, SignIn, SignUp } from '@/pages'
+import { CreateNewPassword, ForgotPassword, Packs, SignIn, SignUp } from '@/pages'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -31,12 +31,16 @@ const publicRoutes: RouteObject[] = [
 const privateRoutes: RouteObject[] = [
   {
     path: '/',
-    element: <div>Kind of authorized</div>,
+    element: <Navigate to="/packs" />,
+  },
+  {
+    path: '/packs',
+    element: <Packs />,
   },
 ]
 
 const PrivateRoutes = () => {
-  const isAuthenticated = false
+  const isAuthenticated = true
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/sign-in" />
 }
