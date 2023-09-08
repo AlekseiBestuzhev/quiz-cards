@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { Layout } from '@/components/layout'
-import { SignIn, SignUp } from '@/pages'
+import { ForgotPassword, SignIn, SignUp } from '@/pages'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -17,6 +17,10 @@ const publicRoutes: RouteObject[] = [
   {
     path: '/sign-up',
     element: <SignUp />,
+  },
+  {
+    path: '/recover-password',
+    element: <ForgotPassword />,
   },
 ]
 

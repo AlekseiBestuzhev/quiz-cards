@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
 import { DevTool } from '@hookform/devtools'
+import { clsx } from 'clsx'
 
 import s from './forgot-password.module.scss'
 
@@ -11,13 +12,16 @@ import { Typography } from '@/components/ui/typography'
 
 type PropsType = {
   onSubmit: (data: ForgotPasswordFormType) => void
+  className?: string
 }
 
-export const ForgotPasswordForm: FC<PropsType> = ({ onSubmit }) => {
+export const ForgotPasswordForm: FC<PropsType> = ({ onSubmit, className }) => {
+  const classes = clsx(s.form, className)
+
   const { control, handleSubmit } = useForgotPassword()
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+    <form onSubmit={handleSubmit(onSubmit)} className={classes}>
       <DevTool control={control} />
       <ControlledTextField control={control} name="email" label="Email" />
       <Typography variant="body2" className={s.information}>

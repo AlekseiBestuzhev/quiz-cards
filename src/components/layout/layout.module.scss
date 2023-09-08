@@ -1,0 +1,7 @@
+@import '@/styles/mixins';
+
+.content {
+  @include container(1010px);
+
+  padding-block: 96px;
+}
