@@ -29,6 +29,16 @@ export const Default: Story = {
   },
 }
 
+export const Small: Story = {
+  args: {
+    label: 'Select',
+    placeholder: 'Select item',
+    disabled: false,
+    options: quiz,
+    small: true,
+  },
+}
+
 export const Disabled: Story = {
   args: {
     label: 'Select',

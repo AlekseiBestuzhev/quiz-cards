@@ -19,6 +19,7 @@ export type SelectPropsType = {
   disabled?: boolean
   required?: boolean
   className?: string
+  small?: boolean
 }
 
 export const Select: FC<SelectPropsType> = ({
@@ -31,11 +32,13 @@ export const Select: FC<SelectPropsType> = ({
   disabled,
   required,
   className,
+  small,
 }) => {
   const classes = {
     label: clsx(s.label, disabled && s.labelDisabled, className),
-    trigger: clsx(s.trigger, disabled && s.triggerDisabled),
+    trigger: clsx(s.trigger, disabled && s.triggerDisabled, small && s.small),
     icon: clsx(s.icon, disabled && s.iconDisabled),
+    item: clsx(s.item, small && s.small),
   }
 
   return (
@@ -58,7 +61,7 @@ export const Select: FC<SelectPropsType> = ({
           <SelectRadix.Content position={'popper'} className={s.content}>
             <SelectRadix.Viewport>
               {options.map(el => (
-                <SelectRadix.Item key={el.value} value={el.value} className={s.item}>
+                <SelectRadix.Item key={el.value} value={el.value} className={classes.item}>
                   <SelectRadix.ItemText>{el.label}</SelectRadix.ItemText>
                 </SelectRadix.Item>
               ))}
