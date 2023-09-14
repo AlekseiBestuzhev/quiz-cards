@@ -9,19 +9,11 @@
 
       margin-bottom: 7px;
     }
+  }
 
-    .filter {
-      @include flex(row, 0, 0, flex-end, space-between);
+  .pagination {
+    @include flex(row, 0, 24px, center, center);
 
-      .textField {
-        flex: 0 1 300px;
-      }
-
-      .icon {
-        width: 16px;
-        height: 16px;
-        fill: var(--color-light-100);
-      }
-    }
+    margin-top: 64px;
   }
 }

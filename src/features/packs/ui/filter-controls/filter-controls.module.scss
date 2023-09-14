@@ -1,0 +1,15 @@
+@import '@/styles/mixins';
+
+.filter {
+  @include flex(row, 0, 0, flex-end, space-between);
+
+  .textField {
+    flex: 0 1 300px;
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
+    fill: var(--color-light-100);
+  }
+}

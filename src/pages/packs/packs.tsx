@@ -1,35 +1,43 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import s from './packs.module.scss'
 
 import { Button } from '@/components/ui/button'
-import { Icon } from '@/components/ui/icon/icon.tsx'
-import { Slider } from '@/components/ui/slider'
-import { Table } from '@/components/ui/table'
-import { TextField } from '@/components/ui/text-field'
+import { Pagination } from '@/components/ui/pagination'
 import { Typography } from '@/components/ui/typography'
 import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/services/decks.ts'
+import { FilterControls, PacksTable } from '@/features/packs/ui'
 
 export const Packs = () => {
-  const [sliderValue, setSliderValue] = useState<number[]>([0, 10])
-  const [nameSearch, setNameSearch] = useState('')
+  const [sliderValue, setSliderValue] = useState([0, 10])
+  const [searchName, setSearchName] = useState('')
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(5)
+
+  const [tabValue, setTabValue] = useState('all')
+
+  const tabs = [
+    { value: 'my', text: 'My cards' },
+    { value: 'all', text: 'All cards' },
+  ]
 
   const packs = useGetDecksQuery({
-    name: nameSearch,
-    itemsPerPage: 10,
+    name: searchName,
+    itemsPerPage: pageSize,
     minCardsCount: sliderValue[0],
     maxCardsCount: sliderValue[1],
+    currentPage,
   })
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchName, sliderValue, pageSize])
 
   const [createDeck] = useCreateDeckMutation()
 
   const createDeckHandler = () => {
     createDeck({ name: 'Created Deck' })
-  }
-
-  const clearFilterHandler = () => {
-    setSliderValue([0, 10])
-    setNameSearch('')
   }
 
   return (
@@ -41,48 +49,26 @@ export const Packs = () => {
           </Typography>
           <Button onClick={createDeckHandler}>Add New Pack</Button>
         </div>
-        <div className={s.filter}>
-          <TextField
-            type="search"
-            className={s.textField}
-            value={nameSearch}
-            onChange={e => setNameSearch(e.currentTarget.value)}
-          />
-          <Slider
-            value={sliderValue}
-            onChange={setSliderValue}
-            label="Number of cards"
-            min={0}
-            max={10}
-          />
-          <Button variant="secondary" onClick={clearFilterHandler}>
-            <Icon name={'trash-bin'} className={s.icon} />
-            Clear Filter
-          </Button>
-        </div>
+        <FilterControls
+          searchName={searchName}
+          setSearchName={setSearchName}
+          sliderValue={sliderValue}
+          sliderMaxValue={packs?.data?.maxCardsCount}
+          setSliderValue={setSliderValue}
+          tabs={tabs}
+          tabValue={tabValue}
+          setTabValue={setTabValue}
+        />
       </div>
-      <Table.Root>
-        <Table.Head>
-          <Table.Row>
-            <Table.HeadCell>Name</Table.HeadCell>
-            <Table.HeadCell>Cards</Table.HeadCell>
-            <Table.HeadCell>Last Updated</Table.HeadCell>
-            <Table.HeadCell>Created by</Table.HeadCell>
-            <Table.HeadCell></Table.HeadCell>
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
-          {packs?.data?.items.map(pack => (
-            <Table.Row key={pack.id}>
-              <Table.Cell>{pack.name}</Table.Cell>
-              <Table.Cell>{pack.cardsCount}</Table.Cell>
-              <Table.Cell>{new Date(pack.updated).toLocaleDateString()}</Table.Cell>
-              <Table.Cell>{pack.author.name}</Table.Cell>
-              <Table.Cell>icon buttons</Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table.Root>
+      {packs?.data?.items && <PacksTable items={packs.data.items} />}
+      <Pagination
+        totalCount={packs?.data?.pagination.totalItems}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+        pageSize={pageSize}
+        onPageSizeChange={setPageSize}
+        className={s.pagination}
+      />
     </div>
   )
 }
