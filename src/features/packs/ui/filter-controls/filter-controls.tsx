@@ -33,6 +33,10 @@ export const FilterControls: FC<Props> = ({
     setSearchName('')
   }
 
+  const onClearTextField = () => {
+    setSearchName('')
+  }
+
   return (
     <div className={s.filter}>
       <TextField
@@ -40,6 +44,7 @@ export const FilterControls: FC<Props> = ({
         className={s.textField}
         value={searchName}
         onChange={e => setSearchName(e.currentTarget.value)}
+        clearField={onClearTextField}
       />
       <TabSwitcher
         tabs={tabs}

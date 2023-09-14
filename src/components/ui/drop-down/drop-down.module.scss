@@ -1,0 +1,111 @@
+@import '@/styles/mixins';
+
+.trigger {
+  all: unset;
+  cursor: pointer;
+  border-radius: 50%;
+
+  .btn {
+    @include flex(row, 0, 0, center, center);
+
+    cursor: pointer;
+
+    width: 24px;
+    height: 24px;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.content {
+  position: relative;
+
+  padding: 0 12px;
+
+  background-color: var(--color-dark-700);
+  border: 1px solid var(--color-dark-500);
+  border-radius: 4px;
+
+  .arrowBox {
+    position: relative;
+    stroke-width: 2px;
+
+    &.arrow {
+      position: absolute;
+      top: -3.75px;
+      right: calc(50% - 3px);
+      transform: rotate(45deg);
+
+      width: 9px;
+      height: 9px;
+
+      background-color: var(--color-dark-700);
+      border: 1px solid var(--color-dark-500);
+      border-top: none;
+      border-left: none;
+    }
+  }
+}
+
+.itemsBox {
+  display: flex;
+  flex-direction: column;
+
+  .item {
+    @include flex(row, 6px, 6px, center);
+
+    cursor: pointer;
+
+    padding: 12px 0;
+
+    font-size: 14px;
+    line-height: 24px;
+
+    outline: none;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--color-dark-500);
+    }
+
+    svg {
+      fill: var(--color-light-100);
+    }
+
+    p,
+    svg {
+      transition: 0.3s;
+    }
+
+    &:focus {
+      p {
+        color: var(--color-info-300);
+      }
+
+      svg {
+        fill: var(--color-info-300);
+      }
+    }
+
+    &:hover {
+      p {
+        color: var(--color-accent-100);
+      }
+
+      svg {
+        fill: var(--color-accent-100);
+      }
+    }
+
+    &[data-disabled] {
+      pointer-events: none;
+      cursor: unset;
+    }
+  }
+}

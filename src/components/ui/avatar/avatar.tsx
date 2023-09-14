@@ -29,10 +29,10 @@ export const Avatar: FC<Props> = ({ userName, image, size = 36, style, className
 
   return (
     <div className={classes}>
-      <AvatarRadix.Root className="AvatarRoot">
+      <AvatarRadix.Root>
         <AvatarRadix.Image className={s.image} src={image} alt="User Avatar" style={styles} />
         {!image && (
-          <AvatarRadix.Fallback className={s.fallback} style={styles} delayMs={600}>
+          <AvatarRadix.Fallback className={s.fallback} style={styles}>
             {initials}
           </AvatarRadix.Fallback>
         )}
