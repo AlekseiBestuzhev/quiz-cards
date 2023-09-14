@@ -1,0 +1,23 @@
+@import '@/styles/mixins';
+
+.root {
+  @include flex(row, 0, 24px, center);
+
+  .dots {
+    display: grid;
+    place-items: center;
+
+    width: 24px;
+    height: 24px;
+
+    color: var(--color-light-100);
+  }
+
+  .selectBlock {
+    @include flex(row, 0, 12px, center);
+  }
+}
+
+.buttons {
+  @include flex(row, 0, 12px, center);
+}

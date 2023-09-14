@@ -8,7 +8,7 @@ import { Slider } from '@/components/ui/slider'
 import { Table } from '@/components/ui/table'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
-import { useCreateDeckMutation, useGetDecksQuery } from '@/services/decks/decks.ts'
+import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/services/decks.ts'
 
 export const Packs = () => {
   const [sliderValue, setSliderValue] = useState<number[]>([0, 10])
