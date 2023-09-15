@@ -1,0 +1,27 @@
+@import '@/styles/mixins';
+
+.button {
+  @include interactive-circle(--color-dark-300);
+
+  cursor: pointer;
+
+  position: relative;
+
+  margin: 0;
+  padding: 0;
+
+  background-color: transparent;
+  border: none;
+  outline: none;
+
+  &.small {
+    @include interactive-circle(--color-dark-300, --color-dark-300, 24px);
+  }
+
+  svg {
+    position: relative;
+    z-index: 5;
+    transform: translateY(2px);
+    fill: var(--color-light-100);
+  }
+}

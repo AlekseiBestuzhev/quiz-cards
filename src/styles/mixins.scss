@@ -18,7 +18,7 @@
   background-color: var($color);
 }
 
-@mixin interactive-circle-element {
+@mixin interactive-circle-element($size) {
   &::before,
   &::after {
     @include animation-circle-control(0);
@@ -32,8 +32,8 @@
 
     display: block;
 
-    width: 36px;
-    height: 36px;
+    width: $size;
+    height: $size;
 
     border-radius: 50%;
 
@@ -41,15 +41,15 @@
   }
 }
 
-@mixin interactive-circle($active-color) {
-  @include interactive-circle-element;
+@mixin interactive-circle($active-color, $hover-color: --color-dark-500, $size: 36px) {
+  @include interactive-circle-element($size);
 
   &:focus-visible::before {
-    @include animation-circle-control(1, --color-dark-500);
+    @include animation-circle-control(1, $hover-color);
   }
 
   &:hover::before {
-    @include animation-circle-control(1, --color-dark-500);
+    @include animation-circle-control(1, $hover-color);
   }
 
   &:active::after {
