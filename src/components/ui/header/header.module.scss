@@ -20,5 +20,21 @@
     .logo {
       cursor: pointer;
     }
+
+    .avatarButton {
+      all: unset;
+
+      cursor: pointer;
+
+      width: 36px;
+      height: 36px;
+
+      border-radius: 50%;
+      outline: 2px solid transparent;
+
+      &:focus-visible {
+        outline: 2px solid var(--color-info-700);
+      }
+    }
   }
 }

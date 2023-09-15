@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, FC, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ComponentRef, forwardRef, ReactNode } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -9,12 +9,14 @@ export type IconButtonProps = {
   small?: boolean
 } & Omit<ComponentPropsWithoutRef<'button'>, 'children'>
 
-export const IconButton: FC<IconButtonProps> = ({ icon, small, className, ...props }) => {
-  const classes = clsx(s.button, small && s.small, className)
+export const IconButton = forwardRef<ComponentRef<'button'>, IconButtonProps>(
+  ({ icon, small, className, ...props }, ref) => {
+    const classes = clsx(s.button, small && s.small, className)
 
-  return (
-    <button {...props} className={classes}>
-      {icon}
-    </button>
-  )
-}
+    return (
+      <button ref={ref} {...props} className={classes}>
+        {icon}
+      </button>
+    )
+  }
+)

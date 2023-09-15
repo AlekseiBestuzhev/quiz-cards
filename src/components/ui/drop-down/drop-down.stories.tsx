@@ -53,7 +53,13 @@ export const WithProfile = {
       <div style={{ display: 'flex', gap: '24px' }}>
         <p style={{ margin: 0 }}>There is the avatar is button for menu:</p>
         <div>
-          <DropDown trigger={<Avatar userName={'Alex'} />}>
+          <DropDown
+            trigger={
+              <button style={{ all: 'unset', cursor: 'pointer' }}>
+                <Avatar userName={'Alex'} />
+              </button>
+            }
+          >
             <DropDownItem onSelect={() => {}}>
               <ProfileBlock userData={userData} />
             </DropDownItem>

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { forwardRef } from 'react'
 
 import s from './profile-block.module.scss'
 
@@ -15,9 +15,9 @@ type PropsType = {
   userData: UserDataType
 }
 
-export const ProfileBlock: FC<PropsType> = ({ userData }) => {
+export const ProfileBlock = forwardRef<any, PropsType>(({ userData }, ref) => {
   return (
-    <div className={s.content}>
+    <div className={s.content} ref={ref}>
       <Avatar userName={userData.name} image={userData.img} className={s.avatar} />
       <div>
         <Typography variant="subtitle2">{userData.name}</Typography>
@@ -27,4 +27,4 @@ export const ProfileBlock: FC<PropsType> = ({ userData }) => {
       </div>
     </div>
   )
-}
+})

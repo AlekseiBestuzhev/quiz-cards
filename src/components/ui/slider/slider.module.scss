@@ -52,7 +52,7 @@
       }
 
       .thumb {
-        @include interactive-circle-element;
+        @include interactive-circle-element(36px);
 
         cursor: pointer;
 
@@ -66,15 +66,13 @@
 
         background-color: var(--color-accent-500);
         border-radius: 10px;
+        outline: none;
 
-        &:hover::after {
+        &:hover::after,
+        &:focus-visible::after {
           @include animation-circle-control(1, --color-accent-500);
 
           opacity: 0.3;
-        }
-
-        &:active::after {
-          opacity: 0.5;
         }
 
         .dot {
@@ -88,10 +86,6 @@
 
           background-color: var(--color-light-100);
           border-radius: 50%;
-        }
-
-        &:focus-visible {
-          outline: 2px solid var(--color-info-700);
         }
       }
     }

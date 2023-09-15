@@ -7,7 +7,7 @@ import { Header } from '@/components/ui/header'
 export const Layout = () => {
   return (
     <>
-      <Header />
+      <Header userIsAuth />
       <div className={s.content}>
         <Outlet />
       </div>
