@@ -13,6 +13,11 @@ export type SignInFormProps = z.infer<typeof loginSchema>
 export const useSignIn = () => {
   const { control, handleSubmit } = useForm<SignInFormProps>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: false,
+    },
   })
 
   return { control, handleSubmit }

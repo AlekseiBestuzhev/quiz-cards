@@ -1,16 +1,19 @@
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 import s from './sign-in.module.scss'
 
-import { SignInForm, SignInFormProps } from '@/components/forms'
+import { SignInForm } from '@/components/forms'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { useGetMeQuery, useLoginMutation } from '@/features/auth/services/auth.ts'
 
 export const SignIn = () => {
-  const onSubmit = (data: SignInFormProps) => {
-    alert(JSON.stringify(data))
-  }
+  const [login] = useLoginMutation()
+  const { data: me, isLoading: isMeLoading } = useGetMeQuery()
+
+  if (isMeLoading) return <div>Loading...</div>
+  if (me && !('success' in me)) return <Navigate to={'/packs'} />
 
   return (
     <div className={s.root}>
@@ -19,7 +22,7 @@ export const SignIn = () => {
           <Typography as="h2" variant="large">
             Sign In
           </Typography>
-          <SignInForm onSubmit={onSubmit} className={s.form}>
+          <SignInForm onSubmit={login} className={s.form}>
             <div className={s.linkContainer}>
               <Typography variant="body2" as={Link} to="/recover-password">
                 Forgot Password?
