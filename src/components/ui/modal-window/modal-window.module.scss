@@ -1,0 +1,60 @@
+@import '@/styles/mixins';
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgb(0 0 0 / 50%);
+}
+
+.root {
+  @include flex(column, 0, 0, stretch, center);
+  @include container(530px);
+
+  position: fixed;
+  inset: 0;
+
+  .card {
+    padding: 0;
+
+    .header {
+      @include flex(row, 0, 24px, center, space-between);
+
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--color-dark-500);
+    }
+
+    .content {
+      padding: 24px;
+    }
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.overlay[data-state='open'],
+.window[data-state='open'] {
+  animation: fade-in 300ms ease-out;
+}
+
+.overlay[data-state='closed'],
+.window[data-state='closed'] {
+  animation: fade-out 300ms ease-in;
+}
