@@ -51,7 +51,7 @@ export const DropDown = forwardRef<any, DropdownProps>(
 export type DropDownItemProps = {
   children?: ReactNode
   disabled?: boolean
-  onSelect: (event: Event) => void
+  onSelect?: (event: Event) => void
   className?: string
 }
 

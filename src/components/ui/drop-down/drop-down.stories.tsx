@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react'
 import { DropDown, DropDownItem, DropDownItemWithIcon } from './'
 
 import { Avatar } from '@/components/ui/avatar'
-import { ProfileBlock } from '@/components/ui/header/profile-block'
+import { ProfileInfo } from '@/components/ui/header/profile-info'
 import { Icon } from '@/components/ui/icon/icon.tsx'
 
 const meta = {
@@ -46,7 +46,7 @@ export const WithProfile = {
     const userData = {
       name: 'Aleksei',
       email: 'frontend-dev@gmail.com',
-      img: '',
+      avatar: '',
     }
 
     return (
@@ -60,8 +60,8 @@ export const WithProfile = {
               </button>
             }
           >
-            <DropDownItem onSelect={() => {}}>
-              <ProfileBlock userData={userData} />
+            <DropDownItem>
+              <ProfileInfo {...userData} />
             </DropDownItem>
             <DropDownItemWithIcon
               icon={<Icon name="user" />}
