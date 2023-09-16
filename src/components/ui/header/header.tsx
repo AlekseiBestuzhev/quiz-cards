@@ -1,58 +1,62 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
 
 import s from './header.module.scss'
+import { ProfileInfo, ProfileInfoProps } from './profile-info'
 
 import { Logo } from '@/assets/illustrations/it-inc-logo.tsx'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { DropDown, DropDownItem, DropDownItemWithIcon } from '@/components/ui/drop-down'
-import { ProfileBlock } from '@/components/ui/header/profile-block'
 import { Icon } from '@/components/ui/icon/icon.tsx'
+import { Typography } from '@/components/ui/typography'
 
 type Props = {
-  userIsAuth: boolean
+  data: ProfileInfoProps | null
+  logout: () => void
 }
-export const Header: FC<Props> = ({ userIsAuth }) => {
+
+export const Header: FC<Props> = memo(({ data, logout }) => {
   const navigate = useNavigate()
 
-  const navigateToHome = () => {
-    navigate('/')
-  }
-
-  const userData = {
-    name: 'Aleksei',
-    email: 'frontend-dev@gmail.com',
-    img: '',
+  const toProfile = () => {
+    navigate('/profile')
   }
 
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <Logo className={s.logo} onClick={navigateToHome} />
-        {userIsAuth ? (
-          <DropDown
-            trigger={
-              <button className={s.avatarButton}>
-                <Avatar userName={'Alex'} />
-              </button>
-            }
-          >
-            <DropDownItem onSelect={() => {}}>
-              <ProfileBlock userData={userData} />
-            </DropDownItem>
-            <DropDownItemWithIcon
-              icon={<Icon name="user" />}
-              text="My profile"
-              onSelect={() => {}}
-            />
-            <DropDownItemWithIcon
-              icon={<Icon name="logout" />}
-              text="Sign out"
-              onSelect={() => {}}
-            />
-          </DropDown>
+        <Link to="/packs" className={s.link}>
+          <Logo className={s.logo} />
+        </Link>
+        {data ? (
+          <div className={s.user}>
+            <Typography variant="subtitle1" className={s.name}>
+              {data.name || data.email}
+            </Typography>
+            <DropDown
+              trigger={
+                <button className={s.dropdownButton}>
+                  <Avatar userName={data.name || data.email} image={data.avatar} />
+                </button>
+              }
+            >
+              <DropDownItem>
+                <ProfileInfo {...data} />
+              </DropDownItem>
+              <DropDownItemWithIcon
+                icon={<Icon name="user" />}
+                text="Profile"
+                onSelect={toProfile}
+              />
+              <DropDownItemWithIcon
+                icon={<Icon name="logout" />}
+                text="Sign out"
+                onSelect={logout}
+              />
+            </DropDown>
+          </div>
         ) : (
           <Button as={Link} to="/sign-in">
             Sign In
@@ -61,4 +65,4 @@ export const Header: FC<Props> = ({ userIsAuth }) => {
       </div>
     </div>
   )
-}
+})
