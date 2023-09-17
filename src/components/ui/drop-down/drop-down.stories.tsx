@@ -22,11 +22,7 @@ export const Default = {
         <div>
           <DropDown>
             <>
-              <DropDownItemWithIcon
-                icon={<Icon name="playCircle" />}
-                text="Learn"
-                onSelect={() => {}}
-              />
+              <DropDownItemWithIcon icon={<Icon name="play" />} text="Learn" onSelect={() => {}} />
               <DropDownItemWithIcon icon={<Icon name="edit" />} text="Edit" onSelect={() => {}} />
               <DropDownItemWithIcon
                 icon={<Icon name="trash-bin" />}
@@ -56,7 +52,7 @@ export const WithProfile = {
           <DropDown
             trigger={
               <button style={{ all: 'unset', cursor: 'pointer' }}>
-                <Avatar userName={'Alex'} />
+                <Avatar userName={userData.name} />
               </button>
             }
           >

@@ -7,6 +7,8 @@ import { Icon } from '@/components/ui/icon/icon.tsx'
 import { Slider } from '@/components/ui/slider'
 import { Tab, TabSwitcher } from '@/components/ui/tab-switcher'
 import { TextField } from '@/components/ui/text-field'
+import { useGetMeQuery } from '@/features/auth'
+import { UserResponse } from '@/features/auth/services/types.ts'
 
 type Props = {
   searchName: string
@@ -14,23 +16,32 @@ type Props = {
   sliderValue: number[]
   sliderMaxValue?: number
   setSliderValue: (newValue: number[]) => void
-  tabs: Tab[]
   tabValue: string
   setTabValue: (newTab: string) => void
 }
+
 export const FilterControls: FC<Props> = ({
   searchName,
   setSearchName,
   sliderValue,
   sliderMaxValue = 10,
   setSliderValue,
-  tabs,
   tabValue,
   setTabValue,
 }) => {
+  const { data } = useGetMeQuery()
+
+  const userId = (data as UserResponse).id
+
+  const tabs: Tab[] = [
+    { value: userId, text: 'My cards' },
+    { value: '', text: 'All cards' },
+  ]
+
   const clearFilterHandler = () => {
     setSliderValue([0, sliderMaxValue])
     setSearchName('')
+    setTabValue('')
   }
 
   const onClearTextField = () => {

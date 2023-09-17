@@ -1,13 +1,22 @@
 import { FC } from 'react'
 
 import { Table } from '@/components/ui/table'
-import { DecksResponse } from '@/features/packs/services/types.ts'
+import { useGetMeQuery } from '@/features/auth'
+import { UserResponse } from '@/features/auth/services/types.ts'
+import { Deck } from '@/features/packs/services/types.ts'
+import { PackRow } from '@/features/packs/ui/pack-row/pack-row.tsx'
 
-type Props = Pick<DecksResponse, 'items'>
+type Props = {
+  items: Deck[]
+}
 
 export const PacksTable: FC<Props> = ({ items }) => {
+  const { data } = useGetMeQuery()
+
+  const authUserId = (data as UserResponse).id
+
   if (!items.length) {
-    return <Table.Empty>No content</Table.Empty>
+    return <Table.Empty>No content with these terms...</Table.Empty>
   }
 
   return (
@@ -23,13 +32,7 @@ export const PacksTable: FC<Props> = ({ items }) => {
       </Table.Head>
       <Table.Body>
         {items.map(pack => (
-          <Table.Row key={pack.id}>
-            <Table.Cell>{pack.name}</Table.Cell>
-            <Table.Cell>{pack.cardsCount}</Table.Cell>
-            <Table.Cell>{new Date(pack.updated).toLocaleDateString()}</Table.Cell>
-            <Table.Cell>{pack.author.name}</Table.Cell>
-            <Table.Cell>icon buttons</Table.Cell>
-          </Table.Row>
+          <PackRow key={pack.id} pack={pack} authUserId={authUserId} />
         ))}
       </Table.Body>
     </Table.Root>

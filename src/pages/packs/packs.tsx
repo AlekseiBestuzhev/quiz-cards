@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react'
 import s from './packs.module.scss'
 
 import { Button } from '@/components/ui/button'
+import { ModalWindow } from '@/components/ui/modal-window'
 import { Pagination } from '@/components/ui/pagination'
+import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/services/decks.ts'
 import { FilterControls, PacksTable } from '@/features/packs/ui'
@@ -15,14 +17,13 @@ export const Packs = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(5)
 
-  const [tabValue, setTabValue] = useState('all')
+  const [tabValue, setTabValue] = useState('')
 
-  const tabs = [
-    { value: 'my', text: 'My cards' },
-    { value: 'all', text: 'All cards' },
-  ]
+  const [newPackTitle, setNewPackTitle] = useState('')
+  const [open, setOpen] = useState(false)
 
   const packs = useGetDecksQuery({
+    authorId: tabValue,
     name: searchName,
     itemsPerPage: pageSize,
     minCardsCount: sliderValue[0],
@@ -32,22 +33,34 @@ export const Packs = () => {
 
   useEffect(() => {
     setCurrentPage(1)
-  }, [searchName, sliderValue, pageSize])
+  }, [searchName, sliderValue, pageSize, tabValue])
 
   const [createDeck] = useCreateDeckMutation()
 
   const createDeckHandler = () => {
-    createDeck({ name: 'Created Deck' })
+    createDeck({ name: newPackTitle })
+    setNewPackTitle('')
+    setOpen(false)
   }
 
   return (
     <div className={s.root}>
+      <ModalWindow open={open} setOpen={setOpen} title="Create new pack">
+        <TextField
+          value={newPackTitle}
+          onChange={e => setNewPackTitle(e.currentTarget.value)}
+          label="Enter title"
+        />
+        <Button onClick={createDeckHandler} style={{ marginTop: '36px' }}>
+          Create
+        </Button>
+      </ModalWindow>
       <div className={s.header}>
         <div className={s.top}>
           <Typography as="h1" variant="large">
             Packs list
           </Typography>
-          <Button onClick={createDeckHandler}>Add New Pack</Button>
+          <Button onClick={() => setOpen(true)}>Add New Pack</Button>
         </div>
         <FilterControls
           searchName={searchName}
@@ -55,7 +68,6 @@ export const Packs = () => {
           sliderValue={sliderValue}
           sliderMaxValue={packs?.data?.maxCardsCount}
           setSliderValue={setSliderValue}
-          tabs={tabs}
           tabValue={tabValue}
           setTabValue={setTabValue}
         />
