@@ -6,5 +6,13 @@
 
   .buttons {
     @include flex(row, 0, 12px, center, center);
+
+    @media (width <= 544px) {
+      @include flex(column, 12px, 0, center, center);
+    }
+  }
+
+  @media (width <= 544px) {
+    width: 64px;
   }
 }

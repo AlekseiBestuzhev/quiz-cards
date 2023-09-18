@@ -67,7 +67,7 @@ export const FilterControls: FC<Props> = memo(
           min={0}
           max={sliderMaxValue}
         />
-        <Button variant="secondary" onClick={clearFilterHandler}>
+        <Button variant="secondary" onClick={clearFilterHandler} className={s.clearButton}>
           <Icon name={'trash-bin'} className={s.icon} />
           Clear Filter
         </Button>

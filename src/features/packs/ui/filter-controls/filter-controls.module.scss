@@ -1,15 +1,28 @@
 @import '@/styles/mixins';
 
 .filter {
-  @include flex(row, 0, 0, flex-end, space-between);
+  @include flex(row, 24px, 12px, flex-end, space-between);
 
   .textField {
     flex: 0 1 300px;
+
+    @media (width <= 544px) {
+      flex-grow: 1;
+      margin-top: 12px;
+    }
   }
 
-  .icon {
-    width: 16px;
-    height: 16px;
-    fill: var(--color-light-100);
+  .clearButton {
+    flex-shrink: 0;
+
+    .icon {
+      width: 16px;
+      height: 16px;
+      fill: var(--color-light-100);
+    }
+  }
+
+  @media (width <= 800px) {
+    flex-wrap: wrap;
   }
 }
