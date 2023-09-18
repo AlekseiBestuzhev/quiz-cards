@@ -4,7 +4,7 @@ import s from './profile-info.module.scss'
 
 import { Avatar } from '@/components/ui/avatar'
 import { Typography } from '@/components/ui/typography'
-import { UserResponse } from '@/features/auth/services/types.ts'
+import { UserResponse } from '@/features/auth/services'
 
 export type ProfileInfoProps = Pick<UserResponse, 'avatar' | 'name' | 'email'>
 

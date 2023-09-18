@@ -6,7 +6,7 @@ import { SignInForm } from '@/components/forms'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
-import { useGetMeQuery, useLoginMutation } from '@/features/auth/services/auth.ts'
+import { useGetMeQuery, useLoginMutation } from '@/features/auth/services'
 
 export const SignIn = () => {
   const [login] = useLoginMutation()
