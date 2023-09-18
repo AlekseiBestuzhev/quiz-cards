@@ -51,11 +51,11 @@ export const Select: FC<SelectPropsType> = ({
         disabled={disabled}
         required={required}
       >
-        <SelectRadix.Trigger className={classes.trigger} asChild aria-label={'select'} tabIndex={1}>
-          <div>
+        <SelectRadix.Trigger className={classes.trigger} asChild aria-label={'select'}>
+          <button>
             <SelectRadix.Value placeholder={placeholder} />
             <Icon name={'arrowDown'} className={classes.icon} />
-          </div>
+          </button>
         </SelectRadix.Trigger>
         <SelectRadix.Portal>
           <SelectRadix.Content position={'popper'} className={s.content}>
