@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -19,40 +19,42 @@ export type PaginationProps = {
   className?: string
 }
 
-export const Pagination: FC<PaginationProps> = ({
-  totalCount = 10,
-  currentPage,
-  onPageChange,
-  pageSize,
-  onPageSizeChange,
-  siblingCount,
-  className,
-}) => {
-  const classes = clsx(s.root, className)
-
-  const paginationRange = usePagination({
+export const Pagination: FC<PaginationProps> = memo(
+  ({
+    totalCount = 10,
     currentPage,
-    totalCount,
-    siblingCount,
+    onPageChange,
     pageSize,
-  })
+    onPageSizeChange,
+    siblingCount,
+    className,
+  }) => {
+    const classes = clsx(s.root, className)
 
-  if (currentPage === 0 || paginationRange.length < 2) {
-    return null
-  }
+    const paginationRange = usePagination({
+      currentPage,
+      totalCount,
+      siblingCount,
+      pageSize,
+    })
 
-  return (
-    <div className={classes}>
-      <NavigationBlock
-        paginationRange={paginationRange}
-        currentPage={currentPage}
-        onPageChange={onPageChange}
-      />
-      <div className={s.selectBlock}>
-        <Typography variant="body2">Show</Typography>
-        <PageSizeSelect pageSize={pageSize} onPageSizeChange={onPageSizeChange} />
-        <Typography variant="body2">on the page</Typography>
+    if (currentPage === 0 || paginationRange.length < 2) {
+      return null
+    }
+
+    return (
+      <div className={classes}>
+        <NavigationBlock
+          paginationRange={paginationRange}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+        />
+        <div className={s.selectBlock}>
+          <Typography variant="body2">Show</Typography>
+          <PageSizeSelect pageSize={pageSize} onPageSizeChange={onPageSizeChange} />
+          <Typography variant="body2">on the page</Typography>
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+)

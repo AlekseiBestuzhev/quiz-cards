@@ -1,18 +1,18 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import s from './pack-row.module.scss'
 
 import { Icon } from '@/components/ui/icon/icon.tsx'
 import { IconButton } from '@/components/ui/icon-button'
 import { Table } from '@/components/ui/table'
-import { Deck } from '@/features/packs/services/types.ts'
+import { Deck } from '@/features/packs/services'
 
 type Props = {
   pack: Deck
   authUserId: string
 }
 
-export const PackRow: FC<Props> = ({ pack, authUserId }) => {
+export const PackRow: FC<Props> = memo(({ pack, authUserId }) => {
   const isMyPack = authUserId === pack.author.id
 
   return (
@@ -34,4 +34,4 @@ export const PackRow: FC<Props> = ({ pack, authUserId }) => {
       </Table.Cell>
     </Table.Row>
   )
-}
+})

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import s from './packs.module.scss'
 
@@ -7,28 +7,36 @@ import { ModalWindow } from '@/components/ui/modal-window'
 import { Pagination } from '@/components/ui/pagination'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
-import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/services/decks.ts'
+import { useGetMeQuery } from '@/features/auth'
+import { UserResponse } from '@/features/auth/services/types.ts'
+import { usePacksFilter, usePacksPagination } from '@/features/packs/model/hooks'
+import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/services'
 import { FilterControls, PacksTable } from '@/features/packs/ui'
 
 export const Packs = () => {
-  const [sliderValue, setSliderValue] = useState([0, 10])
-  const [searchName, setSearchName] = useState('')
+  const { currentPage, pageSize, setCurrentPage, setPageSize } = usePacksPagination()
+  const { searchName, tabValue, sliderValue, setSearchName, setTabValue, setSliderValue } =
+    usePacksFilter()
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageSize, setPageSize] = useState(5)
-
-  const [tabValue, setTabValue] = useState('')
+  const setPage = useCallback(setCurrentPage, [])
+  const setSize = useCallback(setPageSize, [])
+  const setSearch = useCallback(setSearchName, [])
+  const setTab = useCallback(setTabValue, [])
+  const setSlider = useCallback(setSliderValue, [])
 
   const [newPackTitle, setNewPackTitle] = useState('')
   const [open, setOpen] = useState(false)
 
+  const { data } = useGetMeQuery()
+  const userId = (data as UserResponse).id
+
   const packs = useGetDecksQuery({
-    authorId: tabValue,
     name: searchName,
-    itemsPerPage: pageSize,
+    authorId: tabValue,
     minCardsCount: sliderValue[0],
     maxCardsCount: sliderValue[1],
     currentPage,
+    itemsPerPage: pageSize,
   })
 
   useEffect(() => {
@@ -64,21 +72,22 @@ export const Packs = () => {
         </div>
         <FilterControls
           searchName={searchName}
-          setSearchName={setSearchName}
+          setSearchName={setSearch}
           sliderValue={sliderValue}
           sliderMaxValue={packs?.data?.maxCardsCount}
-          setSliderValue={setSliderValue}
+          setSliderValue={setSlider}
           tabValue={tabValue}
-          setTabValue={setTabValue}
+          setTabValue={setTab}
+          authUserId={userId}
         />
       </div>
-      {packs?.data?.items && <PacksTable items={packs.data.items} />}
+      {packs?.data?.items && <PacksTable items={packs.data.items} authUserId={userId} />}
       <Pagination
         totalCount={packs?.data?.pagination.totalItems}
         currentPage={currentPage}
-        onPageChange={setCurrentPage}
+        onPageChange={setPage}
         pageSize={pageSize}
-        onPageSizeChange={setPageSize}
+        onPageSizeChange={setSize}
         className={s.pagination}
       />
     </div>

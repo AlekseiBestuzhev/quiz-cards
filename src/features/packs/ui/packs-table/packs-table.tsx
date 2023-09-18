@@ -1,20 +1,15 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import { Table } from '@/components/ui/table'
-import { useGetMeQuery } from '@/features/auth'
-import { UserResponse } from '@/features/auth/services/types.ts'
-import { Deck } from '@/features/packs/services/types.ts'
+import { Deck } from '@/features/packs/services'
 import { PackRow } from '@/features/packs/ui/pack-row/pack-row.tsx'
 
 type Props = {
   items: Deck[]
+  authUserId: string
 }
 
-export const PacksTable: FC<Props> = ({ items }) => {
-  const { data } = useGetMeQuery()
-
-  const authUserId = (data as UserResponse).id
-
+export const PacksTable: FC<Props> = memo(({ items, authUserId }) => {
   if (!items.length) {
     return <Table.Empty>No content with these terms...</Table.Empty>
   }
@@ -37,4 +32,4 @@ export const PacksTable: FC<Props> = ({ items }) => {
       </Table.Body>
     </Table.Root>
   )
-}
+})
