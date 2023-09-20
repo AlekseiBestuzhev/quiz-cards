@@ -25,7 +25,7 @@ export const TabSwitcher: FC<Props> = ({ value, tabs, onValueChange, label, clas
   const classes = clsx(s.label, className)
 
   return (
-    <Typography as="label" variant="body2" className={classes}>
+    <Typography as="div" variant="body2" className={classes}>
       {label}
       <TabsSwitcher.Root value={value} onValueChange={onValueChange} className={s.root}>
         <TabsSwitcher.List>
