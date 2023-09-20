@@ -25,7 +25,9 @@ export const DropDown = forwardRef<any, DropdownProps>(
     return (
       <DropdownMenuRadix.Root open={open} onOpenChange={setOpen}>
         <DropdownMenuRadix.Trigger className={classes} ref={ref} asChild>
-          {trigger ?? <IconButton icon={<Icon name="more" />} className={s.btn} />}
+          {trigger ?? (
+            <IconButton icon={<Icon name="more" width={20} height={20} />} className={s.btn} />
+          )}
         </DropdownMenuRadix.Trigger>
         <DropdownMenuRadix.Portal>
           <DropdownMenuRadix.Content
