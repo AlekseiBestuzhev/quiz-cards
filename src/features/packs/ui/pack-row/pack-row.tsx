@@ -22,15 +22,17 @@ export const PackRow: FC<Props> = memo(({ pack, authUserId }) => {
       <Table.Cell>{new Date(pack.updated).toLocaleDateString()}</Table.Cell>
       <Table.Cell>{pack.author.name}</Table.Cell>
       <Table.Cell className={s.controls}>
-        {isMyPack ? (
-          <div className={s.buttons}>
-            <IconButton icon={<Icon name={'edit'} width={16} height={16} />} small />
-            <IconButton icon={<Icon name={'play'} width={16} height={16} />} small />
-            <IconButton icon={<Icon name={'trash-bin'} width={16} height={16} />} small />
-          </div>
-        ) : (
-          <IconButton icon={<Icon name={'play'} width={16} height={16} />} small />
-        )}
+        <div className={s.buttons}>
+          {isMyPack ? (
+            <>
+              <IconButton icon={<Icon name={'edit'} width={18} height={18} />} small />
+              <IconButton icon={<Icon name={'play'} width={18} height={18} />} small />
+              <IconButton icon={<Icon name={'trash-bin'} width={18} height={18} />} small />
+            </>
+          ) : (
+            <IconButton icon={<Icon name={'play'} width={18} height={18} />} small />
+          )}
+        </div>
       </Table.Cell>
     </Table.Row>
   )

@@ -57,6 +57,11 @@
 
     transition: 0s;
   }
+
+  &:disabled::before,
+  &:disabled::after {
+    @include animation-circle-control(0, transparent);
+  }
 }
 
 @mixin link-hover {

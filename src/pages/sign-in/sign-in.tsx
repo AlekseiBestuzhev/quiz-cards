@@ -18,7 +18,7 @@ export const SignIn = () => {
   return (
     <div className={s.root}>
       <Card>
-        <div className={s.content}>
+        <section className={s.content}>
           <Typography as="h2" variant="large">
             Sign In
           </Typography>
@@ -35,7 +35,7 @@ export const SignIn = () => {
               Sign Up
             </Button>
           </div>
-        </div>
+        </section>
       </Card>
     </div>
   )

@@ -51,7 +51,7 @@ export const Packs = () => {
   }
 
   return (
-    <div className={s.root}>
+    <section className={s.root}>
       <ModalWindow open={open} setOpen={setOpen} title="Create new pack">
         <TextField
           value={newPackTitle}
@@ -89,6 +89,6 @@ export const Packs = () => {
         onPageSizeChange={setSize}
         className={s.pagination}
       />
-    </div>
+    </section>
   )
 }
