@@ -12,12 +12,12 @@ export const CreateNewPassword = () => {
   return (
     <div className={s.container}>
       <Card>
-        <div className={s.content}>
+        <section className={s.content}>
           <Typography as="h2" variant="large">
             Create new password
           </Typography>
           <CreateNewPasswordForm onSubmit={onSubmit} className={s.form} />
-        </div>
+        </section>
       </Card>
     </div>
   )

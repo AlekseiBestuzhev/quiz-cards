@@ -2,7 +2,6 @@
 
 .controls {
   width: 125px;
-  text-align: center;
 
   .buttons {
     @include flex(row, 0, 12px, center, center);

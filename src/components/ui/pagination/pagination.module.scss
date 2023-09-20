@@ -1,7 +1,9 @@
 @import '@/styles/mixins';
 
 .root {
-  @include flex(row, 0, 24px, center);
+  @include flex(row, 24px, 24px, center);
+
+  flex-wrap: wrap;
 
   .dots {
     display: grid;

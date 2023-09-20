@@ -15,7 +15,7 @@ export const ForgotPassword = () => {
   return (
     <div className={s.container}>
       <Card>
-        <div className={s.content}>
+        <section className={s.content}>
           <Typography as="h2" variant="large">
             Forgot your password?
           </Typography>
@@ -26,7 +26,7 @@ export const ForgotPassword = () => {
               Try logging in
             </Button>
           </div>
-        </div>
+        </section>
       </Card>
     </div>
   )
