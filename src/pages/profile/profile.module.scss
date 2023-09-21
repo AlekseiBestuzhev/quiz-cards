@@ -6,74 +6,29 @@
   .content {
     @include flex(column, 15px, 0, center);
 
+    .avatarContainer {
+      position: relative;
+    }
+
+    .editImage {
+      @include flex(row, 0, 0, center, center);
+
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding: 4px;
+    }
+
     .form {
       align-self: stretch;
     }
 
-    .icon {
-      cursor: pointer;
-      fill: #fff;
-    }
-
     .userName {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex(row, 0, 0, center, center);
     }
 
-    .editNickname {
-      all: unset;
-
-      display: grid;
-      place-items: center;
-
-      width: 24px;
-      height: 24px;
-      margin: 0;
-      padding: 0;
-
-      background-color: transparent;
-      border-radius: 4px;
-
-      &:hover {
-        background-color: var(--color-dark-300);
-      }
-
-      &:focus {
-        outline: 2px solid var(--color-info-700);
-      }
-    }
-
-    .nickName {
-      @include flex(row, 0, 12px, center);
-    }
-
-    .iconLogout {
-      fill: #fff;
-    }
-
-    .email {
-      color: var(--color-dark-100);
+    .icon {
+      fill: var(--color-light-100);
     }
   }
-}
-
-.avatarContainer {
-  position: relative;
-}
-
-.editImage {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 4px;
-}
-
-.avatar {
-  object-fit: cover;
 }

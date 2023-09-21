@@ -1,0 +1,13 @@
+@import '@/styles/mixins';
+
+.nickName {
+  @include flex(row, 0, 16px, center);
+}
+
+.icon {
+  fill: #fff;
+}
+
+.email {
+  color: var(--color-dark-100);
+}
