@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, ReactNode } from 'react'
+import { FC, PropsWithChildren } from 'react'
 
 import * as Dialog from '@radix-ui/react-dialog'
 
@@ -12,7 +12,6 @@ import { Typography } from '@/components/ui/typography'
 type Props = {
   open: boolean
   setOpen: (value: boolean) => void
-  trigger?: ReactNode
   title: string
 } & PropsWithChildren
 
