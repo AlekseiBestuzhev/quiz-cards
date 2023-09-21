@@ -5,7 +5,8 @@ import s from './pack-row.module.scss'
 import { Icon } from '@/components/ui/icon/icon.tsx'
 import { IconButton } from '@/components/ui/icon-button'
 import { Table } from '@/components/ui/table'
-import { Deck, useDeleteDeckMutation } from '@/features/packs/services'
+import { Deck } from '@/features/packs/services'
+import { DeleteControl } from '@/features/packs/ui'
 
 type Props = {
   pack: Deck
@@ -15,20 +16,14 @@ type Props = {
 export const PackRow: FC<Props> = memo(({ pack, authUserId }) => {
   const isMyPack = authUserId === pack.author.id
 
-  const [deleteDeck] = useDeleteDeckMutation()
-
-  const deletePack = () => {
-    deleteDeck({ id: pack.id })
-  }
-
   return (
     <Table.Row key={pack.id}>
       <Table.Cell>{pack.name}</Table.Cell>
       <Table.Cell>{pack.cardsCount}</Table.Cell>
       <Table.Cell>{new Date(pack.updated).toLocaleDateString()}</Table.Cell>
       <Table.Cell>{pack.author.name}</Table.Cell>
-      <Table.Cell className={s.controls}>
-        <div className={s.buttons}>
+      <Table.Cell className={s.cell}>
+        <div className={s.controls}>
           {isMyPack ? (
             <>
               <IconButton icon={<Icon name={'edit'} width={18} height={18} />} small />
@@ -37,11 +32,7 @@ export const PackRow: FC<Props> = memo(({ pack, authUserId }) => {
                 disabled={!pack.cardsCount}
                 small
               />
-              <IconButton
-                icon={<Icon name={'trash-bin'} width={18} height={18} />}
-                onClick={deletePack}
-                small
-              />
+              <DeleteControl id={pack.id} />
             </>
           ) : (
             <IconButton

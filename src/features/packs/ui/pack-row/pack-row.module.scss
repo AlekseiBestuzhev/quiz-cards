@@ -1,12 +1,12 @@
 @import '@/styles/mixins';
 
-.controls {
-  width: 125px;
+.cell {
+  width: 127px;
 
-  .buttons {
+  .controls {
     @include flex(row, 0, 12px, center, center);
 
-    @media (width <= 544px) {
+    @media (width <= 630px) {
       @include flex(column, 12px, 0, center, center);
     }
   }
