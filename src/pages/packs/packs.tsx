@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import s from './packs.module.scss'
 
 import { Button } from '@/components/ui/button'
 import { ModalWindow } from '@/components/ui/modal-window'
 import { Pagination } from '@/components/ui/pagination'
+import { Sort } from '@/components/ui/table-header'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { useGetMeQuery, UserResponse } from '@/features/auth/services'
@@ -26,6 +27,13 @@ export const Packs = () => {
   const [newPackTitle, setNewPackTitle] = useState('')
   const [open, setOpen] = useState(false)
 
+  const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
+  const sortedString = useMemo(() => {
+    if (!sort) return ''
+
+    return `${sort.key}-${sort.direction}`
+  }, [sort])
+
   const { data } = useGetMeQuery()
   const userId = (data as UserResponse).id
 
@@ -34,6 +42,7 @@ export const Packs = () => {
     authorId: tabValue,
     minCardsCount: sliderValue[0],
     maxCardsCount: sliderValue[1],
+    orderBy: sortedString,
     currentPage,
     itemsPerPage: pageSize,
   })
@@ -80,7 +89,9 @@ export const Packs = () => {
           authUserId={userId}
         />
       </div>
-      {packs?.data?.items && <PacksTable items={packs.data.items} authUserId={userId} />}
+      {packs?.data?.items && (
+        <PacksTable items={packs.data.items} authUserId={userId} sort={sort} onSort={setSort} />
+      )}
       <Pagination
         totalCount={packs?.data?.pagination.totalItems}
         currentPage={currentPage}

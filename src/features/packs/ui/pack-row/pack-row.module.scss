@@ -1,17 +1,50 @@
 @import '@/styles/mixins';
 
-.cell {
-  width: 127px;
+.title {
+  @include flex(row, 0, 24px, center);
 
-  .controls {
-    @include flex(row, 0, 12px, center, center);
+  .cover {
+    height: 50px;
+  }
+}
 
-    @media (width <= 630px) {
-      @include flex(column, 12px, 0, center, center);
-    }
+@media (width >= 950px) {
+  .date {
+    width: 180px;
   }
 
-  @media (width <= 544px) {
-    width: 64px;
+  .name {
+    overflow: hidden;
+    width: 200px;
+    max-width: 200px;
+    text-overflow: ellipsis;
+  }
+}
+
+.root {
+  transition: 0.3s;
+
+  &:hover {
+    background-color: var(--color-dark-700);
+  }
+
+  .count {
+    width: 150px;
+  }
+
+  .cell {
+    width: 127px;
+
+    .controls {
+      @include flex(row, 0, 12px, center, center);
+
+      @media (width <= 630px) {
+        @include flex(column, 12px, 0, center, center);
+      }
+    }
+
+    @media (width <= 544px) {
+      width: 64px;
+    }
   }
 }

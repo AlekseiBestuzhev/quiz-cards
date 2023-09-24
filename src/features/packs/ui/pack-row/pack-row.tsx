@@ -17,11 +17,14 @@ export const PackRow: FC<Props> = memo(({ pack, authUserId }) => {
   const isMyPack = authUserId === pack.author.id
 
   return (
-    <Table.Row key={pack.id}>
-      <Table.Cell>{pack.name}</Table.Cell>
-      <Table.Cell>{pack.cardsCount}</Table.Cell>
-      <Table.Cell>{new Date(pack.updated).toLocaleDateString()}</Table.Cell>
-      <Table.Cell>{pack.author.name}</Table.Cell>
+    <Table.Row key={pack.id} className={s.root}>
+      <Table.Cell className={s.title}>
+        {pack.cover && <img src={pack.cover} alt="Pack cover" className={s.cover} />}
+        {pack.name}
+      </Table.Cell>
+      <Table.Cell className={s.count}>{pack.cardsCount}</Table.Cell>
+      <Table.Cell className={s.date}>{new Date(pack.updated).toLocaleDateString()}</Table.Cell>
+      <Table.Cell className={s.name}>{pack.author.name}</Table.Cell>
       <Table.Cell className={s.cell}>
         <div className={s.controls}>
           {isMyPack ? (
