@@ -43,7 +43,7 @@
       border-radius: 2px;
       outline: 1px solid transparent;
 
-      transition: 0.2s;
+      transition: 0.3s;
 
       &::placeholder {
         color: var(--color-dark-100);
@@ -78,6 +78,7 @@
       &:hover:enabled {
         cursor: text;
         background-color: var(--color-dark-700);
+        border-color: var(--color-dark-100);
       }
 
       &.search {
