@@ -11,11 +11,11 @@ const decksAPI = baseAPI.injectEndpoints({
       }),
       providesTags: ['Decks'],
     }),
-    createDeck: builder.mutation<Deck, { name: string }>({
-      query: ({ name }) => ({
+    createDeck: builder.mutation<Deck, FormData>({
+      query: data => ({
         url: `v1/decks`,
         method: 'POST',
-        body: { name },
+        body: data,
       }),
       invalidatesTags: ['Decks'],
     }),
