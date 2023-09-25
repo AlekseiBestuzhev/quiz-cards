@@ -1,7 +1,5 @@
 import { FC, useEffect, useState } from 'react'
 
-import { DevTool } from '@hookform/devtools'
-
 import s from './pack.module.scss'
 
 import noCover from '@/assets/illustrations/no-cover.svg'
@@ -15,7 +13,7 @@ import { Typography } from '@/components/ui/typography'
 type DefaultValuesProps = {
   name: string
   isPrivate: boolean
-  cover?: string
+  cover?: string | null
 }
 
 type Props = {
@@ -69,6 +67,7 @@ export const PackForm: FC<Props> = ({ onSubmit, defaultValues, onCancel }) => {
 
     form.append('name', data.name)
     form.append('isPrivate', `${data.isPrivate}`)
+
     if (file === null) {
       form.append('cover', '')
     } else {
@@ -82,7 +81,6 @@ export const PackForm: FC<Props> = ({ onSubmit, defaultValues, onCancel }) => {
 
   return (
     <form onSubmit={handleSubmit(sendHandler)} className={s.form}>
-      <DevTool control={control} />
       <img src={downloaded || noCover} alt={'img'} className={s.image} />
       {coverError && (
         <Typography variant="caption" className={s.error}>

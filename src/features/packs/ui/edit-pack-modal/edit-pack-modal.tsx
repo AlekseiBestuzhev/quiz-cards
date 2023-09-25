@@ -19,9 +19,13 @@ export const EditPackModal: FC<Props> = ({ open, setOpen, pack }) => {
 
   const [editPack] = useUpdateDeckMutation()
 
-  const editDeckHandler = (data: FormData) => {
-    editPack({ id: pack.id, data })
-    setOpen(false)
+  const editDeckHandler = async (data: FormData) => {
+    try {
+      editPack({ id: pack.id, data })
+      setOpen(false)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
