@@ -6,7 +6,7 @@ import { Icon } from '@/components/ui/icon/icon.tsx'
 import { IconButton } from '@/components/ui/icon-button'
 import { Table } from '@/components/ui/table'
 import { Deck } from '@/features/packs/services'
-import { DeleteControl } from '@/features/packs/ui'
+import { DeleteControl, EditControl } from '@/features/packs/ui'
 
 type Props = {
   pack: Deck
@@ -29,7 +29,7 @@ export const PackRow: FC<Props> = memo(({ pack, authUserId }) => {
         <div className={s.controls}>
           {isMyPack ? (
             <>
-              <IconButton icon={<Icon name={'edit'} width={18} height={18} />} small />
+              <EditControl pack={pack} />
               <IconButton
                 icon={<Icon name={'play'} width={18} height={18} />}
                 disabled={!pack.cardsCount}

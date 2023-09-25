@@ -10,6 +10,18 @@
     border-radius: 2px;
   }
 
+  .imageControls {
+    @include flex(row, 0, 24px, center, space-between);
+
+    button {
+      flex-grow: 1;
+    }
+  }
+
+  .imgIcon {
+    fill: var(--color-light-100);
+  }
+
   .controls {
     @include flex(row, 0, 0, center, space-between);
   }

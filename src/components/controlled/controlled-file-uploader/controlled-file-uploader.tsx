@@ -40,9 +40,11 @@ export const ControlledFileUploader = <T extends FieldValues>({
       file => ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'].includes(file.type),
       'Only .jpg, .jpeg, .png and .webp formats are supported.'
     )
+    .nullable()
     .optional()
 
   const {
+    formState: { errors },
     field: { onChange },
   } = useController({
     name,
@@ -54,7 +56,9 @@ export const ControlledFileUploader = <T extends FieldValues>({
     const res = scheme.safeParse(file)
 
     if (res && 'data' in res) {
-      clearErrors('cover')
+      if (errors) {
+        clearErrors('cover')
+      }
       onChange(file)
     }
 

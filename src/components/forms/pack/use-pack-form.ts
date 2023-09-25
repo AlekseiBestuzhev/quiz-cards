@@ -12,17 +12,18 @@ const packSchema = z.object({
       file => ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'].includes(file.type),
       'Only .jpg, .jpeg, .png and .webp formats are supported.'
     )
+    .nullable()
     .optional(),
 })
 
 export type PackFormType = z.infer<typeof packSchema>
 
 export const usePackForm = (props: PackFormType) => {
-  const { control, watch, formState, setError, clearErrors, resetField, handleSubmit } =
+  const { control, watch, formState, setValue, setError, clearErrors, handleSubmit } =
     useForm<PackFormType>({
       resolver: zodResolver(packSchema),
       defaultValues: props,
     })
 
-  return { control, watch, setError, formState, clearErrors, resetField, handleSubmit }
+  return { control, watch, formState, setValue, setError, clearErrors, handleSubmit }
 }
