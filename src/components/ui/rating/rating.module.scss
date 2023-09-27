@@ -1,0 +1,11 @@
+.starIcon:not(:last-child) {
+  margin-right: 10px;
+}
+
+.normal {
+  stroke: var(--color-warning-300);
+}
+
+.hovered {
+  fill: var(--color-warning-300);
+}

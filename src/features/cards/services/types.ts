@@ -1,0 +1,30 @@
+import { Pagination } from '@/features/packs/services'
+
+export type Card = {
+  id: string
+  question: string
+  answer: string
+  deckId: string
+  questionImg?: string
+  answerImg?: string
+  questionVideo?: string
+  answerVideo?: string
+  created: string
+  updated: string
+  shots: number
+  grade: number
+  userId: string
+}
+
+export type CardsResponse = {
+  pagination: Pagination
+  items: Card[]
+}
+
+export type CardsParams = {
+  question?: string
+  answer?: string
+  orderBy?: string
+  currentPage?: number
+  itemsPerPage?: number
+} | void

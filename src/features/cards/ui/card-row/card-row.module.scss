@@ -1,0 +1,31 @@
+@import '@/styles/mixins';
+
+.question,
+.answer {
+  @include flex(row, 0, 12px, center);
+
+  column-gap: 16px;
+
+  .cover {
+    height: 50px;
+  }
+}
+
+@media (width >= 950px) {
+  .date {
+    width: 180px;
+  }
+
+  .grade {
+    width: 170px;
+  }
+}
+
+.controls {
+  width: 96px;
+  text-align: center;
+
+  .buttons {
+    @include flex(row, 0, 12px, center, center);
+  }
+}
