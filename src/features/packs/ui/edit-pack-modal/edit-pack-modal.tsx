@@ -13,7 +13,14 @@ export type EditPackModalProps = {
   cover: string | null
 }
 
-export const EditPackModal: FC<Props> = ({ open, setOpen, id, name, isPrivate, cover }) => {
+export const EditPackModal: FC<EditPackModalProps> = ({
+  open,
+  setOpen,
+  id,
+  name,
+  isPrivate,
+  cover,
+}) => {
   const startValues = {
     name,
     isPrivate,
