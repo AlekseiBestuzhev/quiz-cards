@@ -3,5 +3,5 @@
 .content {
   @include container(1010px);
 
-  padding-block: 96px;
+  padding-block: 96px 30px;
 }

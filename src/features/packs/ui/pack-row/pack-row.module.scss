@@ -1,10 +1,22 @@
 @import '@/styles/mixins';
 
-.title {
-  @include flex(row, 0, 24px, center);
+.link {
+  @include flex(row, 0, 16px, center);
+
+  width: max-content;
+  padding-block: 0;
 
   .cover {
     height: 50px;
+  }
+
+  &:hover h3 {
+    color: var(--color-accent-100);
+    text-decoration: underline;
+  }
+
+  &:active h3 {
+    color: var(--color-accent-500);
   }
 }
 

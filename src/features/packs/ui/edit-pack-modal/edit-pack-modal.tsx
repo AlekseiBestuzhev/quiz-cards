@@ -2,26 +2,29 @@ import { FC } from 'react'
 
 import { PackForm } from '@/components/forms/pack'
 import { ModalWindow } from '@/components/ui/modal-window'
-import { Deck, useUpdateDeckMutation } from '@/features/packs/services'
+import { useUpdateDeckMutation } from '@/features/packs/services'
 
-type Props = {
+export type EditPackModalProps = {
   open: boolean
   setOpen: (value: boolean) => void
-  pack: Deck
+  id: string
+  name: string
+  isPrivate: boolean
+  cover: string | null
 }
 
-export const EditPackModal: FC<Props> = ({ open, setOpen, pack }) => {
+export const EditPackModal: FC<Props> = ({ open, setOpen, id, name, isPrivate, cover }) => {
   const startValues = {
-    name: pack.name,
-    isPrivate: pack.isPrivate,
-    cover: pack.cover,
+    name,
+    isPrivate,
+    cover,
   }
 
   const [editPack] = useUpdateDeckMutation()
 
   const editDeckHandler = async (data: FormData) => {
     try {
-      editPack({ id: pack.id, data })
+      editPack({ id, data })
       setOpen(false)
     } catch (e) {
       console.log(e)

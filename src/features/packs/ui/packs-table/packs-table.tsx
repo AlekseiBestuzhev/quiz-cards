@@ -28,6 +28,11 @@ export const PacksTable: FC<Props> = memo(({ items, authUserId, ...rest }) => {
       key: 'created',
       title: 'Created By',
     },
+    {
+      key: 'controls',
+      title: '',
+      sortable: false,
+    },
   ]
 
   if (!items.length) {
