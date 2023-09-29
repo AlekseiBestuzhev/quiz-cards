@@ -7,11 +7,11 @@ const packSchema = z.object({
   isPrivate: z.boolean(),
   cover: z
     .instanceof(File)
-    .refine(file => file.size <= 1000000, `Max image size is 1MB.`)
     .refine(
       file => ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'].includes(file.type),
       'Only .jpg, .jpeg, .png and .webp formats are supported.'
     )
+    .refine(file => file.size <= 1000000, `Max image size is 1MB.`)
     .nullable()
     .optional(),
 })
@@ -19,11 +19,8 @@ const packSchema = z.object({
 export type PackFormType = z.infer<typeof packSchema>
 
 export const usePackForm = (props: PackFormType) => {
-  const { control, watch, formState, setValue, setError, clearErrors, handleSubmit } =
-    useForm<PackFormType>({
-      resolver: zodResolver(packSchema),
-      defaultValues: props,
-    })
-
-  return { control, watch, formState, setValue, setError, clearErrors, handleSubmit }
+  return useForm<PackFormType>({
+    resolver: zodResolver(packSchema),
+    defaultValues: props,
+  })
 }

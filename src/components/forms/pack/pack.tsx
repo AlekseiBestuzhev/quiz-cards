@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 
 import s from './pack.module.scss'
 
@@ -10,56 +10,64 @@ import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon/icon.tsx'
 import { Typography } from '@/components/ui/typography'
 
-type DefaultValuesProps = {
-  name: string
-  isPrivate: boolean
-  cover?: string | null
-}
+type PackFormDV = {
+  cover: string | null
+} & Pick<PackFormType, 'name' | 'isPrivate'>
 
 type Props = {
   onSubmit: (data: FormData) => void
-  defaultValues?: DefaultValuesProps
+  defaultValues?: PackFormDV
   onCancel: () => void
 }
 
 export const PackForm: FC<Props> = ({ onSubmit, defaultValues, onCancel }) => {
-  const [downloaded, setDownloaded] = useState<string>(defaultValues?.cover || '')
+  const [downloaded, setDownloaded] = useState<string | null>(defaultValues?.cover || null)
+
+  const [coverError, setCoverError] = useState<string | null>(null)
 
   const values: PackFormType = {
     name: defaultValues?.name || '',
     isPrivate: defaultValues?.isPrivate || false,
   }
 
-  const {
-    watch,
-    control,
-    setValue,
-    setError,
-    clearErrors,
-    handleSubmit,
-    formState: { errors, dirtyFields },
-  } = usePackForm(values)
+  const { watch, control, trigger, resetField, setValue, handleSubmit, getFieldState } =
+    usePackForm(values)
+
+  const fileIsDirty = getFieldState('cover').isDirty
 
   const file = watch('cover')
 
-  const fileIsDirty = dirtyFields.cover
-
-  const coverError = errors.cover?.message
-
-  useEffect(() => {
-    if (file && !coverError && fileIsDirty) {
-      const img = URL.createObjectURL(file)
-
-      setDownloaded(img)
-    }
-  }, [file])
-
   const deleteCoverHandler = () => {
     if (coverError) {
-      clearErrors('cover')
+      setCoverError(null)
     }
     setValue('cover', null)
-    setDownloaded('')
+    setDownloaded(null)
+  }
+
+  const extraActions = async () => {
+    const success = await trigger('cover')
+
+    const { error } = getFieldState('cover')
+
+    const file = watch('cover')
+
+    if (!success && error?.message) {
+      setCoverError(error.message)
+
+      resetField('cover')
+    }
+
+    if (file) {
+      const badCase = defaultValues?.cover ?? null
+      const img = success ? URL.createObjectURL(file) : badCase
+
+      setDownloaded(img)
+
+      if (coverError && !error?.message) {
+        setCoverError(null)
+      }
+    }
   }
 
   const sendHandler = (data: PackFormType) => {
@@ -70,10 +78,8 @@ export const PackForm: FC<Props> = ({ onSubmit, defaultValues, onCancel }) => {
 
     if (file === null) {
       form.append('cover', '')
-    } else {
-      if (fileIsDirty && data.cover) {
-        form.append('cover', data.cover)
-      }
+    } else if (fileIsDirty && data.cover) {
+      form.append('cover', data.cover)
     }
 
     onSubmit(form)
@@ -81,7 +87,7 @@ export const PackForm: FC<Props> = ({ onSubmit, defaultValues, onCancel }) => {
 
   return (
     <form onSubmit={handleSubmit(sendHandler)} className={s.form}>
-      <img src={downloaded || noCover} alt={'img'} className={s.image} />
+      <img src={downloaded ?? noCover} alt={'img'} className={s.image} />
       {coverError && (
         <Typography variant="caption" className={s.error}>
           {coverError}
@@ -97,10 +103,9 @@ export const PackForm: FC<Props> = ({ onSubmit, defaultValues, onCancel }) => {
         <ControlledFileUploader
           control={control}
           name="cover"
-          setError={setError}
-          clearErrors={clearErrors}
           variant="secondary"
           fullWidth={!downloaded}
+          extraActions={extraActions}
         >
           <Icon name="image" className={s.imgIcon} width={20} height={20} />
           Change Cover
