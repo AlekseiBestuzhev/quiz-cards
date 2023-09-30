@@ -15,14 +15,14 @@ export default meta
 
 export const DefaultModeButton = {
   render: () => {
-    return <FileUploader onChange={() => {}} />
+    return <FileUploader name="file" onChange={() => {}} />
   },
 }
 
 export const FullWidthButton = {
   render: () => {
     return (
-      <FileUploader onChange={() => {}} as={Button} fullWidth>
+      <FileUploader name="file" onChange={() => {}} as={Button} fullWidth>
         Choose File
       </FileUploader>
     )
@@ -33,6 +33,7 @@ export const IconButtonUploader = {
   render: () => {
     return (
       <FileUploader
+        name="file"
         icon={<Icon name="more" width={20} height={20} />}
         onChange={() => {}}
         as={IconButton}
