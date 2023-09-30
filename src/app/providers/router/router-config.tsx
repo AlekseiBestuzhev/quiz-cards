@@ -3,13 +3,14 @@ import { createBrowserRouter, Navigate, Outlet, RouterProvider } from 'react-rou
 import { privateRoutes, publicRoutes } from './routes.tsx'
 
 import { Layout } from '@/components/layout'
+import { InitLoading } from '@/components/ui/init-loading'
 import { useGetMeQuery } from '@/features/auth/services'
 
 const PrivateRoutes = () => {
-  const { data: me, isLoading: isMeLoading } = useGetMeQuery()
-  const isAuthenticated = !!me && !('success' in me)
+  const { data, isLoading } = useGetMeQuery()
+  const isAuthenticated = !!data && !('success' in data)
 
-  if (isMeLoading) return <div>Loading...</div>
+  if (isLoading) return <InitLoading />
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/sign-in" />
 }
