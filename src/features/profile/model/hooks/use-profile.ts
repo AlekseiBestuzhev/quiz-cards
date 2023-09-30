@@ -1,3 +1,6 @@
+import { ChangeEvent } from 'react'
+
+import { validateImage } from '@/common/utils'
 import { EditProfileFormProps } from '@/components/forms'
 import { ProfileInfoProps } from '@/components/ui/header/profile-info'
 import {
@@ -14,6 +17,20 @@ export const useProfile = () => {
 
   const [logout] = useLogoutMutation()
 
+  const updateAvatar = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      const file = e.target.files[0]
+
+      if (validateImage(file)) {
+        const formData = new FormData()
+
+        formData.append('avatar', file)
+
+        updateProfile(formData)
+      }
+    }
+  }
+
   const onUpdate = (data: EditProfileFormProps) => {
     const form = new FormData()
 
@@ -23,5 +40,5 @@ export const useProfile = () => {
     updateProfile(form)
   }
 
-  return { user, logout, updateProfile, onUpdate }
+  return { user, logout, updateAvatar, onUpdate }
 }

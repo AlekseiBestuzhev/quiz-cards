@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import s from './profile.module.scss'
 
-import { validateImage } from '@/common/utils'
 import { EditProfileForm, EditProfileFormProps } from '@/components/forms'
 import { Avatar } from '@/components/ui/avatar'
 import { BackButton } from '@/components/ui/back-button'
@@ -15,7 +14,7 @@ import { useProfile } from '@/features/profile/model/hooks'
 import { ProfileControls } from '@/features/profile/ui'
 
 export const Profile = () => {
-  const { user, logout, updateProfile, onUpdate } = useProfile()
+  const { user, logout, updateAvatar, onUpdate } = useProfile()
 
   const [isEditMode, setEditMode] = useState(false)
 
@@ -41,8 +40,8 @@ export const Profile = () => {
               <Avatar size={96} userName={user.name} image={user.avatar} />
               {!isEditMode && (
                 <FileUploader
-                  validate={validateImage}
-                  update={updateProfile}
+                  name="avatar"
+                  onChange={updateAvatar}
                   className={s.editImage}
                   accept="image/*"
                   as={Button}
