@@ -1,1 +1,1 @@
-export { ControlledFileUploader } from './controlled-file-uploader.tsx'
+export * from './controlled-file-uploader.tsx'

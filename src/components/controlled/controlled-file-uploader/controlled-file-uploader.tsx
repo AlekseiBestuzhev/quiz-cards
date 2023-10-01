@@ -5,10 +5,10 @@ import { Control, FieldPath, FieldValues, useController } from 'react-hook-form'
 import { ButtonProps } from '@/components/ui/button'
 import { FileUploader } from '@/components/ui/file-uploader/file-uploader.tsx'
 
-type Props<T extends FieldValues> = {
+export type ControlledFileUploaderProps<T extends FieldValues> = {
   control: Control<T>
   name: FieldPath<T>
-  extraActions?: (inputName: string) => void
+  extraActions?: () => void
 } & Omit<ButtonProps, 'type' | 'onClick' | 'onChange'>
 
 export const ControlledFileUploader = <T extends FieldValues>({
@@ -16,7 +16,7 @@ export const ControlledFileUploader = <T extends FieldValues>({
   control,
   extraActions,
   ...rest
-}: Props<T>) => {
+}: ControlledFileUploaderProps<T>) => {
   const {
     field: { onChange },
   } = useController({
@@ -28,7 +28,7 @@ export const ControlledFileUploader = <T extends FieldValues>({
     const file = e.target.files?.[0]
 
     onChange(file)
-    extraActions?.(name)
+    extraActions?.()
   }
 
   return <FileUploader name={name} type="button" onChange={changeHandler} {...rest} />
