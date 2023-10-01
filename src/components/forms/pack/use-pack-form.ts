@@ -2,18 +2,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { fileSchema, stringSchema } from '@/common/utils'
+
 const packSchema = z.object({
-  name: z.string().nonempty('Required').min(3, 'The name must be at least 3 characters'),
+  name: stringSchema,
   isPrivate: z.boolean(),
-  cover: z
-    .instanceof(File)
-    .refine(
-      file => ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'].includes(file.type),
-      'Only .jpg, .jpeg, .png and .webp formats are supported.'
-    )
-    .refine(file => file.size <= 1000000, `Max image size is 1MB.`)
-    .nullable()
-    .optional(),
+  cover: fileSchema,
 })
 
 export type PackFormType = z.infer<typeof packSchema>
