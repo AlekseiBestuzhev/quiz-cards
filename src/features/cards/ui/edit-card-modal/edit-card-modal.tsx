@@ -42,7 +42,7 @@ export const EditCardModal: FC<EditCardModalProps> = ({
   }
 
   return (
-    <ModalWindow open={open} setOpen={setOpen} title="Add New Card">
+    <ModalWindow open={open} setOpen={setOpen} title="Edit Card">
       <CardForm onSubmit={onSubmit} onCancel={onCancel} defaultValues={values} />
     </ModalWindow>
   )

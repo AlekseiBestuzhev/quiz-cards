@@ -17,6 +17,14 @@
     color: var(--color-danger-300);
   }
 
+  .previewControls {
+    @include flex(row, 0, 24px, center, space-between);
+
+    button {
+      flex-grow: 1;
+    }
+  }
+
   .controls {
     @include flex(row, 0, 0, center, space-between);
   }

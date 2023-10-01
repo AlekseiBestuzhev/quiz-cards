@@ -27,11 +27,11 @@ type Props = {
 }
 
 export const CardForm: FC<Props> = ({ onSubmit, onCancel, defaultValues }) => {
-  const [questionImgUpd, setQuestionImgUpd] = useState(defaultValues?.questionImg || '')
-  const [answerImgUpd, setAnswerImgUpd] = useState(defaultValues?.answerImg || '')
+  const [questionImgUpd, setQuestionImgUpd] = useState(defaultValues?.questionImg || null)
+  const [answerImgUpd, setAnswerImgUpd] = useState(defaultValues?.answerImg || null)
 
-  const [answerImgError, setAnswerImgError] = useState('')
-  const [questionImgError, setQuestionImgError] = useState('')
+  const [answerImgError, setAnswerImgError] = useState<string | null>(null)
+  const [questionImgError, setQuestionImgError] = useState<string | null>(null)
 
   const isAnyPictureExist = defaultValues?.questionImg || defaultValues?.answerImg
 
@@ -49,7 +49,11 @@ export const CardForm: FC<Props> = ({ onSubmit, onCancel, defaultValues }) => {
     { label: 'Picture', value: 'picture' },
   ]
 
-  const { control, watch, resetField, getFieldState, trigger, handleSubmit } = useCardForm(values)
+  const { control, setValue, watch, resetField, getFieldState, trigger, handleSubmit } =
+    useCardForm(values)
+
+  const questionFile = watch('questionImg')
+  const answerFile = watch('answerImg')
 
   const questionImgIsDirty = getFieldState('questionImg').isDirty
   const answerImgIsDirty = getFieldState('answerImg').isDirty
@@ -74,16 +78,36 @@ export const CardForm: FC<Props> = ({ onSubmit, onCancel, defaultValues }) => {
     }
 
     if (file) {
-      const badCase = defaultValues?.[name] || ''
+      const badCase = defaultValues?.[name] ?? null
       const img = success ? URL.createObjectURL(file) : badCase
 
       if (name === 'questionImg') {
         setQuestionImgUpd(img)
-        if (questionImgError && !error?.message) setQuestionImgError('')
+        if (questionImgError && !error?.message) {
+          setQuestionImgError(null)
+        }
       } else {
         setAnswerImgUpd(img)
-        if (answerImgError && !error?.message) setQuestionImgError('')
+        if (answerImgError && !error?.message) {
+          setQuestionImgError(null)
+        }
       }
+    }
+  }
+
+  const deleteCoverHandler = (name: 'questionImg' | 'answerImg') => () => {
+    if (name === 'questionImg') {
+      if (questionImgError) {
+        setQuestionImgError(null)
+      }
+      setValue(name, null)
+      setQuestionImgUpd(null)
+    } else {
+      if (answerImgError) {
+        setAnswerImgError(null)
+      }
+      setValue(name, null)
+      setAnswerImgUpd(null)
     }
   }
 
@@ -94,8 +118,17 @@ export const CardForm: FC<Props> = ({ onSubmit, onCancel, defaultValues }) => {
     form.append('answer', data.answer)
 
     if (withPicture) {
-      questionImgIsDirty && data.questionImg && form.append('questionImg', data.questionImg)
-      answerImgIsDirty && data.answerImg && form.append('answerImg', data.answerImg)
+      if (questionFile === null) {
+        form.append('questionImg', '')
+      } else if (questionImgIsDirty && data.questionImg) {
+        form.append('questionImg', data.questionImg)
+      }
+
+      if (answerFile === null) {
+        form.append('answerImg', '')
+      } else if (answerImgIsDirty && data.answerImg) {
+        form.append('answerImg', data.answerImg)
+      }
     }
 
     onSubmit(form)
@@ -113,50 +146,66 @@ export const CardForm: FC<Props> = ({ onSubmit, onCancel, defaultValues }) => {
       <ControlledTextField control={control} name="question" label="Question" />
       {withPicture && (
         <>
-          <img src={questionImgUpd || noCover} alt={'img'} className={s.image} />
+          <img src={questionImgUpd ?? noCover} alt={'img'} className={s.image} />
           {questionImgError && (
             <Typography variant="caption" className={s.error}>
               {questionImgError}
             </Typography>
           )}
-          <ControlledFileUploader
-            control={control}
-            name="questionImg"
-            variant="secondary"
-            extraActions={extraActions}
-            fullWidth
-          >
-            <Icon name="image" className={s.imgIcon} width={20} height={20} />
-            Change Question Cover
-          </ControlledFileUploader>
+          <div className={s.previewControls}>
+            {questionImgUpd && (
+              <Button type="button" variant="secondary" onClick={deleteCoverHandler('questionImg')}>
+                <Icon name="trash-bin" className={s.imgIcon} width={18} height={18} />
+                Delete Cover
+              </Button>
+            )}
+            <ControlledFileUploader
+              control={control}
+              name="questionImg"
+              variant="secondary"
+              extraActions={extraActions}
+              fullWidth={!questionImgUpd}
+            >
+              <Icon name="image" className={s.imgIcon} width={20} height={20} />
+              Change Cover
+            </ControlledFileUploader>
+          </div>
         </>
       )}
       <ControlledTextField control={control} name="answer" label="Answer" />
       {withPicture && (
         <>
-          <img src={answerImgUpd || noCover} alt={'img'} className={s.image} />
+          <img src={answerImgUpd ?? noCover} alt={'img'} className={s.image} />
           {answerImgError && (
             <Typography variant="caption" className={s.error}>
               {answerImgError}
             </Typography>
           )}
-          <ControlledFileUploader
-            control={control}
-            name="answerImg"
-            variant="secondary"
-            extraActions={extraActions}
-            fullWidth
-          >
-            <Icon name="image" className={s.imgIcon} width={20} height={20} />
-            Change Answer Cover
-          </ControlledFileUploader>
+          <div className={s.previewControls}>
+            {answerImgUpd && (
+              <Button type="button" variant="secondary" onClick={deleteCoverHandler('answerImg')}>
+                <Icon name="trash-bin" className={s.imgIcon} width={18} height={18} />
+                Delete Cover
+              </Button>
+            )}
+            <ControlledFileUploader
+              control={control}
+              name="answerImg"
+              variant="secondary"
+              extraActions={extraActions}
+              fullWidth={!answerImgUpd}
+            >
+              <Icon name="image" className={s.imgIcon} width={20} height={20} />
+              Change Cover
+            </ControlledFileUploader>
+          </div>
         </>
       )}
       <div className={s.controls}>
         <Button variant="secondary" type="button" onClick={onCancel}>
           Cancel
         </Button>
-        <Button>Add New Card</Button>
+        <Button>{defaultValues ? 'Save Changes' : 'Add New Card'}</Button>
       </div>
     </form>
   )
