@@ -5,10 +5,10 @@ export type Card = {
   question: string
   answer: string
   deckId: string
-  questionImg?: string
-  answerImg?: string
-  questionVideo?: string
-  answerVideo?: string
+  questionImg: string | null
+  answerImg: string | null
+  questionVideo: string | null
+  answerVideo: string | null
   created: string
   updated: string
   shots: number

@@ -14,6 +14,7 @@ import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
 import { ProfileResponse, useGetMeQuery } from '@/features/auth/services'
 import { useGetCardsQuery } from '@/features/cards/services'
+import { CreateCardControl } from '@/features/cards/ui'
 import { CardsTable } from '@/features/cards/ui/cards-table/cards-table.tsx'
 import { useGetDeckInfoQuery } from '@/features/packs/services'
 import { EditPackModal } from '@/features/packs/ui'
@@ -88,8 +89,8 @@ export const Pack = () => {
               </DropDown>
             )}
           </Typography>
-          {isMyPack ? (
-            <Button onClick={() => alert('add card')}>Add New Card</Button>
+          {pack && isMyPack ? (
+            <CreateCardControl packId={pack.id} />
           ) : (
             <Button as={Link} to={`./learn`}>
               Learn Cards

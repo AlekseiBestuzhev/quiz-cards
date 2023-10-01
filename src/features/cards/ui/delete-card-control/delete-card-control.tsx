@@ -1,0 +1,43 @@
+import { FC, useState } from 'react'
+
+import { Dialog } from '@/components/ui/dialog'
+import { Icon } from '@/components/ui/icon/icon.tsx'
+import { IconButton } from '@/components/ui/icon-button'
+import { useDeleteCardMutation } from '@/features/cards/services'
+
+type Props = {
+  id: string
+}
+
+export const DeleteCardControl: FC<Props> = ({ id }) => {
+  const [deleteIsOpen, setDeleteIsOpen] = useState(false)
+
+  const [deleteCard] = useDeleteCardMutation()
+
+  const onConfirm = async () => {
+    try {
+      await deleteCard({ id })
+      setDeleteIsOpen(false)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  return (
+    <>
+      <Dialog
+        title="Delete Card"
+        description="Do you really want to remove this card?"
+        buttonText="Delete Card"
+        open={deleteIsOpen}
+        setOpen={setDeleteIsOpen}
+        onConfirm={onConfirm}
+      />
+      <IconButton
+        icon={<Icon name={'trash-bin'} width={16} height={16} />}
+        onClick={() => setDeleteIsOpen(true)}
+        small
+      />
+    </>
+  )
+}

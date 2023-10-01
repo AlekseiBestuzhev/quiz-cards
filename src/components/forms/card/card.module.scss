@@ -1,0 +1,23 @@
+@import '@/styles/mixins';
+
+.root {
+  @include flex(column, 24px, 0, stretch);
+
+  .image {
+    aspect-ratio: 4/1;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .imgIcon {
+    fill: var(--color-light-100);
+  }
+
+  .error {
+    color: var(--color-danger-300);
+  }
+
+  .controls {
+    @include flex(row, 0, 0, center, space-between);
+  }
+}
