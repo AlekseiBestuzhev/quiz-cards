@@ -42,7 +42,7 @@ export const CardRow: FC<Props> = memo(({ card, isMyPack }) => {
       />
       {/*<EditPackModal open={editIsOpen} setOpen={setEditIsOpen} pack={card} />*/}
 
-      <Table.Row key={card.id}>
+      <Table.Row key={card.id} className={s.root}>
         <Table.Cell>
           <div className={s.question}>
             {card.questionImg && <img src={card.questionImg} alt="Question" className={s.cover} />}
@@ -51,7 +51,7 @@ export const CardRow: FC<Props> = memo(({ card, isMyPack }) => {
             </Typography>
           </div>
         </Table.Cell>
-        <Table.Cell>
+        <Table.Cell className={s.answerCell}>
           <div className={s.answer}>
             {card.answerImg && <img src={card.answerImg} alt="Answer" className={s.cover} />}
             <Typography as="h3" variant="body2">

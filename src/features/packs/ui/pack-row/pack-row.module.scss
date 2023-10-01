@@ -36,7 +36,8 @@
 .root {
   transition: 0.3s;
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     background-color: var(--color-dark-800);
   }
 

@@ -67,7 +67,7 @@ export const Pack = () => {
           cover={pack.cover}
         />
       )}
-      <BackButton to="/packs" text="Back To Packs" />
+      <BackButton to="/packs" text="Back to Packs" />
       <div className={s.header}>
         <div className={s.top}>
           <Typography as="h1" variant="large" className={s.title}>

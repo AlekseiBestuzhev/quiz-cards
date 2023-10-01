@@ -1,0 +1,54 @@
+@import '@/styles/mixins';
+
+.button {
+  margin-bottom: 24px;
+
+  svg {
+    fill: var(--color-light-100);
+  }
+
+  &:hover {
+    svg {
+      fill: var(--color-accent-100);
+    }
+
+    .text {
+      color: var(--color-accent-100);
+    }
+  }
+
+  &:active {
+    svg {
+      fill: var(--color-accent-500);
+    }
+
+    .text {
+      color: var(--color-accent-500);
+    }
+  }
+}
+
+.root {
+  @include container(420px);
+
+  .content {
+    @include flex(column, 36px, 0, center);
+
+    .question,
+    .answer {
+      align-self: stretch;
+
+      > b {
+        font-weight: var(--font-weight-bold);
+      }
+
+      .caption {
+        color: var(--color-dark-100);
+      }
+
+      .rate {
+        padding-block: 12px;
+      }
+    }
+  }
+}

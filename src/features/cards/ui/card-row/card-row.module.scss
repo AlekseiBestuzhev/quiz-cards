@@ -1,31 +1,44 @@
 @import '@/styles/mixins';
 
-.question,
-.answer {
-  @include flex(row, 0, 12px, center);
+.root {
+  transition: 0.3s;
 
-  column-gap: 16px;
-
-  .cover {
-    height: 50px;
-  }
-}
-
-@media (width >= 950px) {
-  .date {
-    width: 180px;
+  &:hover,
+  &:focus-within {
+    background-color: var(--color-dark-800);
   }
 
-  .grade {
-    width: 170px;
+  .answerCell {
+    width: 240px;
   }
-}
 
-.controls {
-  width: 96px;
-  text-align: center;
+  .question,
+  .answer {
+    @include flex(row, 0, 12px, center);
 
-  .buttons {
-    @include flex(row, 0, 12px, center, center);
+    column-gap: 16px;
+
+    .cover {
+      height: 50px;
+    }
+  }
+
+  .controls {
+    width: 96px;
+    text-align: center;
+
+    .buttons {
+      @include flex(row, 0, 12px, center, center);
+    }
+  }
+
+  @media (width >= 950px) {
+    .date {
+      width: 180px;
+    }
+
+    .grade {
+      width: 170px;
+    }
   }
 }
