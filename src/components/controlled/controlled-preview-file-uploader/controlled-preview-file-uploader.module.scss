@@ -4,9 +4,18 @@
   @include flex(column, 24px, 0, stretch);
 
   .image {
-    aspect-ratio: 4/1;
+    aspect-ratio: 3/1;
     width: 100%;
     object-fit: cover;
+    transition: 0.3s;
+
+    &.hover {
+      cursor: pointer;
+    }
+
+    &.open {
+      aspect-ratio: 1/1;
+    }
   }
 
   .imgIcon {

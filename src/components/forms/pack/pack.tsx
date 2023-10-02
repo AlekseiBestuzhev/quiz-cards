@@ -2,13 +2,13 @@ import { FC, useState } from 'react'
 
 import s from './pack.module.scss'
 
-import noCover from '@/assets/illustrations/no-cover.svg'
-import { ControlledCheckbox, ControlledTextField } from '@/components/controlled'
-import { ControlledFileUploader } from '@/components/controlled/controlled-file-uploader'
+import {
+  ControlledCheckbox,
+  ControlledTextField,
+  ControlledPreviewFileUploader,
+} from '@/components/controlled'
 import { PackFormType, usePackForm } from '@/components/forms/pack/use-pack-form.ts'
 import { Button } from '@/components/ui/button'
-import { Icon } from '@/components/ui/icon/icon.tsx'
-import { Typography } from '@/components/ui/typography'
 
 type PackFormDV = {
   cover: string | null
@@ -22,7 +22,6 @@ type Props = {
 
 export const PackForm: FC<Props> = ({ onSubmit, defaultValues, onCancel }) => {
   const [downloaded, setDownloaded] = useState<string | null>(defaultValues?.cover || null)
-
   const [coverError, setCoverError] = useState<string | null>(null)
 
   const values: PackFormType = {
@@ -47,9 +46,7 @@ export const PackForm: FC<Props> = ({ onSubmit, defaultValues, onCancel }) => {
 
   const extraActions = async () => {
     const success = await trigger('cover')
-
     const { error } = getFieldState('cover')
-
     const file = watch('cover')
 
     if (!success && error?.message) {
@@ -87,30 +84,14 @@ export const PackForm: FC<Props> = ({ onSubmit, defaultValues, onCancel }) => {
 
   return (
     <form onSubmit={handleSubmit(sendHandler)} className={s.form}>
-      <img src={downloaded ?? noCover} alt={'img'} className={s.image} />
-      {coverError && (
-        <Typography variant="caption" className={s.error}>
-          {coverError}
-        </Typography>
-      )}
-      <div className={s.imageControls}>
-        {downloaded && (
-          <Button type="button" variant="secondary" onClick={deleteCoverHandler}>
-            <Icon name="trash-bin" className={s.imgIcon} width={18} height={18} />
-            Delete Cover
-          </Button>
-        )}
-        <ControlledFileUploader
-          control={control}
-          name="cover"
-          variant="secondary"
-          fullWidth={!downloaded}
-          extraActions={extraActions}
-        >
-          <Icon name="image" className={s.imgIcon} width={20} height={20} />
-          Change Cover
-        </ControlledFileUploader>
-      </div>
+      <ControlledPreviewFileUploader
+        control={control}
+        name="cover"
+        preview={downloaded}
+        errorMessage={coverError}
+        deleteCoverHandler={deleteCoverHandler}
+        extraActions={extraActions}
+      />
       <ControlledTextField control={control} name={'name'} label="Name Pack" />
       <ControlledCheckbox control={control} name={'isPrivate'} label="Private Pack" />
       <div className={s.controls}>

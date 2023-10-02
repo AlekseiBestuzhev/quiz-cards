@@ -1,3 +1,6 @@
+import { useState } from 'react'
+
+import { clsx } from 'clsx'
 import { Control, FieldPath, FieldValues } from 'react-hook-form'
 
 import s from './controlled-preview-file-uploader.module.scss'
@@ -20,9 +23,19 @@ type Props<T extends FieldValues> = {
 export const ControlledPreviewFileUploader = <T extends FieldValues>(props: Props<T>) => {
   const { control, name, extraActions, preview, errorMessage, deleteCoverHandler } = props
 
+  const [open, setOpen] = useState(false)
+
+  const imgClasses = clsx(s.image, preview && s.hover, open && s.open)
+
+  const onClickHandler = () => {
+    if (preview) {
+      setOpen(prevState => !prevState)
+    }
+  }
+
   return (
     <div className={s.root}>
-      <img src={preview ?? noCover} alt={'img'} className={s.image} />
+      <img src={preview ?? noCover} alt={'img'} className={imgClasses} onClick={onClickHandler} />
       {errorMessage && (
         <Typography variant="caption" className={s.error}>
           {errorMessage}
