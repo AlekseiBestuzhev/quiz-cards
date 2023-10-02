@@ -10,6 +10,7 @@ import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { DropDown, DropDownItem, DropDownItemWithIcon } from '@/components/ui/drop-down'
 import { Icon } from '@/components/ui/icon/icon.tsx'
+import { QueryLoading } from '@/components/ui/query-loading'
 import { Typography } from '@/components/ui/typography'
 
 type Props = {
@@ -26,6 +27,7 @@ export const Header: FC<Props> = memo(({ data, logout }) => {
 
   return (
     <div className={s.root}>
+      <QueryLoading />
       <div className={s.container}>
         <Link to="/packs" className={s.link}>
           <Logo className={s.logo} />
