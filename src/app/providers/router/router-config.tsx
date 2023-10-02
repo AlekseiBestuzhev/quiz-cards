@@ -3,8 +3,8 @@ import { createBrowserRouter, Navigate, Outlet, RouterProvider } from 'react-rou
 import { privateRoutes, publicRoutes } from './routes.tsx'
 
 import { Layout } from '@/components/layout'
-import { InitLoading } from '@/components/ui/init-loading'
 import { useGetMeQuery } from '@/features/auth/services'
+import { InitLoading } from '@/features/loading/ui'
 
 const PrivateRoutes = () => {
   const { data, isLoading } = useGetMeQuery()
