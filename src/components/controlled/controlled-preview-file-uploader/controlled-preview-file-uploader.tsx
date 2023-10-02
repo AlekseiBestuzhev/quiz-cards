@@ -33,6 +33,13 @@ export const ControlledPreviewFileUploader = <T extends FieldValues>(props: Prop
     }
   }
 
+  const deleteHandler = () => {
+    deleteCoverHandler()
+    if (open) {
+      setOpen(false)
+    }
+  }
+
   return (
     <div className={s.root}>
       <img src={preview ?? noCover} alt={'img'} className={imgClasses} onClick={onClickHandler} />
@@ -43,7 +50,7 @@ export const ControlledPreviewFileUploader = <T extends FieldValues>(props: Prop
       )}
       <div className={s.previewControls}>
         {preview && (
-          <Button type="button" variant="secondary" onClick={deleteCoverHandler}>
+          <Button type="button" variant="secondary" onClick={deleteHandler}>
             <Icon name="trash-bin" className={s.imgIcon} width={18} height={18} />
             Delete Cover
           </Button>
