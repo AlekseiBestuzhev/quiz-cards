@@ -9,6 +9,7 @@ import {
   Packs,
   Learn,
   Pack,
+  NotFound,
 } from '@/pages'
 
 export const publicRoutes: RouteObject[] = [
@@ -27,6 +28,10 @@ export const publicRoutes: RouteObject[] = [
   {
     path: '/create-new-password',
     element: <CreateNewPassword />,
+  },
+  {
+    path: '/*',
+    element: <NotFound />,
   },
 ]
 
