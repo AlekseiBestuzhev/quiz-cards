@@ -1,5 +1,7 @@
 import { FC, useState } from 'react'
 
+import { toast } from 'react-toastify'
+
 import s from './pack.module.scss'
 
 import {
@@ -50,8 +52,8 @@ export const PackForm: FC<Props> = ({ onSubmit, defaultValues, onCancel }) => {
     const file = watch('cover')
 
     if (!success && error?.message) {
+      toast.error(error.message, { containerId: 'modal' })
       setCoverError(error.message)
-
       resetField('cover')
     }
 

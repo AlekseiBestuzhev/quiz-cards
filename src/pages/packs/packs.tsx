@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+import { toast } from 'react-toastify'
+
 import s from './packs.module.scss'
 
 import { PackForm } from '@/components/forms/pack'
@@ -10,7 +12,7 @@ import { Sort } from '@/components/ui/table-header'
 import { Typography } from '@/components/ui/typography'
 import { useGetMeQuery, UserResponse } from '@/features/auth/services'
 import { usePacksFilter, usePacksPagination } from '@/features/packs/model/hooks'
-import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/services'
+import { ErrorResponse, useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/services'
 import { FilterControls, PacksTable } from '@/features/packs/ui'
 
 export const Packs = () => {
@@ -54,10 +56,14 @@ export const Packs = () => {
 
   const createDeckHandler = async (data: FormData) => {
     try {
-      await createDeck(data)
+      await createDeck(data).unwrap()
       setOpen(false)
-    } catch (e) {
-      console.log(e)
+    } catch (err) {
+      if (typeof err === 'object' && err !== null && 'data' in err) {
+        const error = err as ErrorResponse
+
+        toast.error(error.data.errorMessages[0].message, { containerId: 'modal' })
+      }
     }
   }
 

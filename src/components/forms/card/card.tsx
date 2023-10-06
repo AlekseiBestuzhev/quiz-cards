@@ -1,5 +1,7 @@
 import { FC, useState } from 'react'
 
+import { toast } from 'react-toastify'
+
 import s from './card.module.scss'
 
 import { ControlledPreviewFileUploader, ControlledTextField } from '@/components/controlled'
@@ -48,8 +50,8 @@ export const CardForm: FC<Props> = ({ onSubmit, onCancel, defaultValues }) => {
     const file = watch(name)
 
     if (!success && error?.message) {
+      toast.error(error.message, { containerId: 'modal' })
       errorData[name].set(error.message)
-
       resetField(name)
     }
 

@@ -18,10 +18,19 @@ type Props<T extends FieldValues> = {
   preview: string | null
   errorMessage: string | null
   deleteCoverHandler: () => void
+  displayInlineError?: boolean
 }
 
 export const ControlledPreviewFileUploader = <T extends FieldValues>(props: Props<T>) => {
-  const { control, name, extraActions, preview, errorMessage, deleteCoverHandler } = props
+  const {
+    control,
+    name,
+    extraActions,
+    preview,
+    errorMessage,
+    deleteCoverHandler,
+    displayInlineError = false,
+  } = props
 
   const [open, setOpen] = useState(false)
 
@@ -43,7 +52,7 @@ export const ControlledPreviewFileUploader = <T extends FieldValues>(props: Prop
   return (
     <div className={s.root}>
       <img src={preview ?? noCover} alt={'img'} className={imgClasses} onClick={onClickHandler} />
-      {errorMessage && (
+      {displayInlineError && errorMessage && (
         <Typography variant="caption" className={s.error}>
           {errorMessage}
         </Typography>

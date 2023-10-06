@@ -29,6 +29,7 @@ export const ControlledFileUploader = <T extends FieldValues>({
 
     onChange(file)
     extraActions?.()
+    e.target.value = ''
   }
 
   return <FileUploader name={name} type="button" onChange={changeHandler} {...rest} />
