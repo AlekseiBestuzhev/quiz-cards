@@ -1,0 +1,65 @@
+.linearActivity {
+  position: absolute;
+  top: 0;
+
+  overflow: hidden;
+
+  width: 100%;
+  height: 4px;
+
+  background-color: var(--color-accent-100);
+}
+
+.indeterminate {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.indeterminate::before {
+  content: '';
+
+  position: absolute;
+
+  height: 100%;
+
+  background-color: var(--color-accent-700);
+
+  animation: indeterminate-first 1.5s infinite ease-out;
+}
+
+.indeterminate::after {
+  content: '';
+
+  position: absolute;
+
+  height: 100%;
+
+  background-color: var(--color-accent-700);
+
+  animation: indeterminate-second 1.5s infinite ease-in;
+}
+
+@keyframes indeterminate-first {
+  0% {
+    left: -100%;
+    width: 100%;
+  }
+
+  100% {
+    left: 100%;
+    width: 10%;
+  }
+}
+
+@keyframes indeterminate-second {
+  0% {
+    left: -150%;
+    width: 100%;
+  }
+
+  100% {
+    left: 100%;
+    width: 10%;
+  }
+}

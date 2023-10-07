@@ -1,0 +1,7 @@
+@import '@/styles/mixins';
+
+.root {
+  @include flex(column, 0, 0, center, center);
+
+  margin-top: 30px;
+}

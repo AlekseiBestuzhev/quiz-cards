@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import { DevTool } from '@hookform/devtools'
 import { clsx } from 'clsx'
 
 import s from './create-new-password.module.scss'
@@ -25,7 +24,6 @@ export const CreateNewPasswordForm: FC<PropsType> = ({ onSubmit, className }) =>
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
-      <DevTool control={control} />
       <ControlledTextField control={control} name="password" label="Password" type="password" />
       <Typography variant="body2" className={s.information}>
         Create new password and we will send you further instructions to email

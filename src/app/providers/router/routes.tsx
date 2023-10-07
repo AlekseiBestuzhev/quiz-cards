@@ -1,6 +1,16 @@
 import { Navigate, RouteObject } from 'react-router-dom'
 
-import { CreateNewPassword, ForgotPassword, Packs, SignIn, SignUp } from '@/pages'
+import {
+  CreateNewPassword,
+  ForgotPassword,
+  Profile,
+  SignIn,
+  SignUp,
+  Packs,
+  Learn,
+  Pack,
+  NotFound,
+} from '@/pages'
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -19,6 +29,10 @@ export const publicRoutes: RouteObject[] = [
     path: '/create-new-password',
     element: <CreateNewPassword />,
   },
+  {
+    path: '/*',
+    element: <NotFound />,
+  },
 ]
 
 export const privateRoutes: RouteObject[] = [
@@ -29,5 +43,17 @@ export const privateRoutes: RouteObject[] = [
   {
     path: '/packs',
     element: <Packs />,
+  },
+  {
+    path: '/profile',
+    element: <Profile />,
+  },
+  {
+    path: '/packs/:id',
+    element: <Pack />,
+  },
+  {
+    path: '/packs/:id/learn',
+    element: <Learn />,
   },
 ]

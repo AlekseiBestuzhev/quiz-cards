@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
 import s from './layout.module.scss'
 
@@ -24,6 +25,20 @@ export const Layout = () => {
       <Header data={headerData} logout={logout} />
       <div className={s.content}>
         <Outlet />
+        <ToastContainer
+          enableMultiContainer
+          containerId="common"
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
       </div>
     </>
   )

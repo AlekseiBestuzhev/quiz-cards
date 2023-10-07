@@ -1,0 +1,22 @@
+@import '@/pages/packs/packs.module';
+
+.root {
+  .header {
+    margin-bottom: 36px;
+
+    .cover {
+      height: 100px;
+      margin-bottom: 24px;
+    }
+
+    .top {
+      @include flex(row, 0, 0, center, space-between);
+
+      margin-bottom: 24px;
+
+      .title {
+        @include flex(row, 0, 12px, center, center);
+      }
+    }
+  }
+}

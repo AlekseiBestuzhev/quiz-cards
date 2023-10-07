@@ -23,10 +23,6 @@
       &.disabledIcon {
         fill: var(--color-dark-300);
       }
-
-      &.filledIcon {
-        fill: var(--color-light-100);
-      }
     }
 
     .input {
@@ -43,14 +39,10 @@
       border-radius: 2px;
       outline: 1px solid transparent;
 
-      transition: 0.2s;
+      transition: 0.3s;
 
       &::placeholder {
         color: var(--color-dark-100);
-      }
-
-      &.filled {
-        border-color: var(--color-light-100);
       }
 
       &:disabled {
@@ -59,11 +51,6 @@
         &::placeholder {
           color: var(--color-dark-300);
         }
-      }
-
-      &:focus {
-        border-color: var(--color-info-700);
-        outline: 1px solid var(--color-info-700);
       }
 
       &:-webkit-autofill,
@@ -78,6 +65,12 @@
       &:hover:enabled {
         cursor: text;
         background-color: var(--color-dark-700);
+        border-color: var(--color-dark-100);
+      }
+
+      &:focus:enabled {
+        border-color: var(--color-info-700);
+        outline: 1px solid var(--color-info-700);
       }
 
       &.search {
@@ -112,10 +105,13 @@
       display: flex;
       align-items: center;
 
-      color: var(--color-light-100);
-
       > svg {
-        fill: var(--color-light-100);
+        fill: var(--color-dark-100);
+        transition: 0.3s;
+
+        &:hover {
+          fill: var(--color-light-900);
+        }
       }
 
       &:disabled {

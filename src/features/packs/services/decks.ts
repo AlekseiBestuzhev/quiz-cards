@@ -11,11 +11,11 @@ const decksAPI = baseAPI.injectEndpoints({
       }),
       providesTags: ['Decks'],
     }),
-    createDeck: builder.mutation<Deck, { name: string }>({
-      query: ({ name }) => ({
+    createDeck: builder.mutation<Deck, FormData>({
+      query: data => ({
         url: `v1/decks`,
         method: 'POST',
-        body: { name },
+        body: data,
       }),
       invalidatesTags: ['Decks'],
     }),
@@ -27,7 +27,28 @@ const decksAPI = baseAPI.injectEndpoints({
       }),
       invalidatesTags: ['Decks'],
     }),
+    updateDeck: builder.mutation<Deck, { id: string; data: FormData }>({
+      query: ({ id, data }) => ({
+        url: `v1/decks/${id}`,
+        method: 'PATCH',
+        body: data,
+      }),
+      invalidatesTags: ['Decks', 'Deck'],
+    }),
+    getDeckInfo: builder.query<Omit<Deck, 'author'>, { id: string }>({
+      query: ({ id }) => ({
+        url: `v1/decks/${id}`,
+        method: 'GET',
+      }),
+      providesTags: ['Deck'],
+    }),
   }),
 })
 
-export const { useGetDecksQuery, useCreateDeckMutation, useDeleteDeckMutation } = decksAPI
+export const {
+  useGetDecksQuery,
+  useCreateDeckMutation,
+  useDeleteDeckMutation,
+  useUpdateDeckMutation,
+  useGetDeckInfoQuery,
+} = decksAPI

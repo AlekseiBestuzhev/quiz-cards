@@ -6,11 +6,14 @@ import s from './header.module.scss'
 import { ProfileInfo, ProfileInfoProps } from './profile-info'
 
 import { Logo } from '@/assets/illustrations/it-inc-logo.tsx'
+import { useAppSelector } from '@/common/hooks'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { DropDown, DropDownItem, DropDownItemWithIcon } from '@/components/ui/drop-down'
 import { Icon } from '@/components/ui/icon/icon.tsx'
 import { Typography } from '@/components/ui/typography'
+import { loadingSelector } from '@/features/loading/model/selectors'
+import { QueryLoading } from '@/features/loading/ui'
 
 type Props = {
   data: ProfileInfoProps | null
@@ -18,6 +21,8 @@ type Props = {
 }
 
 export const Header: FC<Props> = memo(({ data, logout }) => {
+  const queryInProgress = useAppSelector(loadingSelector)
+
   const navigate = useNavigate()
 
   const toProfile = () => {
@@ -26,13 +31,14 @@ export const Header: FC<Props> = memo(({ data, logout }) => {
 
   return (
     <div className={s.root}>
+      {queryInProgress && <QueryLoading />}
       <div className={s.container}>
         <Link to="/packs" className={s.link}>
           <Logo className={s.logo} />
         </Link>
         {data ? (
           <div className={s.user}>
-            <Typography variant="subtitle1" className={s.name}>
+            <Typography as={Link} to="/profile" variant="subtitle1" className={s.name}>
               {data.name || data.email}
             </Typography>
             <DropDown

@@ -2,16 +2,18 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { emailSchema, stringSchema } from '@/common/utils'
+
 const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(3),
-  rememberMe: z.boolean().default(false),
+  email: emailSchema,
+  password: stringSchema,
+  rememberMe: z.boolean(),
 })
 
 export type SignInFormProps = z.infer<typeof loginSchema>
 
 export const useSignIn = () => {
-  const { control, handleSubmit } = useForm<SignInFormProps>({
+  return useForm<SignInFormProps>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: '',
@@ -19,6 +21,4 @@ export const useSignIn = () => {
       rememberMe: false,
     },
   })
-
-  return { control, handleSubmit }
 }

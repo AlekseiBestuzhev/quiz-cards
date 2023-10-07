@@ -1,4 +1,4 @@
-@mixin button {
+.button {
   all: unset;
 
   cursor: pointer;
@@ -23,7 +23,11 @@
   border-radius: 0.25rem;
   outline: 2px solid transparent;
 
-  transition: 0.2s;
+  transition: 0.3s;
+
+  > svg {
+    fill: var(--color-light-100);
+  }
 
   &:disabled {
     cursor: initial;
@@ -36,8 +40,6 @@
 }
 
 .primary {
-  @include button;
-
   color: var(--color-light-100);
   background: var(--color-accent-500);
   box-shadow: 0 4px 18px rgb(140 97 255 / 35%);
@@ -62,8 +64,6 @@
 }
 
 .secondary {
-  @include button;
-
   padding-inline: 24px;
   color: var(--color-light-100);
   background: var(--color-dark-300);
@@ -89,8 +89,6 @@
 }
 
 .tertiary {
-  @include button;
-
   width: 7rem;
   height: 2.25rem;
   color: var(--color-accent-500);
@@ -118,8 +116,6 @@
 }
 
 .link {
-  @include button;
-
   margin-left: -0.75rem;
   padding: 0.375rem 0.75rem;
 

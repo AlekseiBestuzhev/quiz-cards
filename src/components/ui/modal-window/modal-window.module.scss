@@ -16,7 +16,7 @@
   inset: 0;
 
   .card {
-    padding: 0;
+    padding: 0 0 24px;
 
     .header {
       @include flex(row, 0, 24px, center, space-between);
@@ -26,7 +26,23 @@
     }
 
     .content {
-      padding: 24px;
+      overflow-y: auto;
+      max-height: 590px;
+      padding: 24px 24px 0;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--color-dark-300);
+        border-radius: 3px;
+
+        &:hover {
+          background-color: var(--color-dark-100);
+        }
+      }
     }
   }
 }

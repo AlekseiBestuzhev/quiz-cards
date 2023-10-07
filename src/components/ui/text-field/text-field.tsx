@@ -33,13 +33,8 @@ export const TextField = forwardRef<HTMLInputElement, PropsType>(
     const classes = {
       root: clsx(s.root, className),
       label: clsx(s.label, rest.disabled && s.disabled),
-      input: clsx(
-        s.input,
-        isSearchType && s.search,
-        rest.value && s.filled,
-        errorMessage && s.error
-      ),
-      searchIcon: clsx(s.searchIcon, rest.disabled && s.disabledIcon, rest.value && s.filledIcon),
+      input: clsx(s.input, isSearchType && s.search, errorMessage && s.error),
+      searchIcon: clsx(s.searchIcon, rest.disabled && s.disabledIcon),
     }
 
     return (

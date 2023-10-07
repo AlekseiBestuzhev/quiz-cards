@@ -1,0 +1,34 @@
+@import '@/styles/mixins';
+
+.root {
+  @include container(420px);
+
+  .content {
+    @include flex(column, 15px, 0, center);
+
+    .avatarContainer {
+      position: relative;
+    }
+
+    .editImage {
+      @include flex(row, 0, 0, center, center);
+
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding: 4px;
+    }
+
+    .form {
+      align-self: stretch;
+    }
+
+    .userName {
+      @include flex(row, 0, 0, center, center);
+    }
+
+    .icon {
+      fill: var(--color-light-100);
+    }
+  }
+}

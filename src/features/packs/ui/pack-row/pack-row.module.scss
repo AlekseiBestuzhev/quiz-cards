@@ -1,17 +1,63 @@
 @import '@/styles/mixins';
 
-.controls {
-  width: 125px;
+.link {
+  @include flex(row, 0, 16px, center);
 
-  .buttons {
-    @include flex(row, 0, 12px, center, center);
+  width: max-content;
+  padding-block: 0;
 
-    @media (width <= 544px) {
-      @include flex(column, 12px, 0, center, center);
-    }
+  .cover {
+    height: 50px;
   }
 
-  @media (width <= 544px) {
-    width: 64px;
+  &:hover h3 {
+    color: var(--color-accent-100);
+    text-decoration: underline;
+  }
+
+  &:active h3 {
+    color: var(--color-accent-500);
+  }
+}
+
+@media (width >= 950px) {
+  .date {
+    width: 180px;
+  }
+
+  .name {
+    overflow: hidden;
+    width: 200px;
+    max-width: 200px;
+    text-overflow: ellipsis;
+  }
+}
+
+.root {
+  transition: 0.3s;
+
+  &:hover,
+  &:focus-within {
+    background-color: var(--color-dark-800);
+  }
+
+  .count {
+    width: 150px;
+  }
+
+  .cell {
+    width: 127px;
+
+    .controls {
+      @include flex(row, 0, 12px, center, center);
+
+      @media (width <= 630px) {
+        @include flex(column, 12px, 0, center, center);
+      }
+    }
+
+    @media (width <= 544px) {
+      width: 64px;
+    }
   }
 }

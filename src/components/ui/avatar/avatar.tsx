@@ -29,14 +29,10 @@ export const Avatar = forwardRef<any, Props>(
     }
 
     return (
-      <div className={classes}>
+      <div className={classes} style={styles}>
         <AvatarRadix.Root ref={ref}>
-          <AvatarRadix.Image className={s.image} src={image} alt="User Avatar" style={styles} />
-          {!image && (
-            <AvatarRadix.Fallback className={s.fallback} style={styles}>
-              {initials}
-            </AvatarRadix.Fallback>
-          )}
+          <AvatarRadix.Image className={s.image} src={image} alt="User Avatar" />
+          {!image && <AvatarRadix.Fallback className={s.fallback}>{initials}</AvatarRadix.Fallback>}
         </AvatarRadix.Root>
       </div>
     )

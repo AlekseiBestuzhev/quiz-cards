@@ -1,0 +1,23 @@
+.hover {
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--color-dark-400);
+  }
+
+  .icon {
+    position: absolute;
+    transform-origin: center center;
+
+    margin-left: 12px;
+
+    fill: var(--color-light-100);
+
+    transition: 0.3s;
+
+    &.down {
+      transform: rotate(180deg);
+    }
+  }
+}

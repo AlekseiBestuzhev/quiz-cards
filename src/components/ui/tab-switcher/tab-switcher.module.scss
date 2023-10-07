@@ -9,6 +9,7 @@
     &:has(:focus-visible) {
       border-radius: 2px;
       outline: 2px solid var(--color-info-700);
+      outline-offset: -1px;
     }
 
     .trigger {
@@ -36,27 +37,26 @@
       }
 
       &:hover {
-        color: var(--color-light-900);
-        background: var(--color-dark-500);
+        background-color: var(--color-dark-700);
         border-color: var(--color-dark-100);
       }
 
       &:active {
         color: var(--color-light-100);
-        background: var(--color-accent-500);
+        background-color: var(--color-accent-500);
         border-color: var(--color-accent-500);
       }
 
       &[data-state='active'] {
         color: var(--color-light-100);
-        background: var(--color-accent-500);
+        background-color: var(--color-accent-500);
         border-color: var(--color-accent-500);
       }
 
       &[data-disabled] {
         cursor: initial;
         color: var(--color-dark-300);
-        background: var(--color-dark-700);
+        background-color: var(--color-dark-700);
         border-color: var(--color-dark-300);
       }
     }

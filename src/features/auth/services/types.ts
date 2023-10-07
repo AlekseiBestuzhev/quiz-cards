@@ -17,3 +17,15 @@ export type UserResponse = {
   created: string
   updated: string
 }
+
+export type ProfileResponse = {
+  avatar: string
+  id: string
+  email: string
+  isEmailVerified: boolean
+  name: string
+  created: string
+  updated: string
+}
+
+export type UpdateProfileFormData = FormData

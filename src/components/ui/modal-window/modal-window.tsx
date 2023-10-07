@@ -1,6 +1,7 @@
-import { FC, PropsWithChildren, ReactNode } from 'react'
+import { FC, PropsWithChildren } from 'react'
 
 import * as Dialog from '@radix-ui/react-dialog'
+import { ToastContainer } from 'react-toastify'
 
 import s from './modal-window.module.scss'
 
@@ -12,7 +13,6 @@ import { Typography } from '@/components/ui/typography'
 type Props = {
   open: boolean
   setOpen: (value: boolean) => void
-  trigger?: ReactNode
   title: string
 } & PropsWithChildren
 
@@ -39,6 +39,20 @@ export const ModalWindow: FC<Props> = ({ open, setOpen, title, children }) => {
               </div>
               <div className={s.content}>{children}</div>
             </Card>
+            <ToastContainer
+              enableMultiContainer
+              containerId="modal"
+              position="bottom-left"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
           </Dialog.Content>
         </div>
       </Dialog.Portal>

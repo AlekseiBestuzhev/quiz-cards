@@ -1,5 +1,14 @@
-import { LoginArgs, LoginResponse, UserResponse } from './types.ts'
+import { toast } from 'react-toastify'
 
+import {
+  LoginArgs,
+  LoginResponse,
+  ProfileResponse,
+  UpdateProfileFormData,
+  UserResponse,
+} from './types.ts'
+
+import { errorNotification } from '@/common/utils'
 import { baseAPI } from '@/services/base-api.ts'
 
 const authAPI = baseAPI.injectEndpoints({
@@ -36,8 +45,25 @@ const authAPI = baseAPI.injectEndpoints({
         method: 'POST',
       }),
       invalidatesTags: ['Me'],
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled
+          toast.info('You are successfully logged out', { containerId: 'common' })
+        } catch (error) {
+          errorNotification(error)
+        }
+      },
+    }),
+    updateProfile: builder.mutation<ProfileResponse, UpdateProfileFormData>({
+      query: body => ({
+        url: `v1/auth/me`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: ['Me'],
     }),
   }),
 })
 
-export const { useGetMeQuery, useLoginMutation, useLogoutMutation } = authAPI
+export const { useGetMeQuery, useLoginMutation, useLogoutMutation, useUpdateProfileMutation } =
+  authAPI

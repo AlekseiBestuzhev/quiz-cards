@@ -1,0 +1,47 @@
+@import '@/styles/mixins';
+
+.cover {
+  align-self: center;
+  height: 180px;
+}
+
+.root {
+  @include container(420px);
+
+  .content {
+    @include flex(column, 24px, 24px, stretch);
+
+    .title {
+      align-self: center;
+    }
+
+    .question {
+      @include flex(column, 6px);
+
+      .questionImg {
+        align-self: center;
+        height: 180px;
+      }
+
+      .caption {
+        color: var(--color-dark-100);
+      }
+    }
+
+    .answer {
+      @include flex(column, 6px);
+
+      .answerText {
+        align-self: stretch;
+
+        > b {
+          font-weight: var(--font-weight-bold);
+        }
+      }
+
+      .rate {
+        padding-block: 12px;
+      }
+    }
+  }
+}

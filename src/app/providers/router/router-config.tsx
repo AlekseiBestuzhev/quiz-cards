@@ -4,12 +4,13 @@ import { privateRoutes, publicRoutes } from './routes.tsx'
 
 import { Layout } from '@/components/layout'
 import { useGetMeQuery } from '@/features/auth/services'
+import { InitLoading } from '@/features/loading/ui'
 
 const PrivateRoutes = () => {
-  const { data: me, isLoading: isMeLoading } = useGetMeQuery()
-  const isAuthenticated = !!me && !('success' in me)
+  const { data, isLoading } = useGetMeQuery()
+  const isAuthenticated = !!data && !('success' in data)
 
-  if (isMeLoading) return <div>Loading...</div>
+  if (isLoading) return <InitLoading />
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/sign-in" />
 }
@@ -18,7 +19,6 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    errorElement: <div>Error Boundary</div>,
     children: [
       {
         element: <PrivateRoutes />,

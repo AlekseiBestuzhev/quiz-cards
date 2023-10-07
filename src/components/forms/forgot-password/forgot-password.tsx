@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-import { DevTool } from '@hookform/devtools'
 import { clsx } from 'clsx'
 
 import s from './forgot-password.module.scss'
@@ -22,7 +21,6 @@ export const ForgotPasswordForm: FC<PropsType> = ({ onSubmit, className }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
-      <DevTool control={control} />
       <ControlledTextField control={control} name="email" label="Email" />
       <Typography variant="body2" className={s.information}>
         Enter your email address and we will send you further instructions

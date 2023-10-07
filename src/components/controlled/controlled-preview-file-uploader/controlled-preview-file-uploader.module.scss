@@ -1,0 +1,36 @@
+@import '@/styles/mixins';
+
+.root {
+  @include flex(column, 24px, 0, stretch);
+
+  .image {
+    aspect-ratio: 3/1;
+    width: 100%;
+    object-fit: cover;
+    transition: 0.3s;
+
+    &.hover {
+      cursor: pointer;
+    }
+
+    &.open {
+      aspect-ratio: 1/1;
+    }
+  }
+
+  .imgIcon {
+    fill: var(--color-light-100);
+  }
+
+  .error {
+    color: var(--color-danger-300);
+  }
+
+  .previewControls {
+    @include flex(row, 0, 24px, center, space-between);
+
+    button {
+      flex-grow: 1;
+    }
+  }
+}

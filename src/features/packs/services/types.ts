@@ -41,3 +41,16 @@ export type DecksParams = {
   currentPage?: number
   itemsPerPage?: number
 } | void
+
+export type ErrorMessage = {
+  field: string
+  message: string
+}
+
+export type ErrorResponseData = {
+  errorMessages: ErrorMessage[]
+}
+
+export type ErrorResponse = {
+  data: ErrorResponseData
+}
