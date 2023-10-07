@@ -20,16 +20,12 @@ export const Learn = () => {
 
   const params = useParams()
   const id = params.id as string
-  const { data: pack } = useGetDeckInfoQuery({ id })
+  const { currentData: pack } = useGetDeckInfoQuery({ id })
   const { currentData: card } = useGetRandomCardQuery({ id })
 
   const onSubmit = async (data: RateType) => {
-    try {
-      await rateCard({ packId: id, cardId: card!.id, grade: +data.grade }).unwrap()
-      setRateMode(false)
-    } catch (error) {
-      errorNotification(error)
-    }
+    await rateCard({ packId: id, cardId: card!.id, grade: +data.grade }).unwrap()
+    setRateMode(false)
   }
 
   return (
@@ -37,7 +33,7 @@ export const Learn = () => {
       <BackButton to=".." relative="path" text="Back to Pack" />
       <section className={s.root}>
         <Card className={s.content}>
-          <Typography as="h1" variant="large">
+          <Typography as="h1" variant="large" className={s.title}>
             Learn {pack?.name}
           </Typography>
           <div className={s.question}>
@@ -47,18 +43,26 @@ export const Learn = () => {
             <Typography variant="body2" className={s.caption}>
               Count of attempts: {card?.shots}
             </Typography>
+            {card?.questionImg && (
+              <img src={card.questionImg} alt="Question Image" className={s.cover} />
+            )}
           </div>
 
           {rateMode ? (
-            <div className={s.answer}>
-              <Typography variant="body1">
-                <b>Answer:</b> {card?.answer}
-              </Typography>
+            <>
+              <div className={s.answer}>
+                <Typography variant="body1" className={s.answerText}>
+                  <b>Answer:</b> {card?.answer}
+                </Typography>
+                {card?.answerImg && (
+                  <img src={card.answerImg} alt="Question Image" className={s.cover} />
+                )}
+              </div>
               <Typography variant="body1" className={s.rate}>
                 <b>Rate yourself:</b>
               </Typography>
               <RateCardForm onSubmit={onSubmit} />
-            </div>
+            </>
           ) : (
             <Button onClick={() => setRateMode(true)} fullWidth>
               Show Answer

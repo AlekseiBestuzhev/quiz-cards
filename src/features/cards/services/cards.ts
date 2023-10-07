@@ -1,3 +1,4 @@
+import { errorNotification } from '@/common/utils'
 import {
   CardsParams,
   CardResponse,
@@ -47,8 +48,8 @@ const cardsAPI = baseAPI.injectEndpoints({
               return newCard
             })
           )
-        } catch (e) {
-          console.log(e)
+        } catch (error) {
+          errorNotification(error)
         }
       },
       invalidatesTags: ['Cards'],
