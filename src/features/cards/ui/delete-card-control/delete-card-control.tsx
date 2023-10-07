@@ -1,5 +1,6 @@
 import { FC, useState } from 'react'
 
+import { errorNotification } from '@/common/utils'
 import { Dialog } from '@/components/ui/dialog'
 import { Icon } from '@/components/ui/icon/icon.tsx'
 import { IconButton } from '@/components/ui/icon-button'
@@ -16,10 +17,10 @@ export const DeleteCardControl: FC<Props> = ({ id }) => {
 
   const onConfirm = async () => {
     try {
-      await deleteCard({ id })
+      await deleteCard({ id }).unwrap()
       setDeleteIsOpen(false)
-    } catch (e) {
-      console.log(e)
+    } catch (error) {
+      errorNotification(error)
     }
   }
 

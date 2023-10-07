@@ -1,6 +1,8 @@
 import { ChangeEvent } from 'react'
 
-import { validateImage } from '@/common/utils'
+import { toast } from 'react-toastify'
+
+import { errorNotification, validateImage } from '@/common/utils'
 import { EditProfileFormProps } from '@/components/forms'
 import { ProfileInfoProps } from '@/components/ui/header/profile-info'
 import {
@@ -17,27 +19,33 @@ export const useProfile = () => {
 
   const [logout] = useLogoutMutation()
 
-  const updateAvatar = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length) {
-      const file = e.target.files[0]
+  const updateAvatar = async (e: ChangeEvent<HTMLInputElement>) => {
+    try {
+      if (e.target.files && e.target.files.length) {
+        const file = e.target.files[0]
 
-      if (validateImage(file)) {
-        const formData = new FormData()
+        if (validateImage(file)) {
+          const formData = new FormData()
 
-        formData.append('avatar', file)
+          formData.append('avatar', file)
+          await updateProfile(formData).unwrap()
 
-        updateProfile(formData)
+          toast.success('Your avatar successfully changed', { containerId: 'common' })
+        }
       }
+    } catch (error) {
+      errorNotification(error)
     }
   }
 
-  const onUpdate = (data: EditProfileFormProps) => {
+  const onUpdate = async (data: EditProfileFormProps) => {
     const form = new FormData()
 
     Object.keys(data).forEach(key => {
       form.append(key, data[key as keyof EditProfileFormProps])
     })
-    updateProfile(form)
+
+    return updateProfile(form).unwrap()
   }
 
   return { user, logout, updateAvatar, onUpdate }

@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { toast } from 'react-toastify'
-
 import s from './packs.module.scss'
 
+import { errorNotification } from '@/common/utils'
 import { PackForm } from '@/components/forms/pack'
 import { Button } from '@/components/ui/button'
 import { ModalWindow } from '@/components/ui/modal-window'
@@ -12,7 +11,7 @@ import { Sort } from '@/components/ui/table-header'
 import { Typography } from '@/components/ui/typography'
 import { useGetMeQuery, UserResponse } from '@/features/auth/services'
 import { usePacksFilter, usePacksPagination } from '@/features/packs/model/hooks'
-import { ErrorResponse, useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/services'
+import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/services'
 import { FilterControls, PacksTable } from '@/features/packs/ui'
 
 export const Packs = () => {
@@ -58,12 +57,8 @@ export const Packs = () => {
     try {
       await createDeck(data).unwrap()
       setOpen(false)
-    } catch (err) {
-      if (typeof err === 'object' && err !== null && 'data' in err) {
-        const error = err as ErrorResponse
-
-        toast.error(error.data.errorMessages[0].message, { containerId: 'modal' })
-      }
+    } catch (error) {
+      errorNotification(error)
     }
   }
 

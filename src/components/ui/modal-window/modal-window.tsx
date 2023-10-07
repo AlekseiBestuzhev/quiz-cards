@@ -43,7 +43,7 @@ export const ModalWindow: FC<Props> = ({ open, setOpen, title, children }) => {
               enableMultiContainer
               containerId="modal"
               position="bottom-left"
-              autoClose={6000}
+              autoClose={5000}
               hideProgressBar={false}
               newestOnTop={false}
               closeOnClick

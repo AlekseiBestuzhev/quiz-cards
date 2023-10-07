@@ -3,12 +3,12 @@ import { toast } from 'react-toastify'
 
 import s from './sign-in.module.scss'
 
+import { errorNotification } from '@/common/utils'
 import { SignInForm } from '@/components/forms'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { LoginArgs, useGetMeQuery, useLoginMutation } from '@/features/auth/services'
-import { ErrorResponse } from '@/features/packs/services'
 
 export const SignIn = () => {
   const [login] = useLoginMutation()
@@ -18,12 +18,8 @@ export const SignIn = () => {
     try {
       await login(data).unwrap()
       toast.success('You are successfully authorized', { containerId: 'common' })
-    } catch (err) {
-      if (typeof err === 'object' && err !== null && 'data' in err) {
-        const error = err as ErrorResponse
-
-        toast.error(error.data.errorMessages[0].message, { containerId: 'common' })
-      }
+    } catch (error) {
+      errorNotification(error)
     }
   }
 

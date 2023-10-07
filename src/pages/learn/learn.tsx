@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import s from './learn.module.scss'
 
+import { errorNotification } from '@/common/utils'
 import { RateCardForm, RateType } from '@/components/forms/rate-card'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
@@ -22,14 +23,18 @@ export const Learn = () => {
   const { data: pack } = useGetDeckInfoQuery({ id })
   const { currentData: card } = useGetRandomCardQuery({ id })
 
-  const onSubmit = (data: RateType) => {
-    setRateMode(false)
-    rateCard({ packId: id, cardId: card!.id, grade: +data.grade })
+  const onSubmit = async (data: RateType) => {
+    try {
+      await rateCard({ packId: id, cardId: card!.id, grade: +data.grade }).unwrap()
+      setRateMode(false)
+    } catch (error) {
+      errorNotification(error)
+    }
   }
 
   return (
     <>
-      <BackButton to=".." relative="path" text="Back to Previous Page" />
+      <BackButton to=".." relative="path" text="Back to Pack" />
       <section className={s.root}>
         <Card className={s.content}>
           <Typography as="h1" variant="large">

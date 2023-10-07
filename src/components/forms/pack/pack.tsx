@@ -42,6 +42,7 @@ export const PackForm: FC<Props> = ({ onSubmit, defaultValues, onCancel }) => {
     if (coverError) {
       setCoverError(null)
     }
+    toast.warning('You deleted cover', { containerId: 'modal' })
     setValue('cover', null)
     setDownloaded(null)
   }

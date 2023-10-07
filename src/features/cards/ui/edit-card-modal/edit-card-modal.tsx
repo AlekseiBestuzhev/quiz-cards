@@ -1,5 +1,6 @@
 import { FC } from 'react'
 
+import { errorNotification } from '@/common/utils'
 import { CardForm } from '@/components/forms/card'
 import { ModalWindow } from '@/components/ui/modal-window'
 import { useUpdateCardMutation } from '@/features/cards/services'
@@ -36,9 +37,13 @@ export const EditCardModal: FC<EditCardModalProps> = ({
     setOpen(false)
   }
 
-  const onSubmit = (data: FormData) => {
-    updateCard({ cardId, data })
-    setOpen(false)
+  const onSubmit = async (data: FormData) => {
+    try {
+      await updateCard({ cardId, data }).unwrap()
+      setOpen(false)
+    } catch (error) {
+      errorNotification(error)
+    }
   }
 
   return (

@@ -71,8 +71,8 @@ export const CardForm: FC<Props> = ({ onSubmit, onCancel, defaultValues }) => {
     if (errorData[name].text) {
       errorData[name].set(null)
     }
+    toast.warning('You deleted cover', { containerId: 'modal' })
     setValue(name, null)
-
     previewData[name].set(null)
   }
 

@@ -1,5 +1,6 @@
 import { FC, useState } from 'react'
 
+import { errorNotification } from '@/common/utils'
 import { Dialog } from '@/components/ui/dialog'
 import { Icon } from '@/components/ui/icon/icon.tsx'
 import { IconButton } from '@/components/ui/icon-button'
@@ -15,9 +16,13 @@ export const DeleteControl: FC<Props> = ({ id, name }) => {
 
   const [deletePack] = useDeleteDeckMutation()
 
-  const onConfirm = () => {
-    deletePack({ id })
-    setOpen(false)
+  const onConfirm = async () => {
+    try {
+      await deletePack({ id }).unwrap()
+      setOpen(false)
+    } catch (error) {
+      errorNotification(error)
+    }
   }
 
   return (

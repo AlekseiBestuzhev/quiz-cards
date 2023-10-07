@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 
 import s from './profile.module.scss'
 
+import { errorNotification } from '@/common/utils'
 import { EditProfileForm, EditProfileFormProps } from '@/components/forms'
 import { Avatar } from '@/components/ui/avatar'
 import { BackButton } from '@/components/ui/back-button'
@@ -12,7 +13,6 @@ import { Card } from '@/components/ui/card'
 import { FileUploader } from '@/components/ui/file-uploader/file-uploader.tsx'
 import { Icon } from '@/components/ui/icon/icon.tsx'
 import { Typography } from '@/components/ui/typography'
-import { ErrorResponse } from '@/features/packs/services'
 import { useProfile } from '@/features/profile/model/hooks'
 import { ProfileControls } from '@/features/profile/ui'
 
@@ -21,21 +21,13 @@ export const Profile = () => {
 
   const [isEditMode, setEditMode] = useState(false)
 
-  const onSubmit = (data: EditProfileFormProps) => {
-    onUpdate(data)
-    setEditMode(false)
-  }
-
-  const logoutHandler = async () => {
+  const onSubmit = async (data: EditProfileFormProps) => {
     try {
-      await logout().unwrap()
-      toast.info('You are successfully logged out', { containerId: 'common' })
-    } catch (err) {
-      if (typeof err === 'object' && err !== null && 'data' in err) {
-        const error = err as ErrorResponse
-
-        toast.error(error.data.errorMessages[0].message, { containerId: 'common' })
-      }
+      await onUpdate(data)
+      setEditMode(false)
+      toast.success('Your name successfully changed', { containerId: 'common' })
+    } catch (error) {
+      errorNotification(error)
     }
   }
 
@@ -69,7 +61,7 @@ export const Profile = () => {
                 initialValues={{ name: user.name }}
               />
             ) : (
-              <ProfileControls user={user} setEditMode={setEditMode} onLogout={logoutHandler} />
+              <ProfileControls user={user} setEditMode={setEditMode} onLogout={logout} />
             )}
           </div>
         </Card>
