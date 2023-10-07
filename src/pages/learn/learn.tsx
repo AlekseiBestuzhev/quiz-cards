@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 
 import s from './learn.module.scss'
 
-import { errorNotification } from '@/common/utils'
 import { RateCardForm, RateType } from '@/components/forms/rate-card'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'

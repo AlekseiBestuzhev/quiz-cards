@@ -47,7 +47,7 @@
           border-bottom-color: var(--color-accent-300);
         }
 
-        &:focus {
+        &:focus-visible {
           color: var(--color-info-300);
           border-bottom-color: var(--color-info-300);
         }
