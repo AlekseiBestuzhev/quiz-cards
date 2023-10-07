@@ -1,4 +1,3 @@
-import { DevTool } from '@hookform/devtools'
 import { clsx } from 'clsx'
 
 import { useSignUp } from './'
@@ -19,7 +18,6 @@ export const SignUpForm = ({ onSubmit, className }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
-      <DevTool control={control} />
       <ControlledTextField control={control} name={'email'} label={'Email'} className={s.email} />
       <ControlledTextField
         control={control}
