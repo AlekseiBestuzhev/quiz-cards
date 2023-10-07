@@ -38,7 +38,7 @@ export const Header: FC<Props> = memo(({ data, logout }) => {
         </Link>
         {data ? (
           <div className={s.user}>
-            <Typography variant="subtitle1" className={s.name}>
+            <Typography as={Link} to="/profile" variant="subtitle1" className={s.name}>
               {data.name || data.email}
             </Typography>
             <DropDown
