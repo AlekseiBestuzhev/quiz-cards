@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import s from './pack.module.scss'
 
+import { errorNotification } from '@/common/utils'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { DropDown, DropDownItemWithIcon } from '@/components/ui/drop-down'
@@ -16,14 +17,15 @@ import { ProfileResponse, useGetMeQuery } from '@/features/auth/services'
 import { useGetCardsQuery } from '@/features/cards/services'
 import { CreateCardControl } from '@/features/cards/ui'
 import { CardsTable } from '@/features/cards/ui/cards-table/cards-table.tsx'
-import { useGetDeckInfoQuery } from '@/features/packs/services'
+import { useDeleteDeckMutation, useGetDeckInfoQuery } from '@/features/packs/services'
 import { EditPackModal } from '@/features/packs/ui'
 
 export const Pack = () => {
   const navigate = useNavigate()
 
-  const { id: packId } = useParams()
-  const { data: pack, isLoading: packLoading } = useGetDeckInfoQuery({ id: packId as string })
+  const { id } = useParams()
+  const packId = id as string
+  const { data: pack, isLoading: packLoading } = useGetDeckInfoQuery({ id: packId })
   const authorId = pack?.userId
 
   const { data: me } = useGetMeQuery()
@@ -52,7 +54,18 @@ export const Pack = () => {
     },
   })
 
+  const [deletePack] = useDeleteDeckMutation()
+
   const [editIsOpen, setEditIsOpen] = useState(false)
+
+  const deletePackHandler = async () => {
+    try {
+      await deletePack({ id: packId })
+      navigate('/packs')
+    } catch (error) {
+      errorNotification(error)
+    }
+  }
 
   if (packLoading) return <p>Loading...</p>
 
@@ -85,7 +98,11 @@ export const Pack = () => {
                   icon={<Icon name="edit" />}
                   text="Edit"
                 />
-                <DropDownItemWithIcon icon={<Icon name="delete" />} text="Delete" />
+                <DropDownItemWithIcon
+                  onSelect={deletePackHandler}
+                  icon={<Icon name="delete" />}
+                  text="Delete"
+                />
               </DropDown>
             )}
           </Typography>
