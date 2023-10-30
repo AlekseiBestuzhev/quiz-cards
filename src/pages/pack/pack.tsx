@@ -1,14 +1,12 @@
 import { useMemo, useState } from 'react'
 
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import s from './pack.module.scss'
 
 import { errorNotification } from '@/common/utils'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
-import { DropDown, DropDownItemWithIcon } from '@/components/ui/drop-down'
-import { Icon } from '@/components/ui/icon/icon.tsx'
 import { Pagination } from '@/components/ui/pagination'
 import { Sort } from '@/components/ui/table-header'
 import { TextField } from '@/components/ui/text-field'
@@ -17,14 +15,17 @@ import { ProfileResponse, useGetMeQuery } from '@/features/auth/services'
 import { useGetCardsQuery } from '@/features/cards/services'
 import { CreateCardControl } from '@/features/cards/ui'
 import { CardsTable } from '@/features/cards/ui/cards-table/cards-table.tsx'
+import { usePackData } from '@/features/pack/model/hooks'
+import { OwnerPackDropDown } from '@/features/pack/ui'
 import { useDeleteDeckMutation, useGetDeckInfoQuery } from '@/features/packs/services'
 import { EditPackModal } from '@/features/packs/ui'
 
 export const Pack = () => {
+  const { packId, currentPage, pageSize, setCurrentPage, setPageSize, searchName, setSearchName } =
+    usePackData()
+
   const navigate = useNavigate()
 
-  const { id } = useParams()
-  const packId = id as string
   const { data: pack, isLoading: packLoading } = useGetDeckInfoQuery({ id: packId })
   const authorId = pack?.userId
 
@@ -32,10 +33,6 @@ export const Pack = () => {
   const authUserId = (me as ProfileResponse)?.id
 
   const isMyPack = authorId === authUserId
-
-  const [searchName, setSearchName] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageSize, setPageSize] = useState(5)
 
   const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
   const sortedString = useMemo(() => {
@@ -87,23 +84,10 @@ export const Pack = () => {
           <Typography as="h1" variant="large" className={s.title}>
             {pack?.name}
             {isMyPack && (
-              <DropDown>
-                <DropDownItemWithIcon
-                  onSelect={() => navigate(`./learn`)}
-                  icon={<Icon name="play" />}
-                  text="Learn"
-                />
-                <DropDownItemWithIcon
-                  onSelect={() => setEditIsOpen(true)}
-                  icon={<Icon name="edit" />}
-                  text="Edit"
-                />
-                <DropDownItemWithIcon
-                  onSelect={deletePackHandler}
-                  icon={<Icon name="delete" />}
-                  text="Delete"
-                />
-              </DropDown>
+              <OwnerPackDropDown
+                onEditHandler={() => setEditIsOpen(true)}
+                onDeleteHandler={deletePackHandler}
+              />
             )}
           </Typography>
           {pack && isMyPack ? (
