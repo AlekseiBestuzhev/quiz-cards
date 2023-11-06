@@ -20,5 +20,10 @@ export type SignUpFormProps = z.infer<typeof registrationSchema>
 export const useSignUp = () => {
   return useForm<SignUpFormProps>({
     resolver: zodResolver(registrationSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
   })
 }
