@@ -11,7 +11,7 @@ import { Pagination } from '@/components/ui/pagination'
 import { Sort } from '@/components/ui/table-header'
 import { TextField } from '@/components/ui/text-field'
 import { Typography } from '@/components/ui/typography'
-import { ProfileResponse, useGetMeQuery } from '@/features/auth/services'
+import { UserResponse, useGetMeQuery } from '@/features/auth/services'
 import { useGetCardsQuery } from '@/features/cards/services'
 import { CreateCardControl } from '@/features/cards/ui'
 import { CardsTable } from '@/features/cards/ui/cards-table/cards-table.tsx'
@@ -30,7 +30,7 @@ export const Pack = () => {
   const authorId = pack?.userId
 
   const { data: me } = useGetMeQuery()
-  const authUserId = (me as ProfileResponse)?.id
+  const authUserId = (me as UserResponse)?.id
 
   const isMyPack = authorId === authUserId
 
