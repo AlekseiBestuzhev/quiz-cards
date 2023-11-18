@@ -1,24 +1,29 @@
-# Карточки
+# Cards
 
 React + TypeScript SPA 🚀
 
 <hr>
 
-### Описание:
+### Description:
 
-В этом приложении Вы можете создать набор карточек на абсолютно любую тему и использовать их для заучивания. Так же Вы можете смотреть колоды других пользователей. На главной странице расположены элементы фильтрации, навигации и сортировки, сами же колоды представлены в виде таблицы. В приложении реализованы авторизация, регистрация и восстановление пароля.
+In this application you can create a set of cards on absolutely any topic and use them for memorization. You can also look at decks of other users. The main page contains filtering, navigation and sorting elements, while the decks themselves are presented in table form. The application implements authorization, registration and password recovery.
 
+Register or use the test account:
+
+login: __test.account.cards@gmail.com__
+
+password: __1234__
 <hr>
 
-### Ссылки:
+### Links:
 
-> [UI-kit](https://quiz-cards-ui-kit.vercel.app/) на базе Storybook
+> [UI-kit](https://quiz-cards-ui-kit.vercel.app/) on Storybook
 >
-> [Cards](https://quiz-cards-prod.vercel.app/) - веб приложение
+> [Cards](https://quiz-cards-prod.vercel.app/) - web application
 
 <hr>
 
-## Используемые библиотеки и пакеты:
+## Libraries and packages:
 
 <table>
   <tr>

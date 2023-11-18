@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 import {
   LoginArgs,
   LoginResponse,
-  ProfileResponse,
+  SignUpArgs,
   UpdateProfileFormData,
   UserResponse,
 } from './types.ts'
@@ -54,7 +54,7 @@ const authAPI = baseAPI.injectEndpoints({
         }
       },
     }),
-    updateProfile: builder.mutation<ProfileResponse, UpdateProfileFormData>({
+    updateProfile: builder.mutation<UserResponse, UpdateProfileFormData>({
       query: body => ({
         url: `v1/auth/me`,
         method: 'PATCH',
@@ -62,8 +62,20 @@ const authAPI = baseAPI.injectEndpoints({
       }),
       invalidatesTags: ['Me'],
     }),
+    signUp: builder.mutation<UserResponse, SignUpArgs>({
+      query: body => ({
+        url: `v1/auth/sign-up`,
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 })
 
-export const { useGetMeQuery, useLoginMutation, useLogoutMutation, useUpdateProfileMutation } =
-  authAPI
+export const {
+  useGetMeQuery,
+  useLoginMutation,
+  useLogoutMutation,
+  useUpdateProfileMutation,
+  useSignUpMutation,
+} = authAPI
