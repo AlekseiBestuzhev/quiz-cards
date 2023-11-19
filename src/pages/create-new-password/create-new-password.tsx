@@ -1,16 +1,26 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import s from './create-new-password.module.scss'
 
+import { errorNotification } from '@/common/utils'
 import { CreateNewPasswordForm, CreateNewPasswordFormType } from '@/components/forms'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { useResetPasswordMutation } from '@/features/auth/services'
 
 export const CreateNewPassword = () => {
+  const [resetPassword] = useResetPasswordMutation()
+  const navigate = useNavigate()
   const { token } = useParams<{ token: string }>()
-  const onSubmit = (data: CreateNewPasswordFormType) => {
+
+  const onSubmit = async ({ password }: CreateNewPasswordFormType) => {
     if (token) {
-      alert(JSON.stringify(data))
+      try {
+        await resetPassword({ token, password })
+        navigate('/sign-in')
+      } catch (error) {
+        errorNotification(error)
+      }
     }
   }
 
