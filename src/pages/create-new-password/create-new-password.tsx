@@ -16,7 +16,7 @@ export const CreateNewPassword = () => {
   const onSubmit = async ({ password }: CreateNewPasswordFormType) => {
     if (token) {
       try {
-        await resetPassword({ token, password })
+        await resetPassword({ token, password }).unwrap()
         navigate('/sign-in')
       } catch (error) {
         errorNotification(error)
