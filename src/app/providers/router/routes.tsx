@@ -1,7 +1,6 @@
 import { Navigate, RouteObject } from 'react-router-dom'
 
 import {
-  CreateNewPassword,
   ForgotPassword,
   Profile,
   SignIn,
@@ -31,8 +30,8 @@ export const publicRoutes: RouteObject[] = [
     element: <CheckEmail />,
   },
   {
-    path: '/create-new-password/:token',
-    element: <CreateNewPassword />,
+    path: '/create-new-password/:email',
+    element: <CheckEmail />,
   },
   {
     path: '/*',
