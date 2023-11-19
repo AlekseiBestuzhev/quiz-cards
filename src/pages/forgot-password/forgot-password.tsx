@@ -1,15 +1,25 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import s from './forgot-password.module.scss'
 
+import { emailRecoveringTemplate as html } from '@/common/email-recovering-template'
+import { errorNotification } from '@/common/utils'
 import { ForgotPasswordForm, ForgotPasswordFormType } from '@/components/forms/'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
+import { useRecoverPasswordMutation } from '@/features/auth/services'
 
 export const ForgotPassword = () => {
-  const onSubmit = (data: ForgotPasswordFormType) => {
-    alert(JSON.stringify(data))
+  const navigate = useNavigate()
+  const [recoverPassword] = useRecoverPasswordMutation()
+  const onSubmit = async ({ email }: ForgotPasswordFormType) => {
+    try {
+      await recoverPassword({ html, email })
+      navigate(`/check-email/${email}`)
+    } catch (error) {
+      errorNotification(error)
+    }
   }
 
   return (

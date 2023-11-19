@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 import {
   LoginArgs,
   LoginResponse,
+  RecoverPasswordRequest,
   SignUpArgs,
   UpdateProfileFormData,
   UserResponse,
@@ -69,6 +70,13 @@ const authAPI = baseAPI.injectEndpoints({
         body,
       }),
     }),
+    recoverPassword: builder.mutation<void, RecoverPasswordRequest>({
+      query: body => ({
+        url: 'v1/auth/recover-password',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 })
 
@@ -78,4 +86,5 @@ export const {
   useLogoutMutation,
   useUpdateProfileMutation,
   useSignUpMutation,
+  useRecoverPasswordMutation,
 } = authAPI

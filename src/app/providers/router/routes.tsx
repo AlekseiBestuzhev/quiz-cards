@@ -10,6 +10,7 @@ import {
   Learn,
   Pack,
   NotFound,
+  CheckEmail,
 } from '@/pages'
 
 export const publicRoutes: RouteObject[] = [
@@ -26,7 +27,11 @@ export const publicRoutes: RouteObject[] = [
     element: <ForgotPassword />,
   },
   {
-    path: '/create-new-password',
+    path: '/check-email/:email',
+    element: <CheckEmail />,
+  },
+  {
+    path: '/create-new-password/:token',
     element: <CreateNewPassword />,
   },
   {
