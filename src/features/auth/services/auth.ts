@@ -77,6 +77,13 @@ const authAPI = baseAPI.injectEndpoints({
         body,
       }),
     }),
+    resetPassword: builder.mutation<void, { token: string; password: string }>({
+      query: ({ token, password }) => ({
+        url: `v1/auth/reset-password/${token}`,
+        method: 'POST',
+        body: { password },
+      }),
+    }),
   }),
 })
 
@@ -87,4 +94,5 @@ export const {
   useUpdateProfileMutation,
   useSignUpMutation,
   useRecoverPasswordMutation,
+  useResetPasswordMutation,
 } = authAPI
