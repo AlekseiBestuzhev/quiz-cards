@@ -26,7 +26,7 @@ export const CreateNewPasswordForm: FC<PropsType> = ({ onSubmit, className }) =>
     <form onSubmit={handleSubmit(onSubmit)} className={classes}>
       <ControlledTextField control={control} name="password" label="Password" type="password" />
       <Typography variant="body2" className={s.information}>
-        Create new password and we will send you further instructions to email
+        Enter new password and then sign in with it.
       </Typography>
       <Button fullWidth>Create New Password</Button>
     </form>

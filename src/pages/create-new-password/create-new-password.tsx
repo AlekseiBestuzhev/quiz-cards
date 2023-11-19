@@ -1,3 +1,5 @@
+import { useParams } from 'react-router-dom'
+
 import s from './create-new-password.module.scss'
 
 import { CreateNewPasswordForm, CreateNewPasswordFormType } from '@/components/forms'
@@ -5,8 +7,11 @@ import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 
 export const CreateNewPassword = () => {
+  const { token } = useParams<{ token: string }>()
   const onSubmit = (data: CreateNewPasswordFormType) => {
-    alert(JSON.stringify(data))
+    if (token) {
+      alert(JSON.stringify(data))
+    }
   }
 
   return (
