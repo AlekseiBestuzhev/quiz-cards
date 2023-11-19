@@ -1,0 +1,31 @@
+@import '@/styles/mixins';
+
+.container {
+  @include container(420px);
+
+  height: 408px;
+  padding: 37px 36px 48px;
+
+  .content {
+    @include flex(column, 0, 0, center);
+
+    .title {
+      margin-bottom: 27px;
+      text-align: center;
+    }
+
+    .imageContainer {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 19px;
+    }
+
+    .notification {
+      margin-bottom: 40px;
+      color: var(--color-light-900);
+      text-align: center;
+      opacity: 0.5;
+    }
+  }
+}
