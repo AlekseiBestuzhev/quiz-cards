@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import s from './forgot-password.module.scss'
 
@@ -15,8 +16,9 @@ export const ForgotPassword = () => {
   const [recoverPassword] = useRecoverPasswordMutation()
   const onSubmit = async ({ email }: ForgotPasswordFormType) => {
     try {
-      await recoverPassword({ html, email })
+      await recoverPassword({ html, email }).unwrap()
       navigate(`/check-email/${email}`)
+      toast.success('The password has been changed', { containerId: 'common' })
     } catch (error) {
       errorNotification(error)
     }
