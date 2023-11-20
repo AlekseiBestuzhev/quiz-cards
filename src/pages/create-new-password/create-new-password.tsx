@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import s from './create-new-password.module.scss'
 
@@ -18,6 +19,7 @@ export const CreateNewPassword = () => {
       try {
         await resetPassword({ token, password }).unwrap()
         navigate('/sign-in')
+        toast.success('The password has been changed', { containerId: 'common' })
       } catch (error) {
         errorNotification(error)
       }
