@@ -339,9 +339,9 @@ export const emailRecoveringTemplate = `
                               <td align="center"
                                   style="Margin:0;padding-right:10px;padding-left:10px;padding-top:25px;padding-bottom:25px;font-size:0px">
                                 <img
-                                  src="https://eblzyfl.stripocdn.email/content/guids/3030ca35-cb4a-4090-8389-d8bf33c5b62e/images/logo.png"
+                                  src="https://eblzyfl.stripocdn.email/content/guids/CABINET_d16ad340a4e02f6f2bd727ea1c9a00393184673ff05a401b551d56cd4fe2a909/images/logo.png"
                                   alt="" style="display:block;font-size:18px;border:0;outline:none;text-decoration:none"
-                                  height="34"></td>
+                                  height="84"></td>
                             </tr>
                           </table>
                         </td>
@@ -461,7 +461,7 @@ export const emailRecoveringTemplate = `
           <tr>
             <td align="center" style="padding:0;Margin:0">
               <table class="es-content-body" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center"
-                     style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:600px">
+                     style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;matgin-bottom:20px;width:600px">
                 <tr>
                   <td align="left" style="padding:0;Margin:0">
                     <table width="100%" cellspacing="0" cellpadding="0"

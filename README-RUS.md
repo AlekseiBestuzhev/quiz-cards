@@ -1,5 +1,9 @@
 # Карточки
 
+<p align="center">
+  <img src="src/assets/readme/logo.png" style="width: 400px" alt="logo" />
+</p>
+
 React + TypeScript SPA 🚀
 
 <hr>
