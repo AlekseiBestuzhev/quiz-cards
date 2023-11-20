@@ -44,7 +44,7 @@ export const Header: FC<Props> = memo(({ data, logout }) => {
             <DropDown
               trigger={
                 <button className={s.dropdownButton}>
-                  <Avatar userName={data.name || data.email} image={data.avatar} />
+                  <Avatar userName={data.name || data.email} image={data.avatar} size={48} />
                 </button>
               }
             >
