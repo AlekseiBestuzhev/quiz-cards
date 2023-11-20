@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import s from './header.module.scss'
 import { ProfileInfo, ProfileInfoProps } from './profile-info'
 
-import { Logo } from '@/assets/illustrations/it-inc-logo.tsx'
+import { Logo } from '@/assets/illustrations/logo.tsx'
 import { useAppSelector } from '@/common/hooks'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
