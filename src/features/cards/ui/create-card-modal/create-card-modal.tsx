@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { errorNotification } from '@/common/utils'
+import { requestHandler } from '@/common/utils'
 import { CardForm } from '@/components/forms/card'
 import { ModalWindow } from '@/components/ui/modal-window'
 import { useCreateCardMutation } from '@/features/cards/services'
@@ -19,12 +19,10 @@ export const CreateCardModal: FC<Props> = ({ open, setOpen, packId }) => {
   }
 
   const onSubmit = async (data: FormData) => {
-    try {
+    await requestHandler(async () => {
       await createCard({ packId, data }).unwrap()
       setOpen(false)
-    } catch (error) {
-      errorNotification(error)
-    }
+    })
   }
 
   return (

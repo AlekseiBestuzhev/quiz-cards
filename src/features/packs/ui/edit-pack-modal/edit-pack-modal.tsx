@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { errorNotification } from '@/common/utils'
+import { requestHandler } from '@/common/utils'
 import { PackForm } from '@/components/forms/pack'
 import { ModalWindow } from '@/components/ui/modal-window'
 import { useUpdateDeckMutation } from '@/features/packs/services'
@@ -31,12 +31,10 @@ export const EditPackModal: FC<EditPackModalProps> = ({
   const [editPack] = useUpdateDeckMutation()
 
   const editDeckHandler = async (data: FormData) => {
-    try {
+    await requestHandler(async () => {
       await editPack({ id, data }).unwrap()
       setOpen(false)
-    } catch (error) {
-      errorNotification(error)
-    }
+    })
   }
 
   return (

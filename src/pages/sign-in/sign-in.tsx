@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import s from './sign-in.module.scss'
 
-import { errorNotification } from '@/common/utils'
+import { requestHandler } from '@/common/utils'
 import { SignInForm } from '@/components/forms'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -15,12 +15,10 @@ export const SignIn = () => {
   const { data: me } = useGetMeQuery()
 
   const loginHandler = async (data: LoginArgs) => {
-    try {
+    await requestHandler(async () => {
       await login(data).unwrap()
       toast.success('You are successfully authorized', { containerId: 'common' })
-    } catch (error) {
-      errorNotification(error)
-    }
+    })
   }
 
   if (me && !('success' in me)) return <Navigate to={'/packs'} />

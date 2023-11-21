@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import s from './pack.module.scss'
 
-import { errorNotification } from '@/common/utils'
+import { requestHandler } from '@/common/utils'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { Pagination } from '@/components/ui/pagination'
@@ -56,12 +56,10 @@ export const Pack = () => {
   const [editIsOpen, setEditIsOpen] = useState(false)
 
   const deletePackHandler = async () => {
-    try {
+    await requestHandler(async () => {
       await deletePack({ id: packId })
       navigate('/packs')
-    } catch (error) {
-      errorNotification(error)
-    }
+    })
   }
 
   if (packLoading) return <p>Loading...</p>
