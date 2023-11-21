@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import { currentPageSelector, pageSizeSelector } from '@/features/packs/model/selectors'
 import { packsActions } from '@/features/packs/model/slice/packs.sliece.ts'
@@ -8,13 +10,13 @@ export const usePacksPagination = () => {
 
   const dispatch = useAppDispatch()
 
-  const setCurrentPage = (newPage: number) => {
+  const setCurrentPage = useCallback((newPage: number) => {
     dispatch(packsActions.setCurrentPage({ newPage }))
-  }
+  }, [])
 
-  const setPageSize = (newPageSize: number) => {
+  const setPageSize = useCallback((newPageSize: number) => {
     dispatch(packsActions.setPageSize({ newPageSize }))
-  }
+  }, [])
 
   return { currentPage, pageSize, setCurrentPage, setPageSize }
 }

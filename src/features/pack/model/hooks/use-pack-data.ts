@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import { useParams } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
@@ -18,17 +20,17 @@ export const usePackData = () => {
 
   const dispatch = useAppDispatch()
 
-  const setCurrentPage = (newPage: number) => {
+  const setCurrentPage = useCallback((newPage: number) => {
     dispatch(packActions.setCurrentPage({ newPage }))
-  }
+  }, [])
 
-  const setPageSize = (newPageSize: number) => {
+  const setPageSize = useCallback((newPageSize: number) => {
     dispatch(packActions.setPageSize({ newPageSize }))
-  }
+  }, [])
 
-  const setSearchName = (newSearchName: string) => {
+  const setSearchName = useCallback((newSearchName: string) => {
     dispatch(packActions.setSearchName({ newSearchName }))
-  }
+  }, [])
 
   return { packId, currentPage, pageSize, setCurrentPage, setPageSize, searchName, setSearchName }
 }

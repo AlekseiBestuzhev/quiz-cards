@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import s from './packs.module.scss'
 
@@ -18,12 +18,6 @@ export const Packs = () => {
   const { currentPage, pageSize, setCurrentPage, setPageSize } = usePacksPagination()
   const { searchName, tabValue, sliderValue, setSearchName, setTabValue, setSliderValue } =
     usePacksFilter()
-
-  const setPage = useCallback(setCurrentPage, [])
-  const setSize = useCallback(setPageSize, [])
-  const setSearch = useCallback(setSearchName, [])
-  const setTab = useCallback(setTabValue, [])
-  const setSlider = useCallback(setSliderValue, [])
 
   const [open, setOpen] = useState(false)
 
@@ -74,12 +68,12 @@ export const Packs = () => {
         </div>
         <FilterControls
           searchName={searchName}
-          setSearchName={setSearch}
+          setSearchName={setSearchName}
           sliderValue={sliderValue}
           sliderMaxValue={packs?.data?.maxCardsCount}
-          setSliderValue={setSlider}
+          setSliderValue={setSliderValue}
           tabValue={tabValue}
-          setTabValue={setTab}
+          setTabValue={setTabValue}
           authUserId={userId}
         />
       </div>
@@ -89,9 +83,9 @@ export const Packs = () => {
       <Pagination
         totalCount={packs?.data?.pagination.totalItems}
         currentPage={currentPage}
-        onPageChange={setPage}
+        onPageChange={setCurrentPage}
         pageSize={pageSize}
-        onPageSizeChange={setSize}
+        onPageSizeChange={setPageSize}
         className={s.pagination}
       />
     </section>
