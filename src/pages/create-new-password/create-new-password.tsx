@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import s from './create-new-password.module.scss'
 
-import { errorNotification } from '@/common/utils'
+import { requestHandler } from '@/common/utils'
 import { CreateNewPasswordForm, CreateNewPasswordFormType } from '@/components/forms'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
@@ -16,13 +16,11 @@ export const CreateNewPassword = () => {
 
   const onSubmit = async ({ password }: CreateNewPasswordFormType) => {
     if (token) {
-      try {
+      await requestHandler(async () => {
         await resetPassword({ token, password }).unwrap()
         navigate('/sign-in')
         toast.success('The password has been changed', { containerId: 'common' })
-      } catch (error) {
-        errorNotification(error)
-      }
+      })
     }
   }
 

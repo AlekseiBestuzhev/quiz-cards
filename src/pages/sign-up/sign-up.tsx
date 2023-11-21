@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 
 import s from './sign-up.module.scss'
 
-import { errorNotification } from '@/common/utils'
+import { requestHandler } from '@/common/utils'
 import { SignUpForm, SignUpFormProps } from '@/components/forms'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -18,13 +18,11 @@ export const SignUp = () => {
   const onSubmit = async (data: SignUpFormProps) => {
     const { confirmPassword, ...rest } = data
 
-    try {
+    await requestHandler(async () => {
       await signUp(rest)
       await login(rest)
       toast.success('You are successfully signed up', { containerId: 'common' })
-    } catch (error) {
-      errorNotification(error)
-    }
+    })
   }
 
   if (me && !('success' in me)) return <Navigate to={'/packs'} />

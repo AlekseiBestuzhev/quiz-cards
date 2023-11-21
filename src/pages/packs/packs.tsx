@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import s from './packs.module.scss'
 
-import { errorNotification } from '@/common/utils'
+import { requestHandler } from '@/common/utils'
 import { PackForm } from '@/components/forms/pack'
 import { Button } from '@/components/ui/button'
 import { ModalWindow } from '@/components/ui/modal-window'
@@ -54,12 +54,10 @@ export const Packs = () => {
   const [createDeck] = useCreateDeckMutation()
 
   const createDeckHandler = async (data: FormData) => {
-    try {
+    await requestHandler(async () => {
       await createDeck(data).unwrap()
       setOpen(false)
-    } catch (error) {
-      errorNotification(error)
-    }
+    })
   }
 
   return (
