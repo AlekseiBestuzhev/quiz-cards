@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import s from './learn.module.scss'
 
+import { requestHandler } from '@/common/utils'
 import { RateCardForm, RateType } from '@/components/forms/rate-card'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
@@ -23,8 +24,10 @@ export const Learn = () => {
   const { currentData: card } = useGetRandomCardQuery({ id })
 
   const onSubmit = async (data: RateType) => {
-    await rateCard({ packId: id, cardId: card!.id, grade: +data.grade }).unwrap()
-    setRateMode(false)
+    await requestHandler(async () => {
+      await rateCard({ packId: id, cardId: card!.id, grade: +data.grade }).unwrap()
+      setRateMode(false)
+    })
   }
 
   return (

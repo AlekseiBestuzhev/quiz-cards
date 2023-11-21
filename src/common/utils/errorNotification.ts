@@ -19,9 +19,19 @@ export const errorNotification = (err: unknown) => {
     ) {
       toast.error(err.data.message, { containerId: 'common' })
     } else if ('errorMessages' in err.data) {
-      const error = err as ErrorResponse
+      if (Array.isArray(err.data.errorMessages)) {
+        if (typeof err.data.errorMessages[0] === 'string') {
+          err.data.errorMessages.forEach(el => {
+            toast.error(el, { containerId: 'common' })
+          })
+        } else {
+          const error = err as ErrorResponse
 
-      toast.error(error.data.errorMessages[0].message, { containerId: 'common' })
+          error.data.errorMessages.forEach(el => {
+            toast.error(el.message, { containerId: 'common' })
+          })
+        }
+      }
     } else {
       toast.error('Some error occurred', { containerId: 'common' })
     }

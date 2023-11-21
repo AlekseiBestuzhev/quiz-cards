@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 
-import { errorNotification } from '@/common/utils'
+import { requestHandler } from '@/common/utils'
 import { Dialog } from '@/components/ui/dialog'
 import { Icon } from '@/components/ui/icon/icon.tsx'
 import { IconButton } from '@/components/ui/icon-button'
@@ -16,12 +16,10 @@ export const DeleteCardControl: FC<Props> = ({ id }) => {
   const [deleteCard] = useDeleteCardMutation()
 
   const onConfirm = async () => {
-    try {
+    await requestHandler(async () => {
       await deleteCard({ id }).unwrap()
       setDeleteIsOpen(false)
-    } catch (error) {
-      errorNotification(error)
-    }
+    })
   }
 
   return (

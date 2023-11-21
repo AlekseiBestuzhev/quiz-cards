@@ -9,7 +9,7 @@ import {
   UserResponse,
 } from './types.ts'
 
-import { errorNotification } from '@/common/utils'
+import { requestHandler } from '@/common/utils'
 import { baseAPI } from '@/services/base-api.ts'
 
 const authAPI = baseAPI.injectEndpoints({
@@ -47,12 +47,10 @@ const authAPI = baseAPI.injectEndpoints({
       }),
       invalidatesTags: ['Me'],
       async onQueryStarted(_, { queryFulfilled }) {
-        try {
+        await requestHandler(async () => {
           await queryFulfilled
           toast.info('You are successfully logged out', { containerId: 'common' })
-        } catch (error) {
-          errorNotification(error)
-        }
+        })
       },
     }),
     updateProfile: builder.mutation<UserResponse, UpdateProfileFormData>({
