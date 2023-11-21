@@ -15,12 +15,10 @@ export const SignUp = () => {
   const [login] = useLoginMutation()
   const { data: me } = useGetMeQuery()
 
-  const onSubmit = async (data: SignUpFormProps) => {
-    const { confirmPassword, ...rest } = data
-
+  const onSubmit = async ({ confirmPassword, ...rest }: SignUpFormProps) => {
     await requestHandler(async () => {
-      await signUp(rest)
-      await login(rest)
+      await signUp(rest).unwrap()
+      await login(rest).unwrap()
       toast.success('You are successfully signed up', { containerId: 'common' })
     })
   }
