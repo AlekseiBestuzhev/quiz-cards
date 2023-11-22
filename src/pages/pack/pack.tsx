@@ -1,10 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
 
 import s from './pack.module.scss'
 
-import { requestHandler } from '@/common/utils'
+import { getSortedString, requestHandler } from '@/common/utils'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { Pagination } from '@/components/ui/pagination'
@@ -35,11 +35,8 @@ export const Pack = () => {
   const isMyPack = authorId === authUserId
 
   const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
-  const sortedString = useMemo(() => {
-    if (!sort) return ''
 
-    return `${sort.key}-${sort.direction}`
-  }, [sort])
+  const sortedString = getSortedString(sort)
 
   const { data } = useGetCardsQuery({
     id: packId as string,

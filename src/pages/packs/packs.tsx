@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import s from './packs.module.scss'
 
-import { requestHandler } from '@/common/utils'
+import { getSortedString, requestHandler } from '@/common/utils'
 import { PackForm } from '@/components/forms/pack'
 import { Button } from '@/components/ui/button'
 import { ModalWindow } from '@/components/ui/modal-window'
@@ -22,11 +22,8 @@ export const Packs = () => {
   const [open, setOpen] = useState(false)
 
   const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
-  const sortedString = useMemo(() => {
-    if (!sort) return ''
 
-    return `${sort.key}-${sort.direction}`
-  }, [sort])
+  const sortedString = getSortedString(sort)
 
   const { data } = useGetMeQuery()
   const userId = (data as UserResponse).id
