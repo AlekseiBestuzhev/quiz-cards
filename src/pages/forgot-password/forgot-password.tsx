@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import s from './forgot-password.module.scss'
 
-import { emailRecoveringTemplate as html } from '@/common/email-recovering-template'
+import { emailRecoveringTemplate as html, ROUTES } from '@/common/consts'
 import { requestHandler } from '@/common/utils'
 import { ForgotPasswordForm, ForgotPasswordFormType } from '@/components/forms/'
 import { Button } from '@/components/ui/button'
@@ -16,7 +16,7 @@ export const ForgotPassword = () => {
   const onSubmit = async ({ email }: ForgotPasswordFormType) => {
     await requestHandler(async () => {
       await recoverPassword({ html, email }).unwrap()
-      navigate(`/check-email/${email}`)
+      navigate(`${ROUTES.checkEmail}/${email}`)
     })
   }
 
@@ -30,7 +30,7 @@ export const ForgotPassword = () => {
           <ForgotPasswordForm onSubmit={onSubmit} className={s.form} />
           <div className={s.register}>
             <Typography variant="body2">Did you remember your password?</Typography>
-            <Button as={Link} to={'/sign-in'} variant="link" className={s.signIn}>
+            <Button as={Link} to={ROUTES.signIn} variant="link" className={s.signIn}>
               Try logging in
             </Button>
           </div>

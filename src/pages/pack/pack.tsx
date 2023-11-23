@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import s from './pack.module.scss'
 
+import { ROUTES } from '@/common/consts'
 import { getSortedString, requestHandler } from '@/common/utils'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
@@ -55,7 +56,7 @@ export const Pack = () => {
   const deletePackHandler = async () => {
     await requestHandler(async () => {
       await deletePack({ id: packId })
-      navigate('/packs')
+      navigate(ROUTES.packs)
     })
   }
 
@@ -73,7 +74,7 @@ export const Pack = () => {
           cover={pack.cover}
         />
       )}
-      <BackButton to="/packs" text="Back to Packs" />
+      <BackButton to={ROUTES.packs} text="Back to Packs" />
       <div className={s.header}>
         <div className={s.top}>
           <Typography as="h1" variant="large" className={s.title}>
@@ -88,7 +89,7 @@ export const Pack = () => {
           {pack && isMyPack ? (
             <CreateCardControl packId={pack.id} />
           ) : (
-            <Button as={Link} to={`./learn`}>
+            <Button as={Link} to={`.${ROUTES.learn}`}>
               Learn Cards
             </Button>
           )}

@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 
 import s from './create-new-password.module.scss'
 
+import { ROUTES } from '@/common/consts'
 import { requestHandler } from '@/common/utils'
 import { CreateNewPasswordForm, CreateNewPasswordFormType } from '@/components/forms'
 import { Card } from '@/components/ui/card'
@@ -18,7 +19,7 @@ export const CreateNewPassword = () => {
     if (token) {
       await requestHandler(async () => {
         await resetPassword({ token, password }).unwrap()
-        navigate('/sign-in')
+        navigate(ROUTES.signIn)
         toast.success('The password has been changed', { containerId: 'common' })
       })
     }

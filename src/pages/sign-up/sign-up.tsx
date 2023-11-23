@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 
 import s from './sign-up.module.scss'
 
+import { ROUTES } from '@/common/consts'
 import { requestHandler } from '@/common/utils'
 import { SignUpForm, SignUpFormProps } from '@/components/forms'
 import { Button } from '@/components/ui/button'
@@ -23,7 +24,7 @@ export const SignUp = () => {
     })
   }
 
-  if (me && !('success' in me)) return <Navigate to={'/packs'} />
+  if (me && !('success' in me)) return <Navigate to={ROUTES.packs} />
 
   return (
     <div className={s.root}>
@@ -35,7 +36,7 @@ export const SignUp = () => {
           <SignUpForm onSubmit={onSubmit} className={s.form} />
           <div className={s.login}>
             <Typography variant="body2">Already have an account?</Typography>
-            <Button as={Link} to="/sign-in" variant="link" className={s.signIn}>
+            <Button as={Link} to={ROUTES.signIn} variant="link" className={s.signIn}>
               Sign In
             </Button>
           </div>

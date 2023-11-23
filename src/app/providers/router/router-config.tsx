@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate, Outlet, RouterProvider } from 'react-rou
 
 import { privateRoutes, publicRoutes } from './routes.tsx'
 
+import { ROUTES } from '@/common/consts'
 import { Layout } from '@/components/layout'
 import { useGetMeQuery } from '@/features/auth/services'
 import { InitLoading } from '@/features/loading/ui'
@@ -12,12 +13,12 @@ const PrivateRoutes = () => {
 
   if (isLoading) return <InitLoading />
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/sign-in" />
+  return isAuthenticated ? <Outlet /> : <Navigate to={ROUTES.signIn} />
 }
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: ROUTES.base,
     element: <Layout />,
     children: [
       {
