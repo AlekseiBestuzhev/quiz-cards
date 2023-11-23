@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 import { clsx } from 'clsx'
-import { Link, LinkProps, RelativeRoutingType } from 'react-router-dom'
+import { Link, LinkProps } from 'react-router-dom'
 
 import s from './back-button.module.scss'
 
@@ -11,8 +11,7 @@ import { Typography } from '@/components/ui/typography'
 
 type Props = {
   text: string
-  relative?: RelativeRoutingType
-} & LinkProps
+} & Omit<LinkProps, 'children'>
 
 export const BackButton: FC<Props> = ({ text, className, ...rest }) => {
   const classes = clsx(s.button, className)
