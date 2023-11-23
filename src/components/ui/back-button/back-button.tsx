@@ -1,7 +1,7 @@
-import { FC } from 'react'
+import { FC, MouseEvent } from 'react'
 
 import { clsx } from 'clsx'
-import { Link, LinkProps } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import s from './back-button.module.scss'
 
@@ -11,13 +11,21 @@ import { Typography } from '@/components/ui/typography'
 
 type Props = {
   text: string
-} & Omit<LinkProps, 'children'>
+  className?: string
+}
 
 export const BackButton: FC<Props> = ({ text, className, ...rest }) => {
+  const navigate = useNavigate()
+
+  const backHandler = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    navigate(-1)
+  }
+
   const classes = clsx(s.button, className)
 
   return (
-    <Button as={Link} variant="link" className={classes} {...rest}>
+    <Button as={Link} to="back" variant="link" onClick={backHandler} className={classes} {...rest}>
       <Icon name={'arrow-back'} width={22} height={22} />
       <Typography variant="body2" className={s.text}>
         {text}
