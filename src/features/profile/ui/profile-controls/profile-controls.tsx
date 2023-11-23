@@ -2,8 +2,8 @@ import { FC } from 'react'
 
 import s from './profile-controls.module.scss'
 
+import { ProfileInfoProps } from '@/components/header/profile-info'
 import { Button } from '@/components/ui/button'
-import { ProfileInfoProps } from '@/components/ui/header/profile-info'
 import { Icon } from '@/components/ui/icon/icon.tsx'
 import { IconButton } from '@/components/ui/icon-button'
 import { Typography } from '@/components/ui/typography'

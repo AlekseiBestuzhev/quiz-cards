@@ -2,8 +2,8 @@ import { Meta } from '@storybook/react'
 
 import { DropDown, DropDownItem, DropDownItemWithIcon } from './'
 
+import { ProfileInfo } from '@/components/header/profile-info'
 import { Avatar } from '@/components/ui/avatar'
-import { ProfileInfo } from '@/components/ui/header/profile-info'
 import { Icon } from '@/components/ui/icon/icon.tsx'
 
 const meta = {

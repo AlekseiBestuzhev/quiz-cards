@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Header } from './'
+import { Header } from './index.ts'
 
 import { BrowserRouterDecorator } from '@/app/providers'
 
