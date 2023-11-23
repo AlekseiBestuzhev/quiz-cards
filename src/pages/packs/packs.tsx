@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import s from './packs.module.scss'
 
+import { useDebounce } from '@/common/hooks'
 import { getSortedString, requestHandler } from '@/common/utils'
 import { PackForm } from '@/components/forms/pack'
 import { Button } from '@/components/ui/button'
@@ -19,6 +20,9 @@ export const Packs = () => {
   const { searchName, tabValue, sliderValue, setSearchName, setTabValue, setSliderValue } =
     usePacksFilter()
 
+  const debouncedSearchName = useDebounce(searchName)
+  const debouncedSliderValue = useDebounce(sliderValue)
+
   const [open, setOpen] = useState(false)
 
   const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
@@ -29,10 +33,10 @@ export const Packs = () => {
   const userId = (data as UserResponse).id
 
   const packs = useGetDecksQuery({
-    name: searchName,
+    name: debouncedSearchName,
     authorId: tabValue,
-    minCardsCount: sliderValue[0],
-    maxCardsCount: sliderValue[1],
+    minCardsCount: debouncedSliderValue[0],
+    maxCardsCount: debouncedSliderValue[1],
     orderBy: sortedString,
     currentPage,
     itemsPerPage: pageSize,
@@ -40,7 +44,7 @@ export const Packs = () => {
 
   useEffect(() => {
     setCurrentPage(1)
-  }, [searchName, sliderValue, pageSize, tabValue])
+  }, [debouncedSearchName, debouncedSliderValue, pageSize, tabValue])
 
   const [createDeck] = useCreateDeckMutation()
 
