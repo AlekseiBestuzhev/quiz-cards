@@ -10,11 +10,11 @@ import { Icon } from '@/components/ui/icon/icon.tsx'
 import { Typography } from '@/components/ui/typography'
 
 type Props = {
-  text: string
+  text?: string
   className?: string
 }
 
-export const BackButton: FC<Props> = ({ text, className, ...rest }) => {
+export const BackButton: FC<Props> = ({ text = 'Back to Previous Page', className, ...rest }) => {
   const navigate = useNavigate()
 
   const backHandler = (e: MouseEvent<HTMLAnchorElement>) => {

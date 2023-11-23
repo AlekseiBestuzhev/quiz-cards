@@ -31,7 +31,7 @@ export const Profile = () => {
 
   return (
     <>
-      <BackButton text="Back to Previous Page" />
+      <BackButton />
       <div className={s.root}>
         <Card>
           <div className={s.content}>

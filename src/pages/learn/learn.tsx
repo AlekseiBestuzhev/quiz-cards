@@ -32,7 +32,7 @@ export const Learn = () => {
 
   return (
     <>
-      <BackButton text="Back to Previous Page" />
+      <BackButton />
       <section className={s.root}>
         <Card className={s.content}>
           <Typography as="h1" variant="large" className={s.title}>
