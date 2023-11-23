@@ -1,3 +1,6 @@
+import { appDeploy } from '@/common/consts/appDeploy.ts'
+import { ROUTES } from '@/common/consts/routes.ts'
+
 export const emailRecoveringTemplate = `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -441,7 +444,7 @@ export const emailRecoveringTemplate = `
                                   style="Margin:0;padding-right:10px;padding-left:10px;padding-top:40px;padding-bottom:40px">
                                 <span class="es-button-border"
                                       style="border-style:solid;border-color:#7C72DC;background:#7C72DC;border-width:1px;display:block;border-radius:6px;width:auto"><a
-                                  href="https://quiz-cards-prod.vercel.app/create-new-password/##token##"
+                                  href="${appDeploy}${ROUTES.createNewPassword}/##token##"
                                   class="es-button" target="_blank"
                                   style="mso-style-priority:100 !important;text-decoration:none !important;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;padding:15px 5px 10px;display:block;background:#7C72DC;border-radius:6px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-weight:normal;font-style:normal;line-height:24px;width:auto;text-align:center;letter-spacing:0;mso-padding-alt:0;mso-border-alt:10px solid #7C72DC">Reset Password</a></span>
                               </td>

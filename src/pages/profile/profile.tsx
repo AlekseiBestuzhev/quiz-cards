@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 
 import s from './profile.module.scss'
 
+import { ROUTES } from '@/common/consts'
 import { requestHandler } from '@/common/utils'
 import { EditProfileForm, EditProfileFormProps } from '@/components/forms'
 import { Avatar } from '@/components/ui/avatar'
@@ -31,7 +32,7 @@ export const Profile = () => {
 
   return (
     <>
-      <BackButton to="/packs" text="Back To Packs List" />
+      <BackButton to={ROUTES.packs} text="Back To Packs List" />
       <div className={s.root}>
         <Card>
           <div className={s.content}>

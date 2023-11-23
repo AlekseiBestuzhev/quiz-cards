@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 
 import { errorNotification, validateImage } from '@/common/utils'
 import { EditProfileFormProps } from '@/components/forms'
-import { ProfileInfoProps } from '@/components/ui/header/profile-info'
+import { ProfileInfoProps } from '@/components/header/profile-info'
 import {
   useGetMeQuery,
   useLogoutMutation,

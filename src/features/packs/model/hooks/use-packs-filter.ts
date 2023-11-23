@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import { useAppDispatch, useAppSelector } from '@/common/hooks'
 import {
   searchNameSelector,
@@ -13,17 +15,17 @@ export const usePacksFilter = () => {
 
   const dispatch = useAppDispatch()
 
-  const setSearchName = (newSearchName: string) => {
+  const setSearchName = useCallback((newSearchName: string) => {
     dispatch(packsActions.setSearchName({ newSearchName }))
-  }
+  }, [])
 
-  const setTabValue = (newTabValue: string) => {
+  const setTabValue = useCallback((newTabValue: string) => {
     dispatch(packsActions.setTabValue({ newTabValue }))
-  }
+  }, [])
 
-  const setSliderValue = (newSliderValue: number[]) => {
+  const setSliderValue = useCallback((newSliderValue: number[]) => {
     dispatch(packsActions.setSliderValue({ newSliderValue }))
-  }
+  }, [])
 
   return { searchName, tabValue, sliderValue, setSearchName, setTabValue, setSliderValue }
 }

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import s from './pack-row.module.scss'
 
+import { ROUTES } from '@/common/consts'
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon/icon.tsx'
 import { IconButton } from '@/components/ui/icon-button'
@@ -23,7 +24,7 @@ export const PackRow: FC<Props> = memo(({ pack, authUserId }) => {
   const navigate = useNavigate()
 
   const onLearn = () => {
-    navigate(`${pack.id}/learn`)
+    navigate(`${pack.id}${ROUTES.learn}`)
   }
 
   return (

@@ -1,10 +1,11 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
 
 import s from './pack.module.scss'
 
-import { requestHandler } from '@/common/utils'
+import { ROUTES } from '@/common/consts'
+import { getSortedString, requestHandler } from '@/common/utils'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
 import { Pagination } from '@/components/ui/pagination'
@@ -35,11 +36,8 @@ export const Pack = () => {
   const isMyPack = authorId === authUserId
 
   const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
-  const sortedString = useMemo(() => {
-    if (!sort) return ''
 
-    return `${sort.key}-${sort.direction}`
-  }, [sort])
+  const sortedString = getSortedString(sort)
 
   const { data } = useGetCardsQuery({
     id: packId as string,
@@ -58,7 +56,7 @@ export const Pack = () => {
   const deletePackHandler = async () => {
     await requestHandler(async () => {
       await deletePack({ id: packId })
-      navigate('/packs')
+      navigate(ROUTES.packs)
     })
   }
 
@@ -76,7 +74,7 @@ export const Pack = () => {
           cover={pack.cover}
         />
       )}
-      <BackButton to="/packs" text="Back to Packs" />
+      <BackButton to={ROUTES.packs} text="Back to Packs" />
       <div className={s.header}>
         <div className={s.top}>
           <Typography as="h1" variant="large" className={s.title}>
@@ -91,7 +89,7 @@ export const Pack = () => {
           {pack && isMyPack ? (
             <CreateCardControl packId={pack.id} />
           ) : (
-            <Button as={Link} to={`./learn`}>
+            <Button as={Link} to={`.${ROUTES.learn}`}>
               Learn Cards
             </Button>
           )}

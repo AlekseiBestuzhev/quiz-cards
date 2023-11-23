@@ -1,4 +1,4 @@
-import { errorNotification } from '@/common/utils/errorNotification.ts'
+import { errorNotification } from '@/common/utils/error-notification.ts'
 
 /**
  * A function that accepts the logic associated with the request and its successful execution. Error handling along with notification is built in.

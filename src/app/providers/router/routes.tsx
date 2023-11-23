@@ -1,6 +1,8 @@
 import { Navigate, RouteObject } from 'react-router-dom'
 
+import { ROUTES } from '@/common/consts'
 import {
+  CreateNewPassword,
   ForgotPassword,
   Profile,
   SignIn,
@@ -14,50 +16,50 @@ import {
 
 export const publicRoutes: RouteObject[] = [
   {
-    path: '/sign-in',
+    path: ROUTES.signIn,
     element: <SignIn />,
   },
   {
-    path: '/sign-up',
+    path: ROUTES.signUp,
     element: <SignUp />,
   },
   {
-    path: '/recover-password',
+    path: ROUTES.recoverPassword,
     element: <ForgotPassword />,
   },
   {
-    path: '/check-email/:email',
+    path: `${ROUTES.checkEmail}/:email`,
     element: <CheckEmail />,
   },
   {
-    path: '/create-new-password/:email',
-    element: <CheckEmail />,
+    path: `${ROUTES.createNewPassword}/:token`,
+    element: <CreateNewPassword />,
   },
   {
-    path: '/*',
+    path: ROUTES.rest,
     element: <NotFound />,
   },
 ]
 
 export const privateRoutes: RouteObject[] = [
   {
-    path: '/',
-    element: <Navigate to="/packs" />,
+    path: ROUTES.base,
+    element: <Navigate to={ROUTES.packs} />,
   },
   {
-    path: '/packs',
+    path: ROUTES.packs,
     element: <Packs />,
   },
   {
-    path: '/profile',
+    path: ROUTES.profile,
     element: <Profile />,
   },
   {
-    path: '/packs/:id',
+    path: `${ROUTES.packs}/:id`,
     element: <Pack />,
   },
   {
-    path: '/packs/:id/learn',
+    path: `${ROUTES.packs}/:id${ROUTES.learn}`,
     element: <Learn />,
   },
 ]
