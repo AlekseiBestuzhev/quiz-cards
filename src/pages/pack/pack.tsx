@@ -89,9 +89,11 @@ export const Pack = () => {
           {pack && isMyPack ? (
             <CreateCardControl packId={pack.id} />
           ) : (
-            <Button as={Link} to={`.${ROUTES.learn}`}>
-              Learn Cards
-            </Button>
+            !!pack?.cardsCount && (
+              <Button as={Link} to={`.${ROUTES.learn}`}>
+                Learn Cards
+              </Button>
+            )
           )}
         </div>
         {pack?.cover && <img src={pack.cover} alt="Cover" className={s.cover} />}
