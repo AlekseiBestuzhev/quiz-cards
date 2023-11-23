@@ -13,10 +13,13 @@
 
     .title {
       align-self: center;
+      word-break: break-word;
     }
 
     .question {
       @include flex(column, 6px);
+
+      word-break: break-word;
 
       .questionImg {
         align-self: center;
@@ -30,6 +33,8 @@
 
     .answer {
       @include flex(column, 6px);
+
+      word-break: break-word;
 
       .answerText {
         align-self: stretch;
