@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import s from './pack.module.scss'
 
 import { ROUTES } from '@/common/consts'
+import { useDebounce } from '@/common/hooks'
 import { getSortedString, requestHandler } from '@/common/utils'
 import { BackButton } from '@/components/ui/back-button'
 import { Button } from '@/components/ui/button'
@@ -25,6 +26,8 @@ export const Pack = () => {
   const { packId, currentPage, pageSize, setCurrentPage, setPageSize, searchName, setSearchName } =
     usePackData()
 
+  const debouncedSearchName = useDebounce(searchName)
+
   const navigate = useNavigate()
 
   const { data: pack, isLoading: packLoading } = useGetDeckInfoQuery({ id: packId })
@@ -42,7 +45,7 @@ export const Pack = () => {
   const { data } = useGetCardsQuery({
     id: packId as string,
     params: {
-      question: searchName,
+      question: debouncedSearchName,
       orderBy: sortedString,
       currentPage,
       itemsPerPage: pageSize,
