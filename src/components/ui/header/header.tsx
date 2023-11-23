@@ -6,6 +6,7 @@ import s from './header.module.scss'
 import { ProfileInfo, ProfileInfoProps } from './profile-info'
 
 import { Logo } from '@/assets/illustrations/logo.tsx'
+import { ROUTES } from '@/common/consts'
 import { useAppSelector } from '@/common/hooks'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -26,19 +27,19 @@ export const Header: FC<Props> = memo(({ data, logout }) => {
   const navigate = useNavigate()
 
   const toProfile = () => {
-    navigate('/profile')
+    navigate(ROUTES.profile)
   }
 
   return (
     <div className={s.root}>
       {queryInProgress && <QueryLoading />}
       <div className={s.container}>
-        <Link to="/packs" className={s.link}>
+        <Link to={ROUTES.packs} className={s.link}>
           <Logo className={s.logo} />
         </Link>
         {data ? (
           <div className={s.user}>
-            <Typography as={Link} to="/profile" variant="subtitle1" className={s.name}>
+            <Typography as={Link} to={ROUTES.profile} variant="subtitle1" className={s.name}>
               {data.name || data.email}
             </Typography>
             <DropDown
@@ -64,7 +65,7 @@ export const Header: FC<Props> = memo(({ data, logout }) => {
             </DropDown>
           </div>
         ) : (
-          <Button as={Link} to="/sign-in">
+          <Button as={Link} to={ROUTES.signIn}>
             Sign In
           </Button>
         )}
