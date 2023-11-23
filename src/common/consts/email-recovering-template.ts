@@ -1,4 +1,4 @@
-import { appDeploy } from '@/common/consts/appDeploy.ts'
+import { appDeploy } from '@/common/consts/app-deploy.ts'
 import { ROUTES } from '@/common/consts/routes.ts'
 
 export const emailRecoveringTemplate = `
