@@ -3,7 +3,8 @@
 .link {
   @include flex(row, 0, 16px, center);
 
-  width: max-content;
+  flex-wrap: wrap;
+  width: 100%;
   padding-block: 0;
 
   .cover {
