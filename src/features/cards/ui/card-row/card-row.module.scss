@@ -17,6 +17,7 @@
     @include flex(row, 0, 12px, center);
 
     column-gap: 16px;
+    word-break: break-word;
 
     .cover {
       height: 50px;

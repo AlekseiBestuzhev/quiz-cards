@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, MouseEvent } from 'react'
 
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import s from './learn.module.scss'
 
@@ -16,12 +16,19 @@ import { useGetDeckInfoQuery } from '@/features/packs/services'
 export const Learn = () => {
   const [rateMode, setRateMode] = useState(false)
 
+  const navigate = useNavigate()
+
   const [rateCard] = useRateCardMutation()
 
   const params = useParams()
   const id = params.id as string
   const { currentData: pack } = useGetDeckInfoQuery({ id })
   const { currentData: card } = useGetRandomCardQuery({ id })
+
+  const backHandler = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    navigate(-1)
+  }
 
   const onSubmit = async (data: RateType) => {
     await requestHandler(async () => {
@@ -32,7 +39,7 @@ export const Learn = () => {
 
   return (
     <>
-      <BackButton to=".." relative="path" text="Back to Pack" />
+      <BackButton to="back" onClick={backHandler} relative="path" text="Back to Previous Page" />
       <section className={s.root}>
         <Card className={s.content}>
           <Typography as="h1" variant="large" className={s.title}>
