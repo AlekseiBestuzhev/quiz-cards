@@ -8,6 +8,14 @@ React + TypeScript SPA 🚀
 
 <hr>
 
+### Links:
+
+> [UI-kit](https://quiz-cards-ui-kit.vercel.app/) on Storybook
+>
+> [Cards](https://quiz-cards-prod.vercel.app/) - web application
+
+<hr>
+
 ### Description:
 
 In this application you can create a set of cards on absolutely any topic and use them for memorization. You can also look at decks of other users. The main page contains filtering, navigation and sorting elements, while the decks themselves are presented in table form. The application implements authorization, registration and password recovery.
@@ -19,11 +27,9 @@ login: __test.account.cards@gmail.com__
 password: __1234__
 <hr>
 
-### Links:
+Build tool: Vite
 
-> [UI-kit](https://quiz-cards-ui-kit.vercel.app/) on Storybook
->
-> [Cards](https://quiz-cards-prod.vercel.app/) - web application
+Styles: module SCSS
 
 <hr>
 
@@ -32,7 +38,7 @@ password: __1234__
 <table>
   <tr>
     <td>async-mutex</td>
-    <td>react-router-dom</td>
+    <td>react-toastify</td>
   </tr>
   <tr>
     <td>clsx</td>
@@ -61,5 +67,9 @@ password: __1234__
   <tr>
     <td>react-redux</td>
     <td>zod</td>
+  </tr>
+  <tr>
+    <td>react-router-dom</td>
+    <td></td>
   </tr>
 </table>
