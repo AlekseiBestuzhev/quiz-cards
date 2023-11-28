@@ -12,7 +12,7 @@ React + TypeScript SPA 🚀
 
 > [UI-kit](https://quiz-cards-ui-kit.vercel.app/) on Storybook
 >
-> [Cards](https://quiz-cards-prod.vercel.app/) - web application
+> [Quiz-Cards](https://quiz-cards-prod.vercel.app/) - web application
 
 <hr>
 
