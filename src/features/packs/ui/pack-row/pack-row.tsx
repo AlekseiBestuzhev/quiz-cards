@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import s from './pack-row.module.scss'
 
+import defaultCover from '@/assets/images/default-image.jpg'
 import { ROUTES } from '@/common/consts'
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon/icon.tsx'
@@ -31,7 +32,7 @@ export const PackRow: FC<Props> = memo(({ pack, authUserId }) => {
     <Table.Row key={pack.id} className={s.root}>
       <Table.Cell>
         <Button as={Link} to={pack.id} variant="link" className={s.link}>
-          {pack.cover && <img src={pack.cover} alt="Pack cover" className={s.cover} />}
+          <img src={pack.cover || defaultCover} alt="Pack cover" className={s.cover} />
           <Typography as="h3" variant="body2">
             {pack.name}
           </Typography>

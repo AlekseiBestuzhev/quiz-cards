@@ -8,7 +8,9 @@
   padding-block: 0;
 
   .cover {
+    max-width: 100px;
     height: 50px;
+    object-fit: cover;
   }
 
   &:hover h3 {

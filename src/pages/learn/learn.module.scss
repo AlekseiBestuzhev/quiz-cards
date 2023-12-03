@@ -1,8 +1,9 @@
 @import '@/styles/mixins';
 
 .cover {
-  align-self: center;
+  width: 100%;
   height: 180px;
+  object-fit: contain;
 }
 
 .root {
@@ -20,11 +21,6 @@
       @include flex(column, 6px);
 
       word-break: break-word;
-
-      .questionImg {
-        align-self: center;
-        height: 180px;
-      }
 
       .caption {
         color: var(--color-dark-100);
