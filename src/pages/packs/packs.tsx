@@ -42,8 +42,12 @@ export const Packs = () => {
     itemsPerPage: pageSize,
   })
 
+  const totalCards = packs?.data?.maxCardsCount
+
   useEffect(() => {
-    setCurrentPage(1)
+    if (totalCards && totalCards / pageSize < currentPage) {
+      setCurrentPage(1)
+    }
   }, [debouncedSearchName, debouncedSliderValue, pageSize, tabValue])
 
   const [createDeck] = useCreateDeckMutation()
