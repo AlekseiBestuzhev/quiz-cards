@@ -8,19 +8,29 @@
     background-color: var(--color-dark-800);
   }
 
-  .answerCell {
-    width: 240px;
-  }
-
   .question,
   .answer {
-    @include flex(row, 0, 12px, center);
+    position: relative;
 
-    column-gap: 16px;
+    padding: 10px 24px 10px 110px;
+
+    text-align: left;
     word-break: break-word;
+    vertical-align: top;
+
+    > h3 {
+      min-height: 50px;
+    }
 
     .cover {
+      position: absolute;
+      left: 24px;
+
+      max-width: 70px;
       height: 50px;
+
+      object-fit: cover;
+      border-radius: 3px;
     }
   }
 

@@ -25,7 +25,15 @@ export const BackButton: FC<Props> = ({ text = 'Back to Previous Page', classNam
   const classes = clsx(s.button, className)
 
   return (
-    <Button as={Link} to="back" variant="link" onClick={backHandler} className={classes} {...rest}>
+    <Button
+      as={Link}
+      to=".."
+      relative="path"
+      variant="link"
+      onClick={backHandler}
+      className={classes}
+      {...rest}
+    >
       <Icon name={'arrow-back'} width={22} height={22} />
       <Typography variant="body2" className={s.text}>
         {text}

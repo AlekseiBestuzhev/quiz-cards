@@ -30,9 +30,9 @@ export const PackRow: FC<Props> = memo(({ pack, authUserId }) => {
 
   return (
     <Table.Row key={pack.id} className={s.root}>
-      <Table.Cell>
+      <Table.Cell align="left" className={s.name}>
         <Button as={Link} to={pack.id} variant="link" className={s.link}>
-          <img src={pack.cover || defaultCover} alt="Pack cover" className={s.cover} />
+          <img src={pack.cover ?? defaultCover} alt="Pack cover" className={s.cover} />
           <Typography as="h3" variant="body2">
             {pack.name}
           </Typography>
@@ -40,7 +40,7 @@ export const PackRow: FC<Props> = memo(({ pack, authUserId }) => {
       </Table.Cell>
       <Table.Cell className={s.count}>{pack.cardsCount}</Table.Cell>
       <Table.Cell className={s.date}>{new Date(pack.updated).toLocaleDateString()}</Table.Cell>
-      <Table.Cell className={s.name}>{pack.author.name}</Table.Cell>
+      <Table.Cell className={s.createdBy}>{pack.author.name}</Table.Cell>
       <Table.Cell className={s.cell}>
         <div className={s.controls}>
           {isMyPack ? (

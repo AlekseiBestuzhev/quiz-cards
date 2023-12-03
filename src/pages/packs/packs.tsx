@@ -3,31 +3,25 @@ import { useEffect, useState } from 'react'
 import s from './packs.module.scss'
 
 import { useDebounce } from '@/common/hooks'
-import { getSortedString, requestHandler } from '@/common/utils'
-import { PackForm } from '@/components/forms/pack'
-import { Button } from '@/components/ui/button'
-import { ModalWindow } from '@/components/ui/modal-window'
+import { getSortedString } from '@/common/utils'
 import { Pagination } from '@/components/ui/pagination'
 import { Sort } from '@/components/ui/table-header'
 import { Typography } from '@/components/ui/typography'
 import { useGetMeQuery, UserResponse } from '@/features/auth/services'
 import { usePacksFilter, usePacksPagination } from '@/features/packs/model/hooks'
-import { useCreateDeckMutation, useGetDecksQuery } from '@/features/packs/services'
-import { FilterControls, PacksTable } from '@/features/packs/ui'
+import { useGetDecksQuery } from '@/features/packs/services'
+import { CreateControl, FilterControls, PacksTable } from '@/features/packs/ui'
 
 export const Packs = () => {
   const { currentPage, pageSize, setCurrentPage, setPageSize } = usePacksPagination()
   const { searchName, tabValue, sliderValue, setSearchName, setTabValue, setSliderValue } =
     usePacksFilter()
 
+  const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
+  const sortedString = getSortedString(sort)
+
   const debouncedSearchName = useDebounce(searchName)
   const debouncedSliderValue = useDebounce(sliderValue)
-
-  const [open, setOpen] = useState(false)
-
-  const [sort, setSort] = useState<Sort>({ key: 'updated', direction: 'desc' })
-
-  const sortedString = getSortedString(sort)
 
   const { data } = useGetMeQuery()
   const userId = (data as UserResponse).id
@@ -50,26 +44,14 @@ export const Packs = () => {
     }
   }, [debouncedSearchName, debouncedSliderValue, pageSize, tabValue])
 
-  const [createDeck] = useCreateDeckMutation()
-
-  const createDeckHandler = async (data: FormData) => {
-    await requestHandler(async () => {
-      await createDeck(data).unwrap()
-      setOpen(false)
-    })
-  }
-
   return (
     <section className={s.root}>
-      <ModalWindow open={open} setOpen={setOpen} title="Create new pack">
-        <PackForm onSubmit={createDeckHandler} onCancel={() => setOpen(false)} />
-      </ModalWindow>
       <div className={s.header}>
         <div className={s.top}>
           <Typography as="h1" variant="large">
             Packs list
           </Typography>
-          <Button onClick={() => setOpen(true)}>Add New Pack</Button>
+          <CreateControl />
         </div>
         <FilterControls
           searchName={searchName}
