@@ -45,7 +45,7 @@ export const Packs = () => {
   const totalCards = packs?.data?.maxCardsCount
 
   useEffect(() => {
-    if (totalCards && totalCards / pageSize < currentPage) {
+    if ((totalCards && totalCards / pageSize < currentPage) || tabValue) {
       setCurrentPage(1)
     }
   }, [debouncedSearchName, debouncedSliderValue, pageSize, tabValue])
