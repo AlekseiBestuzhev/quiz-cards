@@ -8,7 +8,7 @@ const initialState = {
   filter: {
     tabValue: '',
     searchName: '',
-    sliderValue: [0, 10],
+    sliderValue: [0, 30],
   },
 }
 

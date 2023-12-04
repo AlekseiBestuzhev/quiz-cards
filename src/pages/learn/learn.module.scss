@@ -1,9 +1,10 @@
 @import '@/styles/mixins';
 
 .cover {
-  width: 100%;
+  align-self: center;
+  max-width: 100%;
   height: 180px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .root {

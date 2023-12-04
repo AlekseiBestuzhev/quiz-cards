@@ -5,7 +5,7 @@ import { Control, FieldPath, FieldValues } from 'react-hook-form'
 
 import s from './controlled-preview-file-uploader.module.scss'
 
-import noCover from '@/assets/illustrations/no-cover.svg'
+import noCover from '@/assets/images/default-image.jpg'
 import { ControlledFileUploader } from '@/components/controlled/controlled-file-uploader'
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon/icon.tsx'
