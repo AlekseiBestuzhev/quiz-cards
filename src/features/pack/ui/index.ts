@@ -1,1 +1,1 @@
-export { OwnerPackDropDown } from './OwnerPackDropDown/OwnerPackDropDown.tsx'
+export { OwnerPackDropDown } from './owner-pack-drop-down/owner-pack-drop-down.tsx'

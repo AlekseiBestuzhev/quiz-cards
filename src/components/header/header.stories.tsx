@@ -2,13 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Header } from './index.ts'
 
-import { BrowserRouterDecorator } from '@/app/providers'
+import { BrowserRouterDecorator, StoreDecorator } from '@/app/providers'
 
 const meta = {
   title: 'Components/Header',
   component: Header,
   tags: ['autodocs'],
-  decorators: [BrowserRouterDecorator],
+  decorators: [BrowserRouterDecorator, StoreDecorator],
 } satisfies Meta<typeof Header>
 
 export default meta

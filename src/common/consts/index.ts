@@ -1,5 +1,5 @@
 export { emailRecoveringTemplate } from './email-recovering-template.ts'
 export { ROUTES } from './routes.ts'
 export { appDeploy } from './app-deploy.ts'
-export { packsTableColumns } from './packsTableColumns.ts'
-export { packTableColumns } from './packTableColumns.ts'
+export { packsTableColumns } from './packs-table-columns.ts'
+export { packTableColumns } from './pack-table-columns.ts'

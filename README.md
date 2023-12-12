@@ -10,15 +10,18 @@ React + TypeScript SPA 🚀
 
 ### Links:
 
-> [UI-kit](https://quiz-cards-ui-kit.vercel.app/) on Storybook
+> [UI-kit](https://quiz-cards-app-ui-kit.vercel.app/) on Storybook
 >
-> [Quiz-Cards](https://quiz-cards-prod.vercel.app/) - web application
+> [Quiz-Cards](https://quiz-cards-app.vercel.app/) - web application
 
 <hr>
 
 ### Description:
 
-In this application you can create a set of cards on absolutely any topic and use them for memorization. You can also look at decks of other users. The main page contains filtering, navigation and sorting elements, while the decks themselves are presented in table form. The application implements authorization, registration and password recovery.
+In this application you can create a set of cards on absolutely any topic and use them for memorization. 
+You can also look at decks of other users. The main page contains filtering, navigation and sorting elements, 
+while the decks themselves are presented in table form. The application implements authorization, registration 
+and password recovery. If you use a Yandex browser, then allow third-party cookies in your browser settings.
 
 Register or use the test account:
 
