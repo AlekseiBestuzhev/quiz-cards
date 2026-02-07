@@ -1,47 +1,41 @@
-# Cards
+# Карточки ( React + TS )
 
 <p align="center">
   <img src="src/assets/readme/logo.png" style="width: 400px" alt="logo" />
 </p>
 
-React + TypeScript SPA 🚀
+> Используйте VPN для корректной работы API
 
 <hr>
 
-### Links:
+### Описание:
 
-> [UI-kit](https://quiz-cards-app-ui-kit.vercel.app/) on Storybook
->
-> [Quiz-Cards](https://quiz-cards-app.vercel.app/) - web application
+В этом приложении Вы можете создать набор карточек на абсолютно любую тему и использовать их для заучивания. 
+Так же Вы можете смотреть колоды других пользователей. На главной странице расположены элементы фильтрации, 
+навигации и сортировки, сами же колоды представлены в виде таблицы. В приложении реализованы авторизация, регистрация 
+и восстановление пароля. Если Вы используете Яндекс браузер, то разрешите в настройках браузера сторонние cookie-файлы.
 
-<hr>
-
-### Description:
-
-In this application you can create a set of cards on absolutely any topic and use them for memorization. 
-You can also look at decks of other users. The main page contains filtering, navigation and sorting elements, 
-while the decks themselves are presented in table form. The application implements authorization, registration 
-and password recovery. If you use a Yandex browser, then allow third-party cookies in your browser settings.
-
-Register or use the test account:
+Зарегистрируйтесь или используйте тестовый аккаунт:
 
 login: __test.account.cards@gmail.com__
 
 password: __1234__
 <hr>
 
-Build tool: Vite
+### Ссылки:
 
-Styles: module SCSS
+> [UI-kit](https://quiz-cards-app-ui-kit.vercel.app/) на базе Storybook
+>
+> [Cards](https://quiz-cards-app.vercel.app/) - веб приложение
 
 <hr>
 
-## Libraries and packages:
+## Используемые библиотеки и пакеты:
 
 <table>
   <tr>
     <td>async-mutex</td>
-    <td>react-toastify</td>
+    <td>react-router-dom</td>
   </tr>
   <tr>
     <td>clsx</td>
@@ -70,9 +64,5 @@ Styles: module SCSS
   <tr>
     <td>react-redux</td>
     <td>zod</td>
-  </tr>
-  <tr>
-    <td>react-router-dom</td>
-    <td></td>
   </tr>
 </table>
